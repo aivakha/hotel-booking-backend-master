@@ -35,7 +35,7 @@
                                 <thead class="bg-200 text-900">
                                 <tr>
                                     <th class="sort" data-sort="id">ID</th>
-                                    <th class="sort" data-sort="title">{{ __('Назва') }}</th>
+                                    <th class="sort" data-sort="title">{{ __('Відстань (у метрах)') }}</th>
                                     <th class="sort">Дії</th>
                                 </tr>
                                 </thead>

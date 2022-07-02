@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Distance\StoreRequest;
+use App\Http\Requests\Distance\UpdateRequest;
 use App\Models\Distance;
 use Illuminate\Http\Request;
 
@@ -76,13 +77,13 @@ class DistanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
         $distance = Distance::find($id);
         $distance->update($data);
 
-        return redirect()->route('distances.index')->with('success', 'Успішно збережено!');;
+        return redirect()->route('distances.index')->with('success', 'Успішно оновлено!');;
     }
 
     /**

@@ -10,10 +10,10 @@
             <div class="card-body">
                 <div class="row flex-between-center">
                     <div class="col-md">
-                        <h5 class="mb-2 mb-md-0">{{ __('Налаштування зручностей') }}</h5>
+                        <h5 class="mb-2 mb-md-0">{{ __('Налаштування харчування') }}</h5>
                     </div>
                     <div class="col-auto">
-                        <a href="{{route('features.create')}}" class="btn btn-success me-1 mb-1">{{ __('Додати') }}</a>
+                        <a href="{{route('meals.create')}}" class="btn btn-success me-1 mb-1">{{ __('Додати') }}</a>
                     </div>
                 </div>
             </div>
@@ -23,42 +23,42 @@
             <div class="card-header">
                 <div class="row flex-between-end">
                     <div class="col-auto align-self-center">
-                        <h5 class="mb-0">{{ __('Всі зручності') }}</h5>
+                        <h5 class="mb-0">{{ __('Всі види харчувань') }}</h5>
                     </div>
                 </div>
             </div>
             <div class="card-body bg-light">
-                @if ($features->isNotEmpty())
+                @if ($meals->isNotEmpty())
                     <div id="tableExample2" data-list='{"valueNames":["id", "title"],"page":10,"pagination":true}'>
                         <div class="table-responsive scrollbar">
                             <table class="table table-bordered table-striped fs--1 mb-0">
                                 <thead class="bg-200 text-900">
                                 <tr>
                                     <th class="sort" data-sort="id">ID</th>
-                                    <th class="sort" data-sort="title">{{ __('Активність') }}</th>
+                                    <th class="sort" data-sort="title">{{ __('Харчування') }}</th>
                                     <th class="sort">Дії</th>
                                 </tr>
                                 </thead>
                                 <tbody class="list" style="vertical-align: middle">
-                                @foreach($features as $feature)
-                                    <tr>
-                                        <td class="id">{{ $feature->id }}</td>
-                                        <td class="title">{{ $feature->title }}</td>
-                                        <td class="actions">
-                                            <div class="actions-btn">
-                                                <a class="btn p-0" href="{{route('features.edit', $feature->id)}}">
-                                                    <span class="far fa-edit"></span>
-                                                </a>
+                                    @foreach($meals as $meal)
+                                        <tr>
+                                            <td class="id">{{ $meal->id }}</td>
+                                            <td class="title">{{ $meal->title }}</td>
+                                            <td class="actions">
+                                                <div class="actions-btn">
+                                                    <a class="btn p-0" href="{{route('meals.edit', $meal->id)}}">
+                                                        <span class="far fa-edit"></span>
+                                                    </a>
 
-                                                {{Form::open(['route'=> ['features.destroy', $feature->id], 'method' => 'delete'])}}
-                                                <button class="btn p-0 delete-btn" type="submit">
-                                                    <span class="far fa-trash-alt"></span>
-                                                </button>
-                                                {{Form::close()}}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                                    {{Form::open(['route'=> ['meals.destroy', $meal->id], 'method' => 'delete'])}}
+                                                        <button class="btn p-0 delete-btn" type="submit">
+                                                            <span class="far fa-trash-alt"></span>
+                                                        </button>
+                                                    {{Form::close()}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

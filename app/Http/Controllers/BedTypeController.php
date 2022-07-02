@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use \App\Http\Requests\Manager\StoreRequest;
-use App\Models\Manager;
+use App\Http\Requests\BedType\StoreRequest;
+use App\Http\Requests\BedType\UpdateRequest;
+use App\Models\BedType;
 use Illuminate\Http\Request;
 
-class ManagerController extends Controller
+class BedTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,9 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $managers = Manager::all();
+        $bed_types = BedType::all();
 
-        return view('admin.managers.index', compact('managers'));
+        return view('admin.bed-types.index', compact('bed_types'));
     }
 
     /**
@@ -27,7 +28,7 @@ class ManagerController extends Controller
      */
     public function create()
     {
-        return view('admin.managers.create');
+        return view('admin.bed-types.create');
     }
 
     /**
@@ -39,10 +40,9 @@ class ManagerController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
+        BedType::create($data);
 
-        Manager::create($data);
-
-        return redirect()->route('managers.index')->with('success', 'Успішно добавлено!');
+        return redirect()->route('bed-types.index')->with('success', 'Успішно добавлено!');
     }
 
     /**
@@ -53,7 +53,7 @@ class ManagerController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -64,9 +64,9 @@ class ManagerController extends Controller
      */
     public function edit($id)
     {
-        $manager = Manager::find($id);
+        $bed_type = BedType::find($id);
 
-        return view('admin.managers.edit', compact('manager'));
+        return view('admin.bed-types.edit', compact('bed_type'));
     }
 
     /**
@@ -76,13 +76,13 @@ class ManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
-        $manager = Manager::find($id);
-        $manager->update($data);
+        $bed_type = BedType::find($id);
+        $bed_type->update($data);
 
-        return redirect()->route('managers.index')->with('success', 'Успішно оновлено!');;
+        return redirect()->route('bed-types.index')->with('success', 'Успішно оновлено!');
     }
 
     /**
@@ -93,8 +93,8 @@ class ManagerController extends Controller
      */
     public function destroy($id)
     {
-        Manager::find($id)->delete();
+        BedType::find($id)->delete();
 
-        return redirect()->route('managers.index')->with('success', 'Успішно видалено!');
+        return redirect()->route('bed-types.index')->with('success', 'Успішно видалено!');
     }
 }

@@ -43,24 +43,63 @@
                         </li>
                     </ul>
 
-                    <a class="nav-link dropdown-indicator" href="#features" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="features">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-tags"></span></span><span class="nav-link-text ps-1">{{ __('Особливості') }}</span>
+                    <a class="nav-link dropdown-indicator" href="#meals" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="meals">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-hotdog"></span></span><span class="nav-link-text ps-1">{{ __('Харчування') }}</span>
                         </div>
                     </a>
-                    <ul class="nav collapse" id="features">
+                    <ul class="nav collapse" id="meals">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('features.index') }}" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі особиливості') }}</span>
+                            <a class="nav-link" href="{{ route('meals.index') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі типи харчувань') }}</span>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('features.create') }}" data-bs-toggle="" aria-expanded="false">
+                            <a class="nav-link" href="{{ route('meals.create') }}" data-bs-toggle="" aria-expanded="false">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
                                 </div>
                             </a>
                         </li>
                     </ul>
+
+                    <a class="nav-link dropdown-indicator" href="#leisure-activities" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="leisure-activities">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-walking"></span></span><span class="nav-link-text ps-1">{{ __('Активності') }}</span>
+                        </div>
+                    </a>
+                    <ul class="nav collapse" id="leisure-activities">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('leisure-activities.index') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі активності') }}</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('leisure-activities.create') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <a class="nav-link dropdown-indicator" href="#apartment-types" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="apartment-types">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-dice"></span></span><span class="nav-link-text ps-1">{{ __('Типи розміщень') }}</span>
+                        </div>
+                    </a>
+                    <ul class="nav collapse" id="apartment-types">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('apartment-types.index') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі типи розміщень') }}</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('apartment-types.create') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+
 
                     <a class="nav-link dropdown-indicator" href="#cities" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="cities">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-city"></span></span><span class="nav-link-text ps-1">{{ __('Регіони') }}</span>
@@ -150,39 +189,39 @@
                         </li>
                     </ul>
 
-                    <a class="nav-link dropdown-indicator" href="#room_types" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="room_types">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-layer-group"></span></span><span class="nav-link-text ps-1">Room Types</span>
+                    <a class="nav-link dropdown-indicator" href="#bed_types" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="bed_types">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-couch"></span></span><span class="nav-link-text ps-1">{{ __('Типи ліжок') }}</span>
                         </div>
                     </a>
-                    <ul class="nav collapse" id="room_types">
+                    <ul class="nav collapse" id="bed_types">
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">All Types</span>
+                            <a class="nav-link" href="{{ route('bed-types.index') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі типи ліжок') }}</span>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Add New</span>
+                            <a class="nav-link" href="{{ route('bed-types.create') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
                                 </div>
                             </a>
                         </li>
                     </ul>
 
-                    <a class="nav-link dropdown-indicator" href="#room_amenities" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="room_amenities">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-tasks"></span></span><span class="nav-link-text ps-1">Room Amenities</span>
+                    <a class="nav-link dropdown-indicator" href="#features" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="features">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-tags"></span></span><span class="nav-link-text ps-1">{{ __('Зручності') }}</span>
                         </div>
                     </a>
-                    <ul class="nav collapse" id="room_amenities">
+                    <ul class="nav collapse" id="features">
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">All Amenities</span>
+                            <a class="nav-link" href="{{ route('features.index') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі зручності') }}</span>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Add New</span>
+                            <a class="nav-link" href="{{ route('features.create') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
                                 </div>
                             </a>
                         </li>

@@ -19,84 +19,12 @@ Route::resource('/admin/features', 'App\Http\Controllers\FeatureController');
 Route::resource('/admin/cities', 'App\Http\Controllers\CityController');
 Route::resource('/admin/distances', 'App\Http\Controllers\DistanceController');
 Route::resource('/admin/managers', 'App\Http\Controllers\ManagerController');
+Route::resource('/admin/apartment-types', 'App\Http\Controllers\ApartmentTypeController');
+Route::resource('/admin/leisure-activities', 'App\Http\Controllers\LeisureActivityController');
+Route::resource('/admin/bed-types', 'App\Http\Controllers\BedTypeController');
+Route::resource('/admin/meals', 'App\Http\Controllers\MealController');
 
-
-
-//Route::get('/hotels', function () {
-//    return view('admin.hotels.index');
-//});
-//
-//Route::get('/hotels/create', function () {
-//    return view('admin.hotels.create');
-//});
-//
-//Route::get('/hotels/edit', function () {
-//    return view('admin.hotels.edit');
-//});
-//
-//Route::get('/bookings', function () {
-//    return view('admin.bookings.index');
-//});
-//
-//Route::get('/bookings/create', function () {
-//    return view('admin.bookings.create');
-//});
-//
-//Route::get('/bookings/edit', function () {
-//    return view('admin.bookings.edit');
-//});
-//
-//
-//Route::get('/features', function () {
-//    return view('admin.features.index');
-//});
-//
-//Route::get('/features/create', function () {
-//    return view('admin.features.create');
-//});
-//
-//Route::get('/features/edit', function () {
-//    return view('admin.features.edit');
-//});
-//
-//
-//Route::get('/distances', function () {
-//    return view('admin.distances.index');
-//});
-//
-//Route::get('/distances/create', function () {
-//    return view('admin.distances.create');
-//});
-//
-//Route::get('/distances/edit', function () {
-//    return view('admin.distances.edit');
-//});
-//
-//
-//Route::get('/amenities', function () {
-//    return view('admin.amenities.index');
-//});
-//
-//Route::get('/amenities/create', function () {
-//    return view('admin.amenities.create');
-//});
-//
-//Route::get('/amenities/edit', function () {
-//    return view('admin.amenities.edit');
-//});
-
-
-
-
-
-//Route::get('/', 'App\Http\Controllers\HomeController@index');
-//Route::get('/post/{slug}', 'App\Http\Controllers\HomeController@single')->name('post.single');
-//Route::get('/tag/{slug}', 'App\Http\Controllers\HomeController@tag')->name('tag.single');
-//Route::get('/category/{slug}', 'App\Http\Controllers\HomeController@category')->name('category.single');
-//Route::post('/subscribe', 'App\Http\Controllers\SubscribeController@subscribe');
-//Route::get('/verify/{token}', 'App\Http\Controllers\SubscribeController@verify');
-//// R E G I S T R A T I O N  AND  L O G I N
-//
+// R E G I S T R A T I O N  AND  L O G I N
 //Route::group([
 //    'middleware' => 'admin'
 //], function() {

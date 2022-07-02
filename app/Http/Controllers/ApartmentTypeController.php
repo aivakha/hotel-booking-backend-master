@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use \App\Http\Requests\Manager\StoreRequest;
-use App\Models\Manager;
+use App\Http\Requests\ApartmentType\StoreRequest;
+use App\Http\Requests\ApartmentType\UpdateRequest;
+use App\Models\ApartmentType;
 use Illuminate\Http\Request;
 
-class ManagerController extends Controller
+class ApartmentTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,9 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $managers = Manager::all();
+        $apartment_types = ApartmentType::all();
 
-        return view('admin.managers.index', compact('managers'));
+        return view('admin.apartment-types.index', compact('apartment_types'));
     }
 
     /**
@@ -27,7 +28,7 @@ class ManagerController extends Controller
      */
     public function create()
     {
-        return view('admin.managers.create');
+        return view('admin.apartment-types.create');
     }
 
     /**
@@ -40,9 +41,9 @@ class ManagerController extends Controller
     {
         $data = $request->validated();
 
-        Manager::create($data);
+        ApartmentType::create($data);
 
-        return redirect()->route('managers.index')->with('success', 'Успішно добавлено!');
+        return redirect()->route('apartment-types.index')->with('success', 'Успішно добавлено!');
     }
 
     /**
@@ -64,9 +65,9 @@ class ManagerController extends Controller
      */
     public function edit($id)
     {
-        $manager = Manager::find($id);
+        $apartment_type = ApartmentType::find($id);
 
-        return view('admin.managers.edit', compact('manager'));
+        return view('admin.apartment-types.edit', compact('apartment_type'));
     }
 
     /**
@@ -76,13 +77,13 @@ class ManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
-        $manager = Manager::find($id);
-        $manager->update($data);
+        $apartment_type = ApartmentType::find($id);
+        $apartment_type->update($data);
 
-        return redirect()->route('managers.index')->with('success', 'Успішно оновлено!');;
+        return redirect()->route('apartment-types.index')->with('success', 'Успішно оновлено!');;
     }
 
     /**
@@ -93,8 +94,8 @@ class ManagerController extends Controller
      */
     public function destroy($id)
     {
-        Manager::find($id)->delete();
+        ApartmentType::find($id)->delete();
 
-        return redirect()->route('managers.index')->with('success', 'Успішно видалено!');
+        return redirect()->route('apartment-types.index')->with('success', 'Успішно видалено!');
     }
 }

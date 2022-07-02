@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use \App\Http\Requests\Manager\StoreRequest;
-use App\Models\Manager;
+use App\Http\Requests\Meal\StoreRequest;
+use App\Http\Requests\Meal\UpdateRequest;
+use App\Models\Meal;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 
-class ManagerController extends Controller
+class MealController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +17,9 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $managers = Manager::all();
+        $meals = Meal::all();
 
-        return view('admin.managers.index', compact('managers'));
+        return view('admin.meals.index', compact('meals'));
     }
 
     /**
@@ -27,7 +29,7 @@ class ManagerController extends Controller
      */
     public function create()
     {
-        return view('admin.managers.create');
+        return view('admin.meals.create');
     }
 
     /**
@@ -39,62 +41,61 @@ class ManagerController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
+        Meal::create($data);
 
-        Manager::create($data);
-
-        return redirect()->route('managers.index')->with('success', 'Успішно добавлено!');
+        return redirect()->route('meals.index')->with('success', 'Успішно добавлено!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Meal  $meal
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Meal $meal)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Meal $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $manager = Manager::find($id);
+        $meal = Meal::find($id);
 
-        return view('admin.managers.edit', compact('manager'));
+        return view('admin.meals.edit', compact('meal'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Meal  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
-        $manager = Manager::find($id);
-        $manager->update($data);
+        $meal = Meal::find($id);
+        $meal->update($data);
 
-        return redirect()->route('managers.index')->with('success', 'Успішно оновлено!');;
+        return redirect()->route('meals.index')->with('success', 'Успішно оновлено!');;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Meal $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Manager::find($id)->delete();
+        Meal::find($id)->delete();
 
-        return redirect()->route('managers.index')->with('success', 'Успішно видалено!');
+        return redirect()->route('meals.index')->with('success', 'Успішно видалено!');
     }
 }

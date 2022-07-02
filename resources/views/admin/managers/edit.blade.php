@@ -64,7 +64,7 @@
                             <div class="pull-right">
                                 <a class="btn btn-danger me-1 mb-1"
                                    href="{{ route('managers.index')  }}">{{ __('Повернутись назад') }}</a>
-                                <button class="btn btn-success me-1 mb-1">{{ __('Створити') }}</button>
+                                <button class="btn btn-success me-1 mb-1">{{ __('Оновити') }}</button>
                             </div>
                         </div>
                         {!! Form::close() !!}

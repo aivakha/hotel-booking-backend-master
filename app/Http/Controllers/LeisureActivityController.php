@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use \App\Http\Requests\Manager\StoreRequest;
-use App\Models\Manager;
+use App\Http\Requests\LeisureActivity\StoreRequest;
+use App\Http\Requests\LeisureActivity\UpdateRequest;
+use App\Models\LeisureActivity;
 use Illuminate\Http\Request;
 
-class ManagerController extends Controller
+class LeisureActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,9 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $managers = Manager::all();
+        $leisure_activities = LeisureActivity::all();
 
-        return view('admin.managers.index', compact('managers'));
+        return view('admin.leisure-activities.index', compact('leisure_activities'));
     }
 
     /**
@@ -27,7 +28,7 @@ class ManagerController extends Controller
      */
     public function create()
     {
-        return view('admin.managers.create');
+        return view('admin.leisure-activities.create');
     }
 
     /**
@@ -40,9 +41,10 @@ class ManagerController extends Controller
     {
         $data = $request->validated();
 
-        Manager::create($data);
+        $leisure_activity = LeisureActivity::add($data);
+        $leisure_activity->uploadImage($request->file('image'));
 
-        return redirect()->route('managers.index')->with('success', 'Успішно добавлено!');
+        return redirect()->route('leisure-activities.index')->with('success', 'Успішно добавлено!');
     }
 
     /**
@@ -53,7 +55,7 @@ class ManagerController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -64,9 +66,9 @@ class ManagerController extends Controller
      */
     public function edit($id)
     {
-        $manager = Manager::find($id);
+        $leisure_activity = LeisureActivity::find($id);
 
-        return view('admin.managers.edit', compact('manager'));
+        return view('admin.leisure-activities.edit', compact('leisure_activity'));
     }
 
     /**
@@ -76,13 +78,16 @@ class ManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
-        $manager = Manager::find($id);
-        $manager->update($data);
+        $leisure_activity = LeisureActivity::find($id);
+        $leisure_activity->edit($data);
+        if ($request->hasFile('image')) {
+            $leisure_activity->uploadImage($request->file('image'));
+        }
 
-        return redirect()->route('managers.index')->with('success', 'Успішно оновлено!');;
+        return redirect()->route('leisure-activities.index')->with('success', 'Успішно оновлено!');
     }
 
     /**
@@ -93,8 +98,8 @@ class ManagerController extends Controller
      */
     public function destroy($id)
     {
-        Manager::find($id)->delete();
+        LeisureActivity::find($id)->remove();
 
-        return redirect()->route('managers.index')->with('success', 'Успішно видалено!');
+        return redirect()->route('leisure-activities.index')->with('success', 'Успішно видалено!');
     }
 }

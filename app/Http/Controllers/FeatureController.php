@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Feature\StoreRequest;
+use App\Http\Requests\Feature\UpdateRequest;
 use App\Models\Feature;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
@@ -40,11 +41,7 @@ class FeatureController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-
-        dd($request->all());
-
-        $feature = Feature::add($data);
-        $feature->uploadImage($request->file('image'));
+        Feature::create($data);
 
         return redirect()->route('features.index')->with('success', 'Успішно добавлено!');
     }
@@ -80,16 +77,13 @@ class FeatureController extends Controller
      * @param  \App\Models\Feature  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
         $feature = Feature::find($id);
-        $feature->edit($data);
-        if ($request->hasFile('image')) {
-            $feature->uploadImage($request->file('image'));
-        }
+        $feature->update($data);
 
-        return redirect()->route('features.index')->with('success', 'Успішно збережено!');;
+        return redirect()->route('features.index')->with('success', 'Успішно оновлено!');
     }
 
     /**
@@ -100,7 +94,7 @@ class FeatureController extends Controller
      */
     public function destroy($id)
     {
-        Feature::find($id)->remove();
+        Feature::find($id)->delete();
 
         return redirect()->route('features.index')->with('success', 'Успішно видалено!');
     }

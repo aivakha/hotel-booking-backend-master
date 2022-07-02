@@ -10,10 +10,10 @@
             <div class="card-body">
                 <div class="row flex-between-center">
                     <div class="col-md">
-                        <h5 class="mb-2 mb-md-0">{{ __('Налаштування зручностей') }}</h5>
+                        <h5 class="mb-2 mb-md-0">{{ __('Налаштування активностей') }}</h5>
                     </div>
                     <div class="col-auto">
-                        <a href="{{route('features.create')}}" class="btn btn-success me-1 mb-1">{{ __('Додати') }}</a>
+                        <a href="{{route('leisure-activities.create')}}" class="btn btn-success me-1 mb-1">{{ __('Додати') }}</a>
                     </div>
                 </div>
             </div>
@@ -23,34 +23,38 @@
             <div class="card-header">
                 <div class="row flex-between-end">
                     <div class="col-auto align-self-center">
-                        <h5 class="mb-0">{{ __('Всі зручності') }}</h5>
+                        <h5 class="mb-0">{{ __('Всі активності') }}</h5>
                     </div>
                 </div>
             </div>
             <div class="card-body bg-light">
-                @if ($features->isNotEmpty())
+                @if ($leisure_activities->isNotEmpty())
                     <div id="tableExample2" data-list='{"valueNames":["id", "title"],"page":10,"pagination":true}'>
                         <div class="table-responsive scrollbar">
                             <table class="table table-bordered table-striped fs--1 mb-0">
                                 <thead class="bg-200 text-900">
                                 <tr>
                                     <th class="sort" data-sort="id">ID</th>
-                                    <th class="sort" data-sort="title">{{ __('Активність') }}</th>
+                                    <th class="sort" data-sort="title">{{ __('Назва') }}</th>
+                                    <th class="sort" data-sort="image">{{ __('Картинка') }}</th>
                                     <th class="sort">Дії</th>
                                 </tr>
                                 </thead>
                                 <tbody class="list" style="vertical-align: middle">
-                                @foreach($features as $feature)
+                                @foreach($leisure_activities as $leisure_activity)
                                     <tr>
-                                        <td class="id">{{ $feature->id }}</td>
-                                        <td class="title">{{ $feature->title }}</td>
+                                        <td class="id">{{ $leisure_activity->id }}</td>
+                                        <td class="title">{{ $leisure_activity->title }}</td>
+                                        <td class="image">
+                                            <img src="{{ $leisure_activity->getImage() }}" style="width: 40px" alt="">
+                                        </td>
                                         <td class="actions">
                                             <div class="actions-btn">
-                                                <a class="btn p-0" href="{{route('features.edit', $feature->id)}}">
+                                                <a class="btn p-0" href="{{route('leisure-activities.edit', $leisure_activity->id)}}">
                                                     <span class="far fa-edit"></span>
                                                 </a>
 
-                                                {{Form::open(['route'=> ['features.destroy', $feature->id], 'method' => 'delete'])}}
+                                                {{Form::open(['route'=> ['leisure-activities.destroy', $leisure_activity->id], 'method' => 'delete'])}}
                                                 <button class="btn p-0 delete-btn" type="submit">
                                                     <span class="far fa-trash-alt"></span>
                                                 </button>

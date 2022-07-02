@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\City\StoreRequest;
+use App\Http\Requests\City\UpdateRequest;
 use App\Models\City;
 use Illuminate\Http\Request;
 
@@ -76,13 +77,13 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
         $city = City::find($id);
         $city->update($data);
 
-        return redirect()->route('cities.index')->with('success', 'Успішно збережено!');;
+        return redirect()->route('cities.index')->with('success', 'Успішно оновлено!');;
     }
 
     /**
