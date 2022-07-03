@@ -34,6 +34,7 @@
 {{--    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />--}}
     <link href="{{ asset('assets/admin/vendors/prism/prism-okaidia.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/admin/vendors/overlayscrollbars/OverlayScrollbars.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/vendors/glightbox/glightbox.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('assets/admin/css/theme-rtl.css') }}" rel="stylesheet" id="style-rtl">
     <link href="{{ asset('assets/admin/css/theme.css') }}" rel="stylesheet" id="style-default">
@@ -244,6 +245,7 @@
 <script src="{{ asset('assets/admin/vendors/lodash/lodash.min.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/list.js/list.min.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/overlayscrollbars/OverlayScrollbars.min.js') }}"></script>
+<script src="{{ asset('assets/admin/vendors/glightbox/glightbox.min.js') }}"></script>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
 <script src="{{ asset('assets/admin/js/admin.js') }}"></script>

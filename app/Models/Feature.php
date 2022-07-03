@@ -10,4 +10,15 @@ class Feature extends Model
     use HasFactory;
 
     protected $fillable = ['title'];
+
+    public function rooms()
+    {
+        return $this->belongsToMany(
+            Room::class,
+            'room_features',
+            'feature_id',
+            'room_id',
+        );
+    }
+
 }
