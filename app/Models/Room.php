@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -14,7 +15,7 @@ class Room extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable = ['title', 'description', 'date_from', 'date_to', 'preview_image', 'apartment_id'];
+    protected $fillable = ['title', 'description', 'date_from', 'date_to', 'apartment_id'];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -103,7 +104,6 @@ class Room extends Model
         $this->removeGallery();
         $this->features()->detach();
         $this->bedTypes()->detach();
-        // $this->gallery()->delete();
 
         $this->delete();
     }
@@ -112,8 +112,7 @@ class Room extends Model
     {
         if ($this->preview_image != null)
         {
-            Storage::delete("/public/uploads/rooms/{$this->id}/{$this->preview_image}");
-
+            Storage::delete('/public/uploads/rooms/'.$this->id.'/'.$this->preview_image);
             if (empty(Storage::allFiles("/public/uploads/rooms/{$this->id}"))) {
                 Storage::deleteDirectory("/public/uploads/rooms/{$this->id}");
             }
@@ -123,19 +122,12 @@ class Room extends Model
     public function uploadImage($preview_image)
     {
 
-//        dd($this->preview_image);
-
-        if ($preview_image == null)
-        {
-            return;
-        }
+        if ($preview_image == null) { return; }
 
         $this->removeImage();
         $filename = Str::random(10) . '.' . $preview_image->extension();
-
-        $preview_image->storeAs("public/uploads/rooms/". $this->id. "/", $filename);
+        $preview_image->storeAs("public/uploads/rooms/". $this->id, $filename);
         $this->preview_image = $filename;
-
         $this->save();
     }
 
@@ -184,7 +176,7 @@ class Room extends Model
 
     public function removeGallery()
     {
-        if (!empty($this->gallery()))
+        if ($this->gallery()->isNotEmpty())
         {
             foreach($this->gallery() as $item) {
                 Storage::delete("/public/uploads/rooms/{$this->id}/gallery/{$item->image}");
@@ -193,7 +185,14 @@ class Room extends Model
                     Storage::deleteDirectory("/public/uploads/rooms/{$this->id}");
                 }
             }
+            // delete records from DB
+            $ids = RoomGallery::where('room_id', '=', $this->id)->pluck('id')->toArray();
+
+            foreach ($ids as $id) {
+                RoomGallery::find($id)->delete();
+            }
         }
+
     }
 
     public function getGallery(): array
