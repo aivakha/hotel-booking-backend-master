@@ -10,4 +10,9 @@ class City extends Model
     use HasFactory;
 
     protected $fillable = ['title'];
+
+    public function apartments()
+    {
+        return $this->hasMany(Apartment::class); // один ко многим
+    }
 }

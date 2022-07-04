@@ -24,20 +24,20 @@
                         <div class="col ps-0"><hr class="mb-0 navbar-vertical-divider"></div>
                     </div>
 
-                    <a class="nav-link dropdown-indicator" href="#hotels" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="hotels">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-hotel"></span></span><span class="nav-link-text ps-1">Hotels</span>
+                    <a class="nav-link dropdown-indicator" href="#apartments" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="apartments">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-hotel"></span></span><span class="nav-link-text ps-1">{{ __('Апартаменти') }}</span>
                         </div>
                     </a>
-                    <ul class="nav collapse" id="hotels">
+                    <ul class="nav collapse" id="apartments">
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">All Hotels</span>
+                            <a class="nav-link" href="{{ route('apartments.index') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі апартаменти') }}</span>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Add New</span>
+                            <a class="nav-link" href="{{ route('apartments.create') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
                                 </div>
                             </a>
                         </li>
@@ -171,19 +171,19 @@
 
 
                     <a class="nav-link dropdown-indicator" href="#rooms" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="rooms">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-bed"></span></span><span class="nav-link-text ps-1">Rooms</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-bed"></span></span><span class="nav-link-text ps-1">{{ __('Кімнати') }}</span>
                         </div>
                     </a>
                     <ul class="nav collapse" id="rooms">
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">All Rooms</span>
+                            <a class="nav-link" href="{{ route('rooms.index') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі кімнати') }}</span>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Add New</span>
+                            <a class="nav-link" href="{{ route('rooms.create') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
                                 </div>
                             </a>
                         </li>

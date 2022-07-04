@@ -61,8 +61,6 @@ class Room extends Model
         );
     }
 
-
-
     public static function add($fields)
     {
         $room = new static;
@@ -71,7 +69,7 @@ class Room extends Model
         $date_to = Carbon::now()->addYear(10)->format('d-m-Y');
         $dateRange = ['date_from' => $date_from, 'date_to' => $date_to];
 
-        $data = array_merge($fields, $dateRange, ['apartment_id' => 999]);
+        $data = array_merge($fields, $dateRange);
         $room->fill($data);
         $room->save();
 
@@ -94,6 +92,27 @@ class Room extends Model
     public function setBedTypes($ids)
     {
         if ($ids == null) { return; }
+
+        $this->bedTypes()->sync($ids);
+    }
+
+    public function updateFeatures($ids)
+    {
+        if ($ids == null) {
+            return $this->features()->detach();
+        }
+
+        //dd($ids);
+
+        $this->features()->sync($ids);
+    }
+
+    public function updateBedTypes($ids)
+    {
+
+        if ($ids == null) {
+            return $this->bedTypes()->detach();
+        }
 
         $this->bedTypes()->sync($ids);
     }
@@ -126,7 +145,7 @@ class Room extends Model
 
         $this->removeImage();
         $filename = Str::random(10) . '.' . $preview_image->extension();
-        $preview_image->storeAs("public/uploads/rooms/". $this->id, $filename);
+        $preview_image->storeAs("/public/uploads/rooms/". $this->id, $filename);
         $this->preview_image = $filename;
         $this->save();
     }

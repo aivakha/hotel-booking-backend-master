@@ -24,6 +24,7 @@ Route::resource('/admin/leisure-activities', 'App\Http\Controllers\LeisureActivi
 Route::resource('/admin/bed-types', 'App\Http\Controllers\BedTypeController');
 Route::resource('/admin/meals', 'App\Http\Controllers\MealController');
 Route::resource('/admin/rooms', 'App\Http\Controllers\RoomController');
+Route::resource('/admin/apartments', 'App\Http\Controllers\ApartmentController');
 
 // R E G I S T R A T I O N  AND  L O G I N
 //Route::group([

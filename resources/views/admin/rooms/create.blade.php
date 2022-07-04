@@ -21,13 +21,13 @@
                     <div class="tab-pane preview-tab-pane active" role="tabpanel">
                         <div class="row">
                             <div class="mb-3">
-                                <label class="form-label" for="title">{{ __('Назва') }}</label>
+                                <label class="form-label" for="title">{{ __('Назва*') }}</label>
                                 <input class="form-control" id="title" value="{{old('title')}}" name="title" type="text"
                                        placeholder="Deluxe Prime">
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="description">{{ __('Опис') }}</label>
+                                <label class="form-label" for="description">{{ __('Опис*') }}</label>
                                 <textarea class="tinymce d-none" value="{{old('description')}}" name="description"
                                           rows="4"></textarea>
                             </div>
@@ -74,19 +74,10 @@
                                 @endif
                             </div>
 
-                            {{--                            <div class="mb-3">--}}
-                            {{--                                <label class="form-label">{{ __('Житло') }}</label>--}}
-                            {{--                                @if ($apartments)--}}
-                            {{--                                    <select class="form-select js-choice"--}}
-                            {{--                                            size="1" name="apartment_type"--}}
-                            {{--                                            data-options='{"removeItemButton":true,"placeholder":true}'>--}}
-                            {{--                                        <option value="">Житло</option>--}}
-                            {{--                                        @foreach($apartments as $key => $value)--}}
-                            {{--                                            <option value="{{ $key }}">{{ $value }}</option>--}}
-                            {{--                                        @endforeach--}}
-                            {{--                                    </select>--}}
-                            {{--                                @endif--}}
-                            {{--                            </div>--}}
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('Апартамент*') }}</label>
+                                {{Form::select('apartment_id', $apartments, null, ['class' => 'form-select js-choice', 'data-options' => '{"removeItemButton":true,"placeholder":true}'])}}
+                            </div>
 
                             <div class="pull-right">
                                 <a class="btn btn-danger me-1 mb-1"

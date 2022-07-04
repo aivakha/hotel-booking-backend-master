@@ -36,9 +36,9 @@ class RoomController extends Controller
     {
         $features = Feature::pluck('title', 'id')->all();
         $bed_types = BedType::pluck('title', 'id')->all();
-        //$apartments = Apartment::pluck('title', 'id')->all();
+        $apartments = Apartment::pluck('title', 'id')->all();
 
-        return view('admin.rooms.create', compact('features', 'bed_types'));
+        return view('admin.rooms.create', compact('features', 'bed_types', 'apartments'));
     }
 
     /**
@@ -92,7 +92,10 @@ class RoomController extends Controller
         $bedTypes = BedType::pluck('title', 'id')->all();
         $selectedBedTypes = $room->bedTypes->pluck('id')->all();
 
-        return view('admin.rooms.edit', compact('room', 'features', 'selectedFeatures', 'bedTypes', 'selectedBedTypes'));
+        $apartments = Apartment::pluck('title', 'id')->all();
+        $selectedApartment = $room->apartment()->pluck('id')->all();
+
+        return view('admin.rooms.edit', compact('room', 'features', 'selectedFeatures', 'bedTypes', 'selectedBedTypes', 'apartments', 'selectedApartment'));
     }
 
     /**
@@ -117,8 +120,8 @@ class RoomController extends Controller
             $room->uploadGallery($request->file('gallery'));
         }
 
-        $room->setFeatures($request->get('features'));
-        $room->setBedTypes($request->get('bed_types'));
+        $room->updateFeatures($request->get('features'));
+        $room->updateBedTypes($request->get('bed_types'));
 
         return redirect()->route('rooms.index')->with('success', 'Успішно оновлено!');
     }
@@ -133,6 +136,6 @@ class RoomController extends Controller
     {
         Room::find($id)->remove();
 
-        return redirect()->route('rooms.index');
+        return redirect()->route('rooms.index')->with('success', 'Успішно видалено!');
     }
 }

@@ -11,4 +11,8 @@ class Manager extends Model
 
     protected $guarded = [];
 
+    public function apartments()
+    {
+        return $this->hasMany(Apartment::class); // один ко многим
+    }
 }

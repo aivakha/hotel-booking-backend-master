@@ -10,10 +10,10 @@
             <div class="card-body">
                 <div class="row flex-between-center">
                     <div class="col-md">
-                        <h5 class="mb-2 mb-md-0">{{ __('Налаштування кімнат') }}</h5>
+                        <h5 class="mb-2 mb-md-0">{{ __('Налаштування апартаментів') }}</h5>
                     </div>
                     <div class="col-auto">
-                        <a href="{{route('rooms.create')}}" class="btn btn-success me-1 mb-1">{{ __('Додати') }}</a>
+                        <a href="{{route('apartments.create')}}" class="btn btn-success me-1 mb-1">{{ __('Додати') }}</a>
                     </div>
                 </div>
             </div>
@@ -23,41 +23,49 @@
             <div class="card-header">
                 <div class="row flex-between-end">
                     <div class="col-auto align-self-center">
-                        <h5 class="mb-0">{{ __('Всі кімнати') }}</h5>
+                        <h5 class="mb-0">{{ __('Всі апартаменти') }}</h5>
                     </div>
                 </div>
             </div>
             <div class="card-body bg-light">
-                @if ($rooms->isNotEmpty())
-                    <div id="tableExample2" data-list='{"valueNames":["id", "title", "apartment", "preview_image"],"page":15,"pagination":true}'>
+                @if ($apartments->isNotEmpty())
+                    <div id="tableExample2" data-list='{"valueNames":["id", "title", "city", "type", "star-rate", "preview_image"],"page":15,"pagination":true}'>
                         <div class="table-responsive scrollbar">
                             <table class="table table-bordered table-striped fs--1 mb-0">
                                 <thead class="bg-200 text-900">
                                 <tr>
                                     <th class="sort" data-sort="id">ID</th>
                                     <th class="sort" data-sort="title">{{ __('Назва') }}</th>
-                                    <th class="sort" data-sort="apartment">{{ __('Апартамент') }}</th>
+                                    <th class="sort" data-sort="city">{{ __('Місто') }}</th>
+                                    <th class="sort" data-sort="type">{{ __('Тип') }}</th>
+                                    <th class="sort" data-sort="star-rate">{{ __('Рейтинг') }}</th>
                                     <th class="sort" data-sort="preview_image">{{ __('Картинка') }}</th>
                                     <th class="sort">Дії</th>
                                 </tr>
                                 </thead>
                                 <tbody class="list" style="vertical-align: middle">
 
-                                @foreach($rooms as $room)
+                                @foreach($apartments as $apartment)
+
+                                {{--@dd($room)--}}
+                                {{--{{ $room->gallery()->where('room_id', $room->id)->get() }}--}}
+
                                     <tr>
-                                        <td class="id">{{ $room->id }}</td>
-                                        <td class="title">{{ $room->title }}</td>
-                                        <td class="apartment">{{ $room->apartment->title }}</td>
+                                        <td class="id">{{ $apartment->id }}</td>
+                                        <td class="title">{{ $apartment->title }}</td>
+                                        <td class="city">{{ $apartment->city->title }}</td>
+                                        <td class="type">{{ $apartment->type->title }}</td>
+                                        <td class="star-rate">{{ $apartment->star_rate }}</td>
                                         <td class="preview_image">
-                                            <img src="{{ $room->getImage() }}" style="width: 100%;max-width: 100px" alt="">
+                                            <img src="{{ $apartment->getImage() }}" style="width: 100%;max-width: 100px" alt="">
                                         </td>
                                         <td class="actions">
                                             <div class="actions-btn">
-                                                <a class="btn p-0" href="{{route('rooms.edit', $room->id)}}">
+                                                <a class="btn p-0" href="{{route('apartments.edit', $apartment->id)}}">
                                                     <span class="far fa-edit"></span>
                                                 </a>
 
-                                                {{Form::open(['route'=> ['rooms.destroy', $room->id], 'method' => 'delete'])}}
+                                                {{Form::open(['route'=> ['apartments.destroy', $apartment->id], 'method' => 'delete'])}}
                                                 <button class="btn p-0 delete-btn" type="submit">
                                                     <span class="far fa-trash-alt"></span>
                                                 </button>

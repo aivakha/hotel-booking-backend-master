@@ -29,8 +29,7 @@
 
                         <div class="mb-3">
                             <label class="form-label" for="description">{{ __('Опис') }}</label>
-                            <textarea class="tinymce d-none" name="description"
-                                      rows="4">{{ $room->description }}</textarea>
+                            <textarea class="tinymce d-none" name="description" rows="4">{{ $room->description }}</textarea>
                         </div>
 
                         <div class="col-md-6">
@@ -73,6 +72,11 @@
                         <div class="mb-3">
                             <label class="form-label">{{ __('Типи ліжка') }}</label>
                             {{Form::select('bed_types[]', $bedTypes, $selectedBedTypes, ['class' => 'form-select js-choice', 'multiple' => 'multiple', 'data-options' => '{"removeItemButton":true,"placeholder":true}'])}}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">{{ __('Апартамент*') }}</label>
+                            {{Form::select('apartment_id', $apartments, $selectedApartment, ['class' => 'form-select js-choice', 'data-options' => '{"removeItemButton":true,"placeholder":true}'])}}
                         </div>
 
                         <div class="pull-right">

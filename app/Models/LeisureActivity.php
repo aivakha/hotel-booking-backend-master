@@ -13,6 +13,16 @@ class LeisureActivity extends Model
 
     protected $fillable = ['title'];
 
+    public function apartments()
+    {
+        return $this->belongsToMany(
+            Apartment::class,
+            'apartment_leisure_activities',
+            'leisure_activity_id',
+            'apartment_id',
+        );
+    }
+
     public static function add($fields)
     {
         $feature = new static;
