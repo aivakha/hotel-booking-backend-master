@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,58 +16,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', 'App\Http\Controllers\IndexController@index');
 
-Route::resource('/admin/features', 'App\Http\Controllers\FeatureController');
-Route::resource('/admin/cities', 'App\Http\Controllers\CityController');
-Route::resource('/admin/distances', 'App\Http\Controllers\DistanceController');
-Route::resource('/admin/managers', 'App\Http\Controllers\ManagerController');
-Route::resource('/admin/apartment-types', 'App\Http\Controllers\ApartmentTypeController');
-Route::resource('/admin/leisure-activities', 'App\Http\Controllers\LeisureActivityController');
-Route::resource('/admin/bed-types', 'App\Http\Controllers\BedTypeController');
-Route::resource('/admin/meals', 'App\Http\Controllers\MealController');
-Route::resource('/admin/rooms', 'App\Http\Controllers\RoomController');
-Route::resource('/admin/apartments', 'App\Http\Controllers\ApartmentController');
+Auth::routes(['verify' => true, 'register'=> false, 'login'=> false]);
 
-// R E G I S T R A T I O N  AND  L O G I N
-//Route::group([
-//    'middleware' => 'admin'
-//], function() {
-//    // A D M I N - B A C K E N D
-//    Route::get('/admin', 'App\Http\Controllers\Admin\DashboardController@index');
-//    Route::resource('/admin/categories', 'App\Http\Controllers\Admin\CategoriesController');
-//    Route::resource('/admin/tags', 'App\Http\Controllers\Admin\TagsController');
-//    Route::resource('/admin/users', 'App\Http\Controllers\Admin\UsersController');
-//    Route::resource('/admin/posts', 'App\Http\Controllers\Admin\PostsController');
-//    Route::resource('/admin/subscribers', 'App\Http\Controllers\Admin\SubscribersController');
-//
-//    // C O M M E N T
-//    Route::post('/comment', 'App\Http\Controllers\CommentsController@store');
-//
-//    Route::get('/admin/comments', 'App\Http\Controllers\Admin\CommentsController@index')->name('admin.comments');
-//    Route::get('/admin/comments/toggle/{id}', 'App\Http\Controllers\Admin\CommentsController@toggle');
-//    Route::delete('/admin/comments/destroy/{id}', 'App\Http\Controllers\Admin\CommentsController@destroy')->name('comments.destroy');
-//
-//});
-//
-//
-//Route::group([
-//    'middleware' => 'auth'
-//], function() {
-//    Route::resource('/profile', 'App\Http\Controllers\ProfileController');
-//    Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
-//});
-//
-//Route::group([
-//    'middleware' => 'guest'
-//], function() {
-//    Route::get('/register', 'App\Http\Controllers\AuthController@registerForm');
-//    Route::post('/register', 'App\Http\Controllers\AuthController@register');
-//    Route::get('/login', 'App\Http\Controllers\AuthController@loginForm')->name('login');
-//    Route::post('/login', 'App\Http\Controllers\AuthController@login');
-//});
-//
+Route::group([
+    'middleware' => ['admin', 'auth', 'verified']
+], function() {
+    Route::get('/admin', 'App\Http\Controllers\IndexController@index');
+    Route::resource('/admin/features', 'App\Http\Controllers\FeatureController');
+    Route::resource('/admin/cities', 'App\Http\Controllers\CityController');
+    Route::resource('/admin/distances', 'App\Http\Controllers\DistanceController');
+    Route::resource('/admin/managers', 'App\Http\Controllers\ManagerController');
+    Route::resource('/admin/apartment-types', 'App\Http\Controllers\ApartmentTypeController');
+    Route::resource('/admin/leisure-activities', 'App\Http\Controllers\LeisureActivityController');
+    Route::resource('/admin/bed-types', 'App\Http\Controllers\BedTypeController');
+    Route::resource('/admin/meals', 'App\Http\Controllers\MealController');
+    Route::resource('/admin/rooms', 'App\Http\Controllers\RoomController');
+    Route::resource('/admin/apartments', 'App\Http\Controllers\ApartmentController');
+    Route::resource('/admin/bookings', 'App\Http\Controllers\BookingController');
 
 
+    Route::get('/admin/account', 'App\Http\Controllers\UserController@edit')->name('account');
+    Route::put('/admin/account', 'App\Http\Controllers\UserController@update')->name('account.update');
 
 
+    Route::resource('/admin/roles', 'App\Http\Controllers\RoleController')->middleware('role:super_user');
+});
+
+Route::group([
+    'middleware' => 'auth'
+], function() {
+    Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
+});
+
+Route::group([
+    'middleware' => 'guest'
+], function() {
+    Route::get('/registration', 'App\Http\Controllers\AuthController@registrationForm')->name('registration');
+    Route::post('/registration', 'App\Http\Controllers\AuthController@registration');
+    Route::get('/login', 'App\Http\Controllers\AuthController@loginForm')->name('login');
+    Route::post('/login', 'App\Http\Controllers\AuthController@login');
+});
+
+
+Route::get('/test', 'App\Http\Controllers\TestController@index');

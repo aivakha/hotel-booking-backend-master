@@ -232,24 +232,24 @@
 
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                        <div class="col-auto navbar-vertical-label">Booking Settings</div>
+                        <div class="col-auto navbar-vertical-label">{{ __('Налаштування бронювань') }}</div>
                         <div class="col ps-0"><hr class="mb-0 navbar-vertical-divider"></div>
                     </div>
 
                     <a class="nav-link dropdown-indicator" href="#bookings" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="bookings">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-calendar-alt"></span></span><span class="nav-link-text ps-1">Bookings</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-calendar-alt"></span></span><span class="nav-link-text ps-1">{{ __('Бронювання') }}</span>
                         </div>
                     </a>
                     <ul class="nav collapse" id="bookings">
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">All Bookings</span>
+                            <a class="nav-link" href="{{ route('bookings.index') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі бронювання') }}</span>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Add New</span>
+                            <a class="nav-link" href="{{ route('bookings.create') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
                                 </div>
                             </a>
                         </li>
@@ -280,6 +280,26 @@
                             </a>
                         </li>
                     </ul>
+
+                    <a class="nav-link dropdown-indicator" href="#roles" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="roles">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-hotdog"></span></span><span class="nav-link-text ps-1">{{ __('Ролі користувачів') }}</span>
+                        </div>
+                    </a>
+                    <ul class="nav collapse" id="roles">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('roles.index') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Всі ролі') }}</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('roles.create') }}" data-bs-toggle="" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+
                     <a class="nav-link" href="">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">

@@ -29384,6 +29384,10 @@ div[data-collapse] + .kanban-item,
     gap: 5px;
 }
 
-.delete-btn {
+.approved {
+    color: green;
+}
 
+.declined {
+    color: red;
 }

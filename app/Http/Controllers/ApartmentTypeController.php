@@ -83,7 +83,7 @@ class ApartmentTypeController extends Controller
         $apartment_type = ApartmentType::find($id);
         $apartment_type->update($data);
 
-        return redirect()->route('apartment-types.index')->with('success', 'Успішно оновлено!');;
+        return redirect()->route('apartment-types.index')->with('success', 'Успішно оновлено!');
     }
 
     /**

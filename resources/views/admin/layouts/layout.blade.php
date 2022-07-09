@@ -35,6 +35,7 @@
     <link href="{{ asset('assets/admin/vendors/prism/prism-okaidia.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/admin/vendors/overlayscrollbars/OverlayScrollbars.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/admin/vendors/glightbox/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/vendors/flatpickr/flatpickr.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('assets/admin/css/theme-rtl.css') }}" rel="stylesheet" id="style-rtl">
     <link href="{{ asset('assets/admin/css/theme.css') }}" rel="stylesheet" id="style-default">
@@ -241,6 +242,7 @@
 <script src="{{ asset('assets/admin/vendors/prism/prism.js') }}"></script>
 
 <script src="{{ asset('assets/admin/vendors/echarts/echarts.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/flatpickr.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/fontawesome/all.min.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/lodash/lodash.min.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/list.js/list.min.js') }}"></script>
@@ -250,21 +252,5 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
 <script src="{{ asset('assets/admin/js/admin.js') }}"></script>
 
-
-{{--<script>--}}
-{{--    // Get a reference to the file input element--}}
-{{--    const inputElement = document.querySelector('input[id="feature_logo"]');--}}
-
-{{--    // Create a FilePond instance--}}
-{{--    const pond = FilePond.create(inputElement);--}}
-{{--    FilePond.setOptions({--}}
-{{--        server: {--}}
-{{--            url:  '/upload',--}}
-{{--            headers: {--}}
-{{--                'X-CSRF-TOKEN': '{{ csrf_token() }}'--}}
-{{--            }--}}
-{{--        }--}}
-{{--    });--}}
-{{--</script>--}}
 </body>
 

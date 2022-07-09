@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\Distance;
 use App\Models\Feature;
 use App\Models\Manager;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller

@@ -30,7 +30,8 @@ class StoreRequest extends FormRequest
             'gallery.*' => 'image|nullable',
             'features' => 'nullable',
             'bed_types' => 'nullable',
-            'apartment_id' => 'required',
+            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'apartment_id' => 'required'
         ];
     }
 }

@@ -39,6 +39,20 @@ class Apartment extends Model
         ];
     }
 
+    public function bookings() {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function rooms()
     {
         return $this->hasMany(Room::class);

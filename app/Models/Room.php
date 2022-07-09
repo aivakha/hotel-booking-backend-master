@@ -15,7 +15,7 @@ class Room extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable = ['title', 'description', 'date_from', 'date_to', 'apartment_id'];
+    protected $fillable = ['title', 'description', 'date_from', 'date_to', 'price', 'apartment_id'];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -29,6 +29,10 @@ class Room extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function bookings() {
+        return $this->hasMany(Booking::class);
     }
 
     public function apartment()

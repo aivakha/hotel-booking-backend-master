@@ -79,6 +79,12 @@
                             {{Form::select('apartment_id', $apartments, $selectedApartment, ['class' => 'form-select js-choice', 'data-options' => '{"removeItemButton":true,"placeholder":true}'])}}
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label" for="price">{{ __('Ціна за добу*') }}</label>
+                            <input class="form-control" id="price" value="{{ $room->price }}" name="price" type="text"
+                                   placeholder="800">
+                        </div>
+
                         <div class="pull-right">
                             <a class="btn btn-danger me-1 mb-1"
                                href="{{ route('rooms.index')  }}">{{ __('Повернутись назад') }}</a>
