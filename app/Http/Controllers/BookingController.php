@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\BookingEvent;
+use App\Events\BookingStatusEvent;
 use App\Http\Requests\Booking\StoreRequest;
 use App\Http\Requests\Booking\UpdateRequest;
 use App\Models\Booking;
@@ -101,6 +102,8 @@ class BookingController extends Controller
 
         $booking = Booking::find($id);
         $booking->edit($data);
+        $booking->setCheckIn($request->get('check_in'));
+        $booking->setCheckOut($request->get('check_out'));
 
         return redirect()->route('bookings.index')->with('success', 'Успішно оновлено!');
     }

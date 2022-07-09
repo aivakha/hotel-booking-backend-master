@@ -501,7 +501,7 @@
                                                             <td align="center" class="es-m-txt-c"
                                                                 style="padding:0;Margin:0;padding-bottom:10px"><h1
                                                                     style="Margin:0;line-height:40px;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;font-size:40px;font-style:normal;font-weight:bold;color:#333333">
-                                                                    Бронювання оформлено успішно!</h1></td>
+                                                                    Нове бронювання!</h1></td>
                                                         </tr>
                                                     </table>
                                                 </td>
@@ -550,8 +550,9 @@
                                                             <td align="center" class="es-m-p0r es-m-p0l"
                                                                 style="Margin:0;padding-top:5px;padding-bottom:15px;padding-left:40px;padding-right:40px">
                                                                 <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:21px;color:#333333;font-size:14px">
-                                                                    Цей електронний лист призначений для підтвердження
-                                                                    вашого замовлення.</p></td>
+                                                                    Цей електронний лист призначений для сповіщення
+                                                                    нового замовлення.</p>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="center" style="padding:0;Margin:0"><span
@@ -607,10 +608,17 @@
                                                            role="presentation"
                                                            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p
-                                                                    style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:21px;color:#333333;font-size:14px">
-                                                                    Менеджер:
-                                                                    <strong>{{ $data['manager']['email'] }}</strong></p>
+                                                            <td align="left" style="padding:0;Margin:0">
+                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:21px;color:#333333;font-size:14px">
+                                                                    Повне ім'я:
+                                                                    <strong>{{ $data['user']['last_name'] }} {{ $data['user']['first_name'] }}</strong>
+                                                                </p>
+                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:21px;color:#333333;font-size:14px">
+                                                                    E-mail:
+                                                                    <strong>{{ $data['user']['email'] }}</strong></p>
+                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:21px;color:#333333;font-size:14px">
+                                                                    Телефон:
+                                                                    <strong>{{ $data['user']['phone'] }}</strong></p>
                                                                 <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:21px;color:#333333;font-size:14px">
                                                                     Номер
                                                                     бронювання:&nbsp;<strong>#{{ $data['id'] }}</strong>
@@ -655,31 +663,6 @@
                                             </tr>
                                         </table>
                                         <!--[if mso]></td></tr></table><![endif]--></td>
-                                </tr>
-                                <tr>
-                                    <td align="left"
-                                        style="Margin:0;padding-bottom:10px;padding-top:15px;padding-left:20px;padding-right:20px">
-                                        <table cellpadding="0" cellspacing="0" width="100%"
-                                               style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                            <tr>
-                                                <td align="left" style="padding:0;Margin:0;width:560px">
-                                                    <table cellpadding="0" cellspacing="0" width="100%"
-                                                           role="presentation"
-                                                           style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                        <tr>
-                                                            <td align="center"
-                                                                style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px">
-                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:21px;color:#333333;font-size:14px">
-                                                                    Є питання? Напишіть нам
-                                                                    на {{ $data['manager']['email'] }} або зателефонуйте
-                                                                    нам за номером {{ $data['manager']['phone'] }}.</p>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
                                 </tr>
                             </table>
                         </td>

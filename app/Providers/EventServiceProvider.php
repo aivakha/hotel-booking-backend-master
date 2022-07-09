@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use App\Events\BookingEvent;
-use App\Listeners\Booking\EmailManagerListener;
+use App\Events\BookingStatusEvent;
+use App\Listeners\EmailClientDeclinedStatusListener;
+use App\Listeners\EmailClientStatusListener;
+use App\Listeners\EmailManagerListener;
 use App\Listeners\EmailClientListener;
 use App\Listeners\VerifiedEmailNotification;
 use Illuminate\Auth\Events\Registered;
@@ -29,8 +32,12 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         BookingEvent::class => [
-            // EmailManagerListener::class,
+            EmailManagerListener::class,
             EmailClientListener::class,
+        ],
+
+        BookingStatusEvent::class => [
+            EmailClientStatusListener::class,
         ],
     ];
 

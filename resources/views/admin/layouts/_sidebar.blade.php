@@ -258,31 +258,12 @@
 
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                        <div class="col-auto navbar-vertical-label">User Settings</div>
+                        <div class="col-auto navbar-vertical-label">{{ __('Налаштування користувачів') }}</div>
                         <div class="col ps-0"><hr class="mb-0 navbar-vertical-divider"></div>
                     </div>
 
-                    <a class="nav-link dropdown-indicator" href="#users" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="users">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-users"></span></span><span class="nav-link-text ps-1">Users</span>
-                        </div>
-                    </a>
-                    <ul class="nav collapse" id="users">
-                        <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">All Users</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="app/email/inbox.html" data-bs-toggle="" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Add New</span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-
                     <a class="nav-link dropdown-indicator" href="#roles" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="roles">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-hotdog"></span></span><span class="nav-link-text ps-1">{{ __('Ролі користувачів') }}</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-users"></span></span><span class="nav-link-text ps-1">{{ __('Ролі та права доступу') }}</span>
                         </div>
                     </a>
                     <ul class="nav collapse" id="roles">
@@ -300,17 +281,8 @@
                         </li>
                     </ul>
 
-                    <a class="nav-link" href="">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-user-check"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Waiting Approval</span>
-                        </div>
-                    </a>
 
                 </li>
-
             </ul>
         </div>
     </div>

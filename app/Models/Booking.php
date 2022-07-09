@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\BookingStatusEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -39,6 +40,9 @@ class Booking extends Model
     public function edit($fields)
     {
         $this->fill($fields);
+        if ($this->isDirty('status')) {
+            event(new BookingStatusEvent($this));
+        }
         $this->save();
     }
 

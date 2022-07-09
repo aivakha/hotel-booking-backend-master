@@ -31,45 +31,48 @@ class EmailClientListener
         $user_id = $event->booking->user_id;
         $user = User::find($user_id);
 
-        $booking_id = $event->booking->id;
+        if ($user) {
 
-        $check_in = $event->booking->check_in;
-        $check_out = $event->booking->check_out;
-        $days = $check_out->diffInDays($check_in);
+            $booking_id = $event->booking->id;
 
-        $room_title = $event->booking->room->title;
-        $room_price = $event->booking->room->price;
-        $total_price = $room_price * $days;
+            $check_in = $event->booking->check_in;
+            $check_out = $event->booking->check_out;
+            $days = $check_out->diffInDays($check_in);
 
-        $apartment_title = $event->booking->apartment->title;
-        $apartment_address = $event->booking->apartment->address;
+            $room_title = $event->booking->room->title;
+            $room_price = $event->booking->room->price;
+            $total_price = $room_price * $days;
 
-        $manager_first_name = $event->booking->apartment->manager->first_name;
-        $manager_last_name = $event->booking->apartment->manager->last_name;
-        $manager_email = $event->booking->apartment->manager->email;
-        $manager_phone = $event->booking->apartment->manager->phone;
+            $apartment_title = $event->booking->apartment->title;
+            $apartment_address = $event->booking->apartment->address;
 
-        $created_at = $event->booking->created_at;
+            $manager_first_name = $event->booking->apartment->manager->first_name;
+            $manager_last_name = $event->booking->apartment->manager->last_name;
+            $manager_email = $event->booking->apartment->manager->email;
+            $manager_phone = $event->booking->apartment->manager->phone;
 
-        $data = [
-            'id' => $booking_id,
-            'check_in' => $check_in,
-            'check_out' => $check_out,
-            'room_title' => $room_title,
-            'total_price' => $total_price,
-            'created_at' => $created_at,
-            'apartment' => [
-                'title' => $apartment_title,
-                'address' => $apartment_address,
-            ],
-            'manager' => [
-                'first_name' => $manager_first_name,
-                'last_name' => $manager_last_name,
-                'email' => $manager_email,
-                'phone' => $manager_phone,
-            ],
-        ];
+            $created_at = $event->booking->created_at;
 
-        $user->notify(new EmailClientNotification($data));
+            $data = [
+                'id' => $booking_id,
+                'check_in' => $check_in,
+                'check_out' => $check_out,
+                'room_title' => $room_title,
+                'total_price' => $total_price,
+                'created_at' => $created_at,
+                'apartment' => [
+                    'title' => $apartment_title,
+                    'address' => $apartment_address,
+                ],
+                'manager' => [
+                    'first_name' => $manager_first_name,
+                    'last_name' => $manager_last_name,
+                    'email' => $manager_email,
+                    'phone' => $manager_phone,
+                ],
+            ];
+
+            $user->notify(new EmailClientNotification($data));
+        }
     }
 }
