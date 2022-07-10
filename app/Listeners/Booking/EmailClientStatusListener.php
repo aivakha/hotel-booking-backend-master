@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Booking;
 
+//use App\Events\Booking\BookingEvent;
+use App\Events\Booking\BookingStatusEvent;
 use App\Models\User;
 use App\Notifications\Booking\EmailClientStatusNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -22,10 +24,10 @@ class EmailClientStatusListener
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param  \App\Events\Booking\BookingStatusEvent  $event
      * @return void
      */
-    public function handle($event)
+    public function handle(BookingStatusEvent $event)
     {
         $booking = $event->booking;
         $user = $event->booking->user;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Booking;
 
 use App\Models\Booking;
 use Illuminate\Broadcasting\Channel;
@@ -11,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BookingStatusEvent
+class BookingEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

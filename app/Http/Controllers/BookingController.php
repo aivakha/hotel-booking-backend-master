@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BookingEvent;
-use App\Events\BookingStatusEvent;
+use App\Events\Booking\BookingEvent;
 use App\Http\Requests\Booking\StoreRequest;
 use App\Http\Requests\Booking\UpdateRequest;
 use App\Models\Booking;
@@ -35,8 +34,6 @@ class BookingController extends Controller
         $rooms = Room::pluck('title', 'id')->all();
         $users = User::pluck('email', 'id')->all();
 
-//        Mail::send('email.')
-
         return view('admin.bookings.create', compact('rooms', 'users'));
     }
 
@@ -48,7 +45,6 @@ class BookingController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        // dd($request->validated());
         $data = $request->validated();
         $booking = Booking::add($data);
         $booking->setApartment($request->get('room_id'));

@@ -4,6 +4,8 @@
     <div class="content">
         @include('admin.layouts._navbar')
 
+        @include('admin.layouts.alerts._success')
+
         <div class="card mb-3">
             <div class="card-header">
                 <div class="row flex-between-end">

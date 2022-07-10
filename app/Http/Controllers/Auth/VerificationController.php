@@ -26,7 +26,15 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+
+    //protected $redirectTo = RouteServiceProvider::HOME;
+
+    protected function redirectTo()
+    {
+        session()->flash('success', 'Ваш e-mail успішно підтверджений!');
+
+        return '/admin';
+    }
 
     /**
      * Create a new controller instance.

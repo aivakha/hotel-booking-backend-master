@@ -2,12 +2,11 @@
 
 namespace App\Providers;
 
-use App\Events\BookingEvent;
-use App\Events\BookingStatusEvent;
-use App\Listeners\EmailClientDeclinedStatusListener;
-use App\Listeners\EmailClientStatusListener;
-use App\Listeners\EmailManagerListener;
-use App\Listeners\EmailClientListener;
+use App\Events\Booking\BookingEvent;
+use App\Events\Booking\BookingStatusEvent;
+use App\Listeners\Booking\EmailClientStatusListener;
+use App\Listeners\Booking\EmailManagerListener;
+use App\Listeners\Booking\EmailClientListener;
 use App\Listeners\VerifiedEmailNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;

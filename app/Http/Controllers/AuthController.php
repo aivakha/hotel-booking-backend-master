@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\LoginStore;
 use App\Http\Requests\Auth\RegistrationStore;
 use App\Models\User;
-use App\Notifications\VerifyEmailNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
@@ -35,7 +34,7 @@ class AuthController extends Controller
             return redirect()->route('verification.notice');
         }
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'Успішно оновлено!');
     }
 
     public function loginForm() {

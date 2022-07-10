@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Booking;
 
-use App\Events\BookingEvent;
+use App\Events\Booking\BookingEvent;
 use App\Models\User;
-use App\Notifications\Booking\EmailManagerNotification;
+use App\Notifications\Booking\EmailClientNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class EmailManagerListener
+class EmailClientListener
 {
     /**
      * Create the event listener.
@@ -28,16 +28,12 @@ class EmailManagerListener
      */
     public function handle(BookingEvent $event)
     {
-        $manager = $event->booking->apartment->manager;
-        $booking_id = $event->booking->id;
-
-        $user = User::find($event->booking->user_id);
+        $user_id = $event->booking->user_id;
+        $user = User::find($user_id);
 
         if ($user) {
-            $user_first_name = $user->first_name;
-            $user_last_name = $user->last_name;
-            $user_phone = $user->phone;
-            $user_email = $user->email;
+
+            $booking_id = $event->booking->id;
 
             $check_in = $event->booking->check_in;
             $check_out = $event->booking->check_out;
@@ -49,6 +45,11 @@ class EmailManagerListener
 
             $apartment_title = $event->booking->apartment->title;
             $apartment_address = $event->booking->apartment->address;
+
+            $manager_first_name = $event->booking->apartment->manager->first_name;
+            $manager_last_name = $event->booking->apartment->manager->last_name;
+            $manager_email = $event->booking->apartment->manager->email;
+            $manager_phone = $event->booking->apartment->manager->phone;
 
             $created_at = $event->booking->created_at;
 
@@ -63,15 +64,15 @@ class EmailManagerListener
                     'title' => $apartment_title,
                     'address' => $apartment_address,
                 ],
-                'user' => [
-                    'first_name' => $user_first_name,
-                    'last_name' => $user_last_name,
-                    'email' => $user_email,
-                    'phone' => $user_phone,
+                'manager' => [
+                    'first_name' => $manager_first_name,
+                    'last_name' => $manager_last_name,
+                    'email' => $manager_email,
+                    'phone' => $manager_phone,
                 ],
             ];
 
-            $manager->notify(new EmailManagerNotification($data));
+            $user->notify(new EmailClientNotification($data));
         }
     }
 }
