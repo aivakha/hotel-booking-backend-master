@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use \App\Http\Requests\Manager\StoreRequest;
-use App\Models\Manager;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\City\StoreRequest;
+use App\Http\Requests\City\UpdateRequest;
+use App\Models\City;
 use Illuminate\Http\Request;
 
-class ManagerController extends Controller
+class CityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +17,9 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $managers = Manager::all();
+        $cities = City::all();
 
-        return view('admin.managers.index', compact('managers'));
+        return view('admin.cities.index', compact('cities'));
     }
 
     /**
@@ -27,7 +29,7 @@ class ManagerController extends Controller
      */
     public function create()
     {
-        return view('admin.managers.create');
+        return view('admin.cities.create');
     }
 
     /**
@@ -40,9 +42,9 @@ class ManagerController extends Controller
     {
         $data = $request->validated();
 
-        Manager::create($data);
+        City::create($data);
 
-        return redirect()->route('managers.index')->with('success', 'Успішно добавлено!');
+        return redirect()->route('cities.index')->with('success', 'Успішно добавлено!');
     }
 
     /**
@@ -64,9 +66,9 @@ class ManagerController extends Controller
      */
     public function edit($id)
     {
-        $manager = Manager::find($id);
+        $city = City::find($id);
 
-        return view('admin.managers.edit', compact('manager'));
+        return view('admin.cities.edit', compact('city'));
     }
 
     /**
@@ -76,13 +78,13 @@ class ManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
-        $manager = Manager::find($id);
-        $manager->update($data);
+        $city = City::find($id);
+        $city->update($data);
 
-        return redirect()->route('managers.index')->with('success', 'Успішно оновлено!');;
+        return redirect()->route('cities.index')->with('success', 'Успішно оновлено!');;
     }
 
     /**
@@ -93,8 +95,8 @@ class ManagerController extends Controller
      */
     public function destroy($id)
     {
-        Manager::find($id)->delete();
+        City::find($id)->delete();
 
-        return redirect()->route('managers.index')->with('success', 'Успішно видалено!');
+        return redirect()->route('cities.index')->with('success', 'Успішно видалено!');
     }
 }

@@ -263,4 +263,8 @@ class Apartment extends Model
             return [];
         }
     }
+
+    public function getComments() {
+        return $this->comments()->where('status', 1)->get();
+    }
 }

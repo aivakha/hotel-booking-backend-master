@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\City\StoreRequest;
-use App\Http\Requests\City\UpdateRequest;
-use App\Models\City;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Feature\StoreRequest;
+use App\Http\Requests\Feature\UpdateRequest;
+use App\Models\Feature;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 
-class CityController extends Controller
+class FeatureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +18,9 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::all();
+        $features = Feature::all();
 
-        return view('admin.cities.index', compact('cities'));
+        return view('admin.features.index', compact('features'));
     }
 
     /**
@@ -28,7 +30,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('admin.cities.create');
+        return view('admin.features.create');
     }
 
     /**
@@ -40,62 +42,61 @@ class CityController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
+        Feature::create($data);
 
-        City::create($data);
-
-        return redirect()->route('cities.index')->with('success', 'Успішно добавлено!');
+        return redirect()->route('features.index')->with('success', 'Успішно добавлено!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Feature  $feature
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Feature $feature)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Feature  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $city = City::find($id);
+        $feature = Feature::find($id);
 
-        return view('admin.cities.edit', compact('city'));
+        return view('admin.features.edit', compact('feature'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Feature  $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
-        $city = City::find($id);
-        $city->update($data);
+        $feature = Feature::find($id);
+        $feature->update($data);
 
-        return redirect()->route('cities.index')->with('success', 'Успішно оновлено!');;
+        return redirect()->route('features.index')->with('success', 'Успішно оновлено!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Feature $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        City::find($id)->delete();
+        Feature::find($id)->delete();
 
-        return redirect()->route('cities.index')->with('success', 'Успішно видалено!');
+        return redirect()->route('features.index')->with('success', 'Успішно видалено!');
     }
 }

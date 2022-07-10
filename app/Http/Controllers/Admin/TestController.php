@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Booking;
 use App\Models\Room;
@@ -36,8 +37,10 @@ class TestController extends Controller
 
         $availiable_rooms = Room::whereNotIn('id', $booked_ids)->get();
 
+        $apartment = Apartment::find(8);
+
         // $test = DB::table('rooms')->whereNotIn('id', $booked_ids)->get();
 
-        return view('admin.test', compact('users', 'rooms', 'apartments', 'bookings', 'room', 'availiable_rooms'));
+        return view('admin.test', compact('users', 'rooms', 'apartments', 'bookings', 'room', 'availiable_rooms', 'apartment'));
     }
 }

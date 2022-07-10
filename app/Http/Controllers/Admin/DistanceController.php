@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\LeisureActivity\StoreRequest;
-use App\Http\Requests\LeisureActivity\UpdateRequest;
-use App\Models\LeisureActivity;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Distance\StoreRequest;
+use App\Http\Requests\Distance\UpdateRequest;
+use App\Models\Distance;
 use Illuminate\Http\Request;
 
-class LeisureActivityController extends Controller
+class DistanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,9 @@ class LeisureActivityController extends Controller
      */
     public function index()
     {
-        $leisure_activities = LeisureActivity::all();
+        $distances = Distance::all();
 
-        return view('admin.leisure-activities.index', compact('leisure_activities'));
+        return view('admin.distances.index', compact('distances'));
     }
 
     /**
@@ -28,7 +29,7 @@ class LeisureActivityController extends Controller
      */
     public function create()
     {
-        return view('admin.leisure-activities.create');
+        return view('admin.distances.create');
     }
 
     /**
@@ -41,10 +42,9 @@ class LeisureActivityController extends Controller
     {
         $data = $request->validated();
 
-        $leisure_activity = LeisureActivity::add($data);
-        $leisure_activity->uploadImage($request->file('image'));
+        Distance::create($data);
 
-        return redirect()->route('leisure-activities.index')->with('success', 'Успішно добавлено!');
+        return redirect()->route('distances.index')->with('success', 'Успішно добавлено!');
     }
 
     /**
@@ -55,7 +55,7 @@ class LeisureActivityController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -66,9 +66,9 @@ class LeisureActivityController extends Controller
      */
     public function edit($id)
     {
-        $leisure_activity = LeisureActivity::find($id);
+        $distance = Distance::find($id);
 
-        return view('admin.leisure-activities.edit', compact('leisure_activity'));
+        return view('admin.distances.edit', compact('distance'));
     }
 
     /**
@@ -81,13 +81,10 @@ class LeisureActivityController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
-        $leisure_activity = LeisureActivity::find($id);
-        $leisure_activity->edit($data);
-        if ($request->hasFile('image')) {
-            $leisure_activity->uploadImage($request->file('image'));
-        }
+        $distance = Distance::find($id);
+        $distance->update($data);
 
-        return redirect()->route('leisure-activities.index')->with('success', 'Успішно оновлено!');
+        return redirect()->route('distances.index')->with('success', 'Успішно оновлено!');;
     }
 
     /**
@@ -98,8 +95,8 @@ class LeisureActivityController extends Controller
      */
     public function destroy($id)
     {
-        LeisureActivity::find($id)->remove();
+        Distance::find($id)->delete();
 
-        return redirect()->route('leisure-activities.index')->with('success', 'Успішно видалено!');
+        return redirect()->route('distances.index')->with('success', 'Успішно видалено!');
     }
 }

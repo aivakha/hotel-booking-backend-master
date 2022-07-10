@@ -20,33 +20,38 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true, 'register'=> false, 'login'=> false]);
 
 Route::group([
-    'middleware' => ['admin', 'auth', 'verified']
+    'middleware' => ['admin', 'auth', 'verified'],
+    'prefix' => 'admin',
+    'namespace' => 'App\Http\Controllers\Admin'
 ], function() {
-    Route::get('/admin', 'App\Http\Controllers\IndexController@index');
-    Route::resource('/admin/features', 'App\Http\Controllers\FeatureController');
-    Route::resource('/admin/cities', 'App\Http\Controllers\CityController');
-    Route::resource('/admin/distances', 'App\Http\Controllers\DistanceController');
-    Route::resource('/admin/managers', 'App\Http\Controllers\ManagerController');
-    Route::resource('/admin/apartment-types', 'App\Http\Controllers\ApartmentTypeController');
-    Route::resource('/admin/leisure-activities', 'App\Http\Controllers\LeisureActivityController');
-    Route::resource('/admin/bed-types', 'App\Http\Controllers\BedTypeController');
-    Route::resource('/admin/meals', 'App\Http\Controllers\MealController');
-    Route::resource('/admin/rooms', 'App\Http\Controllers\RoomController');
-    Route::resource('/admin/apartments', 'App\Http\Controllers\ApartmentController');
-    Route::resource('/admin/bookings', 'App\Http\Controllers\BookingController');
+    Route::get('/', 'IndexController@index');
 
+    Route::get('/account', 'UserController@edit')->name('account');
+    Route::put('/account', 'UserController@update')->name('account.update');
 
-    Route::get('/admin/account', 'App\Http\Controllers\UserController@edit')->name('account');
-    Route::put('/admin/account', 'App\Http\Controllers\UserController@update')->name('account.update');
+    Route::get('/comments', 'CommentController@index')->name('comments.index');
+    Route::get('/comments/update/{id}', 'CommentController@update')->name('comments.update');
+    Route::delete('/comments/destroy/{id}', 'CommentController@destroy')->name('comments.destroy');
 
-
-    Route::resource('/admin/roles', 'App\Http\Controllers\RoleController')->middleware('role:super_user');
+    Route::resource('/features', 'FeatureController');
+    Route::resource('/cities', 'CityController');
+    Route::resource('/distances', 'DistanceController');
+    Route::resource('/managers', 'ManagerController');
+    Route::resource('/apartment-types', 'ApartmentTypeController');
+    Route::resource('/leisure-activities', 'LeisureActivityController');
+    Route::resource('/bed-types', 'BedTypeController');
+    Route::resource('/meals', 'MealController');
+    Route::resource('/rooms', 'RoomController');
+    Route::resource('/apartments', 'ApartmentController');
+    Route::resource('/bookings', 'BookingController');
+    Route::resource('/roles', 'RoleController')->middleware('role:super_user');
 });
 
 Route::group([
     'middleware' => 'auth'
 ], function() {
     Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
+    Route::post('/comment', 'App\Http\Controllers\CommentController@store')->name('comments.store');
 });
 
 Route::group([

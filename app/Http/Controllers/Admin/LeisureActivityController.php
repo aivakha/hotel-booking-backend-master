@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\BedType\StoreRequest;
-use App\Http\Requests\BedType\UpdateRequest;
-use App\Models\BedType;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\LeisureActivity\StoreRequest;
+use App\Http\Requests\LeisureActivity\UpdateRequest;
+use App\Models\LeisureActivity;
 use Illuminate\Http\Request;
 
-class BedTypeController extends Controller
+class LeisureActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,9 @@ class BedTypeController extends Controller
      */
     public function index()
     {
-        $bed_types = BedType::all();
+        $leisure_activities = LeisureActivity::all();
 
-        return view('admin.bed-types.index', compact('bed_types'));
+        return view('admin.leisure-activities.index', compact('leisure_activities'));
     }
 
     /**
@@ -28,7 +29,7 @@ class BedTypeController extends Controller
      */
     public function create()
     {
-        return view('admin.bed-types.create');
+        return view('admin.leisure-activities.create');
     }
 
     /**
@@ -40,9 +41,11 @@ class BedTypeController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        BedType::create($data);
 
-        return redirect()->route('bed-types.index')->with('success', 'Успішно добавлено!');
+        $leisure_activity = LeisureActivity::add($data);
+        $leisure_activity->uploadImage($request->file('image'));
+
+        return redirect()->route('leisure-activities.index')->with('success', 'Успішно добавлено!');
     }
 
     /**
@@ -64,9 +67,9 @@ class BedTypeController extends Controller
      */
     public function edit($id)
     {
-        $bed_type = BedType::find($id);
+        $leisure_activity = LeisureActivity::find($id);
 
-        return view('admin.bed-types.edit', compact('bed_type'));
+        return view('admin.leisure-activities.edit', compact('leisure_activity'));
     }
 
     /**
@@ -79,10 +82,13 @@ class BedTypeController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
-        $bed_type = BedType::find($id);
-        $bed_type->update($data);
+        $leisure_activity = LeisureActivity::find($id);
+        $leisure_activity->edit($data);
+        if ($request->hasFile('image')) {
+            $leisure_activity->uploadImage($request->file('image'));
+        }
 
-        return redirect()->route('bed-types.index')->with('success', 'Успішно оновлено!');
+        return redirect()->route('leisure-activities.index')->with('success', 'Успішно оновлено!');
     }
 
     /**
@@ -93,8 +99,8 @@ class BedTypeController extends Controller
      */
     public function destroy($id)
     {
-        BedType::find($id)->delete();
+        LeisureActivity::find($id)->remove();
 
-        return redirect()->route('bed-types.index')->with('success', 'Успішно видалено!');
+        return redirect()->route('leisure-activities.index')->with('success', 'Успішно видалено!');
     }
 }

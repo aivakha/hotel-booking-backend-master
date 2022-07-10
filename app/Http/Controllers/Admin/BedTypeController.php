@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Distance\StoreRequest;
-use App\Http\Requests\Distance\UpdateRequest;
-use App\Models\Distance;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\BedType\StoreRequest;
+use App\Http\Requests\BedType\UpdateRequest;
+use App\Models\BedType;
 use Illuminate\Http\Request;
 
-class DistanceController extends Controller
+class BedTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,9 @@ class DistanceController extends Controller
      */
     public function index()
     {
-        $distances = Distance::all();
+        $bed_types = BedType::all();
 
-        return view('admin.distances.index', compact('distances'));
+        return view('admin.bed-types.index', compact('bed_types'));
     }
 
     /**
@@ -28,7 +29,7 @@ class DistanceController extends Controller
      */
     public function create()
     {
-        return view('admin.distances.create');
+        return view('admin.bed-types.create');
     }
 
     /**
@@ -40,10 +41,9 @@ class DistanceController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
+        BedType::create($data);
 
-        Distance::create($data);
-
-        return redirect()->route('distances.index')->with('success', 'Успішно добавлено!');
+        return redirect()->route('bed-types.index')->with('success', 'Успішно добавлено!');
     }
 
     /**
@@ -54,7 +54,7 @@ class DistanceController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -65,9 +65,9 @@ class DistanceController extends Controller
      */
     public function edit($id)
     {
-        $distance = Distance::find($id);
+        $bed_type = BedType::find($id);
 
-        return view('admin.distances.edit', compact('distance'));
+        return view('admin.bed-types.edit', compact('bed_type'));
     }
 
     /**
@@ -80,10 +80,10 @@ class DistanceController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
-        $distance = Distance::find($id);
-        $distance->update($data);
+        $bed_type = BedType::find($id);
+        $bed_type->update($data);
 
-        return redirect()->route('distances.index')->with('success', 'Успішно оновлено!');;
+        return redirect()->route('bed-types.index')->with('success', 'Успішно оновлено!');
     }
 
     /**
@@ -94,8 +94,8 @@ class DistanceController extends Controller
      */
     public function destroy($id)
     {
-        Distance::find($id)->delete();
+        BedType::find($id)->delete();
 
-        return redirect()->route('distances.index')->with('success', 'Успішно видалено!');
+        return redirect()->route('bed-types.index')->with('success', 'Успішно видалено!');
     }
 }
