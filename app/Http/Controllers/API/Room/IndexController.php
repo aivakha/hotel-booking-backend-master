@@ -14,7 +14,7 @@ class IndexController extends Controller
 
         $filter = app()->make(RoomFilter::class, ['queryParams' => array_filter($data)]);
 
-        $rooms = Room::filter($filter)->get();
+        $rooms = Room::filter($filter)->paginate(3, ['*'], 'page', $data['page']);
 //        $rooms = Room::all();
 
         return RoomResource::collection($rooms);

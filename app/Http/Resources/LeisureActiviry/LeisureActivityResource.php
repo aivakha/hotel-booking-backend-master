@@ -17,6 +17,7 @@ class LeisureActivityResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'image' => env('APP_URL') . $this->getImage(),
             'created_at' => $this->created_at,
         ];
     }

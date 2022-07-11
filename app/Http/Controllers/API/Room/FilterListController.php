@@ -41,8 +41,6 @@ class FilterListController extends Controller
             ],
         ];
 
-        // dd($result);
-
         return response()->json($result);
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <!-- ======================= Start Page Title ===================== -->
-    <div class="page-title image-title" style="background-image:url(assets/client/img/tour.jpg);">
+    <div class="page-title image-title" style="background-image:url(//hotel-booking-backend-master/assets/client/img/tour.jpg);">
         <div class="container">
             <div class="page-title-wrap">
                 <h2>Знайдіть Своє Житло</h2>
@@ -206,12 +206,14 @@
                                 <!-- Single Tour -->
                                 <div class="tour-box-image">
                                     <figure>
-                                        <a href="tour-detail.html">
+                                        <router-link :to="{name: 'rooms.show', params: {slug: room.slug}}">
                                             <img :src="room.preview_image" class="img-responsive listing-box-img" alt="">
                                             <div class="list-overlay"></div>
-                                        </a>
+                                        </router-link>
                                         <h4 class="destination-place">
-                                            <a href="#">{{ room.title }}</a>
+                                            <router-link :to="{name: 'rooms.show', params: {slug: room.slug}}">
+                                                {{ room.title }}
+                                            </router-link>
                                         </h4>
                                     </figure>
                                 </div>
@@ -221,7 +223,7 @@
                                     <span class="vcard author">
                                     <span class="fn">
                                     <a href="#">
-                                        <img alt="" src="assets/client/img/no-user-img.jpg" class="avatar avatar-24" height="24" width="24">
+                                        <img alt="" src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg" class="avatar avatar-24" height="24" width="24">
                                         {{ room.apartment.manager.last_name }} {{ room.apartment.manager.first_name }}
                                     </a>
                                     </span>
@@ -251,21 +253,22 @@
                         </div>
 
                     </div>
-                    <div class="row">
+                    <div v-if="pagination.last_page > 1" class="row">
                         <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
+                            <li v-if="pagination.current_page !== 1" class="page-item">
+                                <a @click.prevent="getRooms(pagination.current_page - 1)" class="page-link" href="#" aria-label="Previous">
                                     <span class="ti-arrow-left"></span>
-                                    <span class="sr-only">Previous</span>
                                 </a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
+
+                            <li v-for="link in pagination.links" :class="link.active ? 'active' : 'page-item'">
+                                <template v-if="Number(link.label)">
+                                    <a @click.prevent="getRooms(link.label)" class="page-link" href="#">{{  link.label }}</a>
+                                </template>
+                            </li>
+
+                            <li v-if="pagination.current_page !== pagination.last_page" class="page-item">
+                                <a @click.prevent="getRooms(pagination.current_page + 1)" class="page-link" href="#" aria-label="Next">
                                     <span class="ti-arrow-right"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
@@ -280,13 +283,8 @@
 </template>
 
 <script>
-// import RoomCardComponent from "../../components/Room/RoomCardComponent";
-
 export default {
     name: 'Index',
-    // components: {
-    //     'RoomCardComponent': RoomCardComponent
-    // },
 
     mounted() {
         this.getRooms()
@@ -305,6 +303,8 @@ export default {
             distances: [], // working
             star_rates: [], // working
             prices: [], // working
+
+            pagination: [],
         }
     },
 
@@ -313,8 +313,10 @@ export default {
             let minPrice = $('.fss-left').text();
             let maxPrice = $('.fss-right').text();
             this.prices = [minPrice, maxPrice];
-            console.log(this.meals);
+            this.getRooms();
+        },
 
+        getRooms(page = 1) {
             this.axios.post('/api/rooms', {
                 'meals': this.meals,
                 'leisure_activities': this.leisure_activities,
@@ -323,21 +325,13 @@ export default {
                 'apartment_types': this.apartment_types,
                 'distances': this.distances,
                 'star_rates': this.star_rates,
-                'prices': this.prices
-            })
-                .then(response => {
-                    console.log(response);
-                    this.rooms = response.data.data;
-                })
-        },
-
-        getRooms() {
-            this.axios.post('/api/rooms', {
-
+                'prices': this.prices,
+                'page': page
             })
             .then(response => {
                 console.log(response);
                 this.rooms = response.data.data;
+                this.pagination = response.data.meta;
             })
         },
 

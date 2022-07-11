@@ -23234,6 +23234,18 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_views_Rooms_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Rooms/Index.vue */ "./resources/js/views/Rooms/Index.vue"));
     }
+  }, {
+    path: '/rooms/:slug',
+    name: 'rooms.show',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_views_Rooms_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Rooms/Show.vue */ "./resources/js/views/Rooms/Show.vue"));
+    }
+  }, {
+    path: '/apartments/:slug',
+    name: 'apartments.show',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_views_Apartments_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/Apartments/Show.vue */ "./resources/js/views/Apartments/Show.vue"));
+    }
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -49714,7 +49726,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_Home_Index_vue":1,"resources_js_views_Rooms_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_Home_Index_vue":1,"resources_js_views_Rooms_Index_vue":1,"resources_js_views_Rooms_Show_vue":1,"resources_js_views_Apartments_Show_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
