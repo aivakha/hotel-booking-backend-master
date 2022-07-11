@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Filterable;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +15,7 @@ class Room extends Model
 {
     use HasFactory;
     use Sluggable;
+    use Filterable;
 
     protected $fillable = ['title', 'description', 'date_from', 'date_to', 'price', 'apartment_id'];
 

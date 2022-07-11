@@ -90,7 +90,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="bed_type in filterList.bed_types">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox">
+                                                <input type="checkbox" v-model="bed_types" :value="bed_type.id">
                                                 <label></label>
                                             </span>
                                             {{  bed_type.title }}
@@ -161,7 +161,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="feature in filterList.features">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox">
+                                                <input type="checkbox" v-model="features" :value="feature.id">
                                                 <label></label>
                                             </span>
                                             {{  feature.title }}
@@ -298,7 +298,9 @@ export default {
             rooms: [],
             filterList: [],
             meals: [],
-            prices: [],
+            features: [], // working
+            bed_types: [], // working
+            prices: [], // working
         }
     },
 
@@ -311,6 +313,8 @@ export default {
 
             this.axios.post('/api/rooms', {
                 'meals': this.meals,
+                'features': this.features,
+                'bed_types': this.bed_types,
                 'prices': this.prices
             })
                 .then(response => {
@@ -320,7 +324,9 @@ export default {
         },
 
         getRooms() {
-            this.axios.get('/api/rooms')
+            this.axios.post('/api/rooms', {
+
+            })
             .then(response => {
                 console.log(response);
                 this.rooms = response.data.data;

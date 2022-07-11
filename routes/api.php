@@ -18,5 +18,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/rooms', \App\Http\Controllers\API\Room\IndexController::class);
+Route::post('/rooms', \App\Http\Controllers\API\Room\IndexController::class);
 Route::get('/rooms/filters', \App\Http\Controllers\API\Room\FilterListController::class);
