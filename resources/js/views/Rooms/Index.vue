@@ -16,7 +16,7 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="tr-single-box">
                         <div class="tr-single-header">
-                            <h4>Search Hotel</h4>
+                            <h4>Форма пошуку</h4>
                             <span class="pull-right clickables" data-toggle="collapse" data-target="#filter_1"><i
                                 class="ti-align-left"></i></span>
                         </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="tr-single-box">
                         <div class="tr-single-header">
-                            <h4>Filter</h4>
+                            <h4>Фільтр</h4>
                             <span class="pull-right clickables" data-toggle="collapse" data-target="#filter_2"><i
                                 class="ti-align-left"></i></span>
                         </div>
@@ -73,7 +73,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="apartment_type in filterList.apartment_types">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox">
+                                                <input type="checkbox" v-model="apartment_types" :value="apartment_type.id">
                                                 <label></label>
                                             </span>
                                             {{  apartment_type.title }}
@@ -125,7 +125,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="distance in filterList.distances">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox">
+                                                <input type="checkbox" v-model="distances" :value="distance.id">
                                                 <label></label>
                                             </span>
                                             {{  distance.title }}
@@ -143,7 +143,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="leisure_activity in filterList.leisure_activities">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox">
+                                                <input type="checkbox" v-model="leisure_activities" :value="leisure_activity.id">
                                                 <label></label>
                                             </span>
                                             {{  leisure_activity.title }}
@@ -179,7 +179,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="star_rate in filterList.star_rates">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox">
+                                                <input type="checkbox" v-model="star_rates" :value="star_rate.star_rate">
                                                 <label></label>
                                             </span>
                                             <div class="search-rating">
@@ -298,8 +298,12 @@ export default {
             rooms: [],
             filterList: [],
             meals: [],
+            leisure_activities: [],
             features: [], // working
             bed_types: [], // working
+            apartment_types: [], // working
+            distances: [], // working
+            star_rates: [], // working
             prices: [], // working
         }
     },
@@ -313,8 +317,12 @@ export default {
 
             this.axios.post('/api/rooms', {
                 'meals': this.meals,
+                'leisure_activities': this.leisure_activities,
                 'features': this.features,
                 'bed_types': this.bed_types,
+                'apartment_types': this.apartment_types,
+                'distances': this.distances,
+                'star_rates': this.star_rates,
                 'prices': this.prices
             })
                 .then(response => {

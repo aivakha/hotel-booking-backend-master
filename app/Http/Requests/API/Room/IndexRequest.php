@@ -28,6 +28,10 @@ class IndexRequest extends FormRequest
             'prices' => 'nullable|array',
             'features' => 'nullable|array',
             'bed_types' => 'nullable|array',
+            'apartment_types' => 'nullable|array',
+            'distances' => 'nullable|array',
+            'star_rates' => 'nullable|array',
+            'leisure_activities' => 'nullable|array',
         ];
     }
 }
