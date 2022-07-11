@@ -26,8 +26,8 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'description' => 'required|max:2000',
-            'preview_image' => 'image|nullable',
-            'gallery.*' => 'image|nullable',
+            'preview_image' => 'image|required',
+            'gallery.*' => 'image|required',
             'features' => 'nullable',
             'bed_types' => 'nullable',
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
