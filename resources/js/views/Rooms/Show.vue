@@ -1,10 +1,12 @@
 <template>
-    <section class="page-title-banner" style="background-image:url(//hotel-booking-backend-master/assets/client/img/banner.jpg);">
+    <section class="page-title-banner"
+             style="background-image:url(//hotel-booking-backend-master/assets/client/img/banner.jpg);">
         <div class="container">
             <div class="row">
                 <div class="tr-list-detail">
                     <div class="tr-list-thumb">
-                        <img src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg" class="img-responsive img-circle" alt="" />
+                        <img src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg"
+                             class="img-responsive img-circle" alt=""/>
                     </div>
                     <div v-if="room.apartment" class="tr-list-info">
                         <h4>{{ room.apartment.manager.last_name }} {{ room.apartment.manager.first_name }}</h4>
@@ -14,7 +16,26 @@
             </div>
         </div>
     </section>
-    <!-- ======================= End Banner ===================== -->
+
+    <section class="profile-header-nav padd-0 bb-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-8">
+
+                </div>
+
+                <div v-if="room.apartment" class="col-md-4 col-sm-4">
+                    <div class="fl-right">
+                        <a :href="`tel:${room.apartment.manager.phone}`" class="btn theme-btn">
+                            <span class="fa fa-paper-plane mrg-r-10"></span>
+                            Зателефонуйте нам
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <!-- ============== Hotel Detail ====================== -->
     <section class="tr-single-detail gray-bg">
@@ -35,7 +56,9 @@
 
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="list-thumb-box">
-                                                    <img :src="'http://hotel-booking-backend-master' + room.preview_image" class="img-responsive" alt="">
+                                                    <img
+                                                        :src="'http://hotel-booking-backend-master' + room.preview_image"
+                                                        class="img-responsive" alt="">
                                                     <h5 v-if="room.apartment">
                                                         {{ room.apartment.star_rate }}/<sub class="theme-cl">5</sub>
                                                     </h5>
@@ -55,7 +78,8 @@
                                                                         <i class=" ti-location-pin"></i>
                                                                     </div>
                                                                     <div class="icon-box-text">
-                                                                        {{ room.apartment.title }}, {{ room.apartment.address }}
+                                                                        {{ room.apartment.title }},
+                                                                        {{ room.apartment.address }}
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -89,12 +113,12 @@
 
                                                         <li v-if="room.apartment">
                                                             <div class="icon-box-icon-block">
-                                                                    <div class="icon-box-round">
-                                                                        <i class="ti-comment-alt"></i>
-                                                                    </div>
-                                                                    <div class="icon-box-text">
-                                                                        {{ room.apartment.comments.length }} коментарів
-                                                                    </div>
+                                                                <div class="icon-box-round">
+                                                                    <i class="ti-comment-alt"></i>
+                                                                </div>
+                                                                <div class="icon-box-text">
+                                                                    {{ room.apartment.comments.length }} коментарів
+                                                                </div>
                                                             </div>
                                                         </li>
 
@@ -116,6 +140,34 @@
                                         <ul class="amenities third">
                                             <li v-for="feature in room.features">{{ feature.title }}</li>
                                         </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div v-if="room.apartment" class="row">
+                                <div class="tr-single-box">
+                                    <div class="tr-single-header">
+                                        <h4><i class="ti-thumb-up"></i>Особливості помешкання</h4>
+                                    </div>
+                                    <div class="tr-single-body">
+                                        <div class="row">
+
+                                            <div v-for="leisureActivity in room.apartment.leisureActivities"
+                                                 class="col-md-4 col-sm-6">
+                                                <div class="listing-features">
+                                                    <div class="listing-features-box">
+                                                        <div class="listing-features-thumb">
+                                                            <img :src="leisureActivity.image" class="img-responsive"
+                                                                 alt="">
+                                                        </div>
+                                                        <div class="listing-features-detail">
+                                                            <h4>{{ leisureActivity.title }}</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -148,32 +200,6 @@
                                 </div>
                             </div>
 
-                            <div v-if="room.apartment" class="row">
-                                <div class="tr-single-box">
-                                    <div class="tr-single-header">
-                                        <h4><i class="ti-thumb-up"></i>Особливості помешкання</h4>
-                                    </div>
-                                    <div class="tr-single-body">
-                                        <div class="row">
-
-                                            <div v-for="leisureActivity in room.apartment.leisureActivities" class="col-md-4 col-sm-6">
-                                                <div class="listing-features">
-                                                    <div class="listing-features-box">
-                                                        <div class="listing-features-thumb">
-                                                            <img :src="leisureActivity.image" class="img-responsive" alt="">
-                                                        </div>
-                                                        <div class="listing-features-detail">
-                                                            <h4>{{ leisureActivity.title }}</h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div v-if="room.apartment && getAverageRate() > 0" class="row">
                                 <div class="tr-single-box">
                                     <div class="tr-single-header">
@@ -185,9 +211,11 @@
                                                 <div id="review_summary">
                                                     <strong>{{ getAverageRate() }}</strong>
                                                     <em v-if="getAverageRate() >= 4" class="cl-success">Супер</em>
-                                                    <em v-if="getAverageRate() < 4 && getAverageRate() >= 3" style="color: #f0ad4e">Добре</em>
+                                                    <em v-if="getAverageRate() < 4 && getAverageRate() >= 3"
+                                                        style="color: #f0ad4e">Добре</em>
                                                     <em v-if="getAverageRate() < 3" style="color: #d9534f ">Погано</em>
-                                                    <small>Пораховано на основі {{ room.apartment.comments.length }} відгуків</small>
+                                                    <small>Пораховано на основі {{ room.apartment.comments.length }}
+                                                        відгуків</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,11 +230,10 @@
                 <!-- Sidebar Start -->
                 <div class="col-md-4 col-sm-12">
 
-                    <!-- Tourist Overview -->
                     <div v-if="room.apartment" class="tr-single-box">
                         <div class="tr-single-header">
                             <h4>
-                                <router-link :to="{name: 'apartments.show', params: {slug: room.slug}}">
+                                <router-link :to="{name: 'apartments.show', params: {slug: room.apartment.slug}}">
                                     {{ room.apartment.title }}
                                 </router-link>
                                 <sup class="cl-success"> Україна, {{ room.apartment.city.title }}</sup>
@@ -217,14 +244,34 @@
                             <ul class="extra-service half">
                                 <li>
                                     <div class="icon-box-icon-block">
-                                        <a href="#">
-                                            <div class="icon-box-round">
-                                                <i class="ti-comment-alt"></i>
-                                            </div>
-                                            <div class="icon-box-text">
-                                                {{ room.apartment.comments.length }} відгуків
-                                            </div>
-                                        </a>
+                                        <div class="icon-box-round">
+                                            <i class="ti-comment-alt"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            {{ room.apartment.comments.length }} відгуків
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="icon-box-icon-block">
+                                        <div class="icon-box-round">
+                                            <i class="ti-timer"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            До центру міста {{ room.apartment.distance.title }} метрів
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li v-if="room.apartment" v-for="meal in room.apartment.meals">
+                                    <div class="icon-box-icon-block">
+                                        <div class="icon-box-round">
+                                            <i class="ti-heart"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            {{ meal.title }}
+                                        </div>
                                     </div>
                                 </li>
                             </ul>

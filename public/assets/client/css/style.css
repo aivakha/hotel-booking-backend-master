@@ -5467,8 +5467,10 @@ span.user-status {
 	margin-bottom: 0
 }
 
-.profile-header-nav button.btn.theme-btn {
-	margin-top: 9px
+.profile-header-nav button.btn.theme-btn, .profile-header-nav a.btn.theme-btn {
+    margin-top: 9px;
+    margin-bottom: 9px;
+    display: block;
 }
 
 .profile-header-nav .nav-tabs li a {
@@ -5723,11 +5725,11 @@ ul.amenities.fourth li {
 	padding: 7px 0
 }
 
-.extra-service.half li {
-	width: 50%;
-	float: left;
-	display: inline-block
-}
+/*.extra-service.half li {*/
+/*	width: 50%;*/
+/*	float: left;*/
+/*	display: inline-block*/
+/*}*/
 
 .tr-single-header span.clickable,
 .tr-single-header span.clickables {
