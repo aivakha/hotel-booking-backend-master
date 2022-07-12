@@ -20,6 +20,8 @@ Route::post('/rooms', \App\Http\Controllers\API\Room\IndexController::class);
 Route::get('/rooms/filters', \App\Http\Controllers\API\Room\FilterListController::class);
 Route::get('/rooms/{slug}', \App\Http\Controllers\API\Room\ShowController::class);
 Route::get('/apartments/{slug}', \App\Http\Controllers\API\Apartment\ShowController::class);
+Route::get('/random-rooms', \App\Http\Controllers\API\Room\MostViewedController::class);
+Route::get('/random-apartments', \App\Http\Controllers\API\Apartment\MostViewedController::class);
 
 
 

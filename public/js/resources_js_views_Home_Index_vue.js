@@ -14,7 +14,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Index',
   mounted: function mounted() {
-    $(document).trigger('change');
+    this.getRandomRooms();
+    this.getRandomApartments();
+  },
+  data: function data() {
+    return {
+      rooms: [],
+      apartments: []
+    };
+  },
+  methods: {
+    getRandomRooms: function getRandomRooms() {
+      var _this = this;
+
+      this.axios.get('/api/random-rooms').then(function (response) {
+        _this.rooms = response.data.data;
+        console.log(response.data.data);
+      });
+    },
+    getRandomApartments: function getRandomApartments() {
+      var _this2 = this;
+
+      this.axios.get('/api/random-apartments').then(function (response) {
+        _this2.apartments = response.data.data;
+        console.log(response.data.data);
+      });
+    }
   }
 });
 
@@ -110,11 +135,351 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"clearfix\"></div><section class=\"destination gray-bg\"><div class=\"container\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"heading\"><span class=\"theme-cl\">Book Hotel</span><h1>Top Viewed Hotels</h1></div></div></div><div class=\"row\"><div class=\"col-md-4 col-sm-4\"><article class=\"tour-box style-1\"><!-- Single Tour --><div class=\"tour-box-image\"><figure><a href=\"tour-detail.html\"><img src=\"assets/client/img/tour/tour-1.jpg\" class=\"img-responsive listing-box-img\" alt=\"\"><div class=\"list-overlay\"></div></a><h4 class=\"destination-place\"><a href=\"#\">Istanbul, Turkey</a></h4></figure></div><div class=\"entry-meta\"><div class=\"meta-item meta-author\"><div class=\"coauthors\"><span class=\"vcard author\"><span class=\"fn\"><a href=\"#\"><img alt=\"\" src=\"assets/client/img/user-1.jpg\" class=\"avatar avatar-24\" height=\"24\" width=\"24\">Lisa Scholfield</a></span></span></div></div><div class=\"meta-item meta-comment fl-right\"><i class=\"ti-comment-alt\"></i><span>25</span></div><div class=\"meta-item meta-rating fl-right\"><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star-half\"></i></div></div><div class=\"inner-box\"><div class=\"box-inner-ellipsis\"><h4 class=\"entry-title\"><a href=\"#\">Netherlands</a></h4></div></div></article></div><div class=\"col-md-4 col-sm-4\"><article class=\"tour-box style-1\"><!-- Single Tour --><div class=\"tour-box-image\"><figure><a href=\"tour-detail.html\"><img src=\"assets/client/img/tour/tour-1.jpg\" class=\"img-responsive listing-box-img\" alt=\"\"><div class=\"list-overlay\"></div></a><h4 class=\"destination-place\"><a href=\"#\">Istanbul, Turkey</a></h4></figure></div><div class=\"entry-meta\"><div class=\"meta-item meta-author\"><div class=\"coauthors\"><span class=\"vcard author\"><span class=\"fn\"><a href=\"#\"><img alt=\"\" src=\"assets/client/img/user-1.jpg\" class=\"avatar avatar-24\" height=\"24\" width=\"24\">Lisa Scholfield</a></span></span></div></div><div class=\"meta-item meta-comment fl-right\"><i class=\"ti-comment-alt\"></i><span>25</span></div><div class=\"meta-item meta-rating fl-right\"><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star-half\"></i></div></div><div class=\"inner-box\"><div class=\"box-inner-ellipsis\"><h4 class=\"entry-title\"><a href=\"#\">Netherlands</a></h4></div></div></article></div><div class=\"col-md-4 col-sm-4\"><article class=\"tour-box style-1\"><!-- Single Tour --><div class=\"tour-box-image\"><figure><a href=\"tour-detail.html\"><img src=\"assets/client/img/tour/tour-1.jpg\" class=\"img-responsive listing-box-img\" alt=\"\"><div class=\"list-overlay\"></div></a><h4 class=\"destination-place\"><a href=\"#\">Istanbul, Turkey</a></h4></figure></div><div class=\"entry-meta\"><div class=\"meta-item meta-author\"><div class=\"coauthors\"><span class=\"vcard author\"><span class=\"fn\"><a href=\"#\"><img alt=\"\" src=\"assets/client/img/user-1.jpg\" class=\"avatar avatar-24\" height=\"24\" width=\"24\">Lisa Scholfield</a></span></span></div></div><div class=\"meta-item meta-comment fl-right\"><i class=\"ti-comment-alt\"></i><span>25</span></div><div class=\"meta-item meta-rating fl-right\"><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star-half\"></i></div></div><div class=\"inner-box\"><div class=\"box-inner-ellipsis\"><h4 class=\"entry-title\"><a href=\"#\">Netherlands</a></h4></div></div></article></div></div></div></section><div class=\"clearfix\"></div><section><div class=\"container\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"heading\"><span class=\"theme-cl\">Select Hotel</span><h1>Top Rated Hotels</h1></div></div></div><div class=\"row\"><div class=\"col-md-4 col-sm-4\"><article class=\"tour-box style-1\"><!-- Single Tour --><div class=\"tour-box-image\"><figure><a href=\"tour-detail.html\"><img src=\"assets/client/img/tour/tour-1.jpg\" class=\"img-responsive listing-box-img\" alt=\"\"><div class=\"list-overlay\"></div></a><h4 class=\"destination-place\"><a href=\"#\">Istanbul, Turkey</a></h4></figure></div><div class=\"entry-meta\"><div class=\"meta-item meta-author\"><div class=\"coauthors\"><span class=\"vcard author\"><span class=\"fn\"><a href=\"#\"><img alt=\"\" src=\"assets/client/img/user-1.jpg\" class=\"avatar avatar-24\" height=\"24\" width=\"24\">Lisa Scholfield</a></span></span></div></div><div class=\"meta-item meta-comment fl-right\"><i class=\"ti-comment-alt\"></i><span>25</span></div><div class=\"meta-item meta-rating fl-right\"><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star-half\"></i></div></div><div class=\"inner-box\"><div class=\"box-inner-ellipsis\"><h4 class=\"entry-title\"><a href=\"#\">Netherlands</a></h4></div></div></article></div><div class=\"col-md-4 col-sm-4\"><article class=\"tour-box style-1\"><!-- Single Tour --><div class=\"tour-box-image\"><figure><a href=\"tour-detail.html\"><img src=\"assets/client/img/tour/tour-1.jpg\" class=\"img-responsive listing-box-img\" alt=\"\"><div class=\"list-overlay\"></div></a><h4 class=\"destination-place\"><a href=\"#\">Istanbul, Turkey</a></h4></figure></div><div class=\"entry-meta\"><div class=\"meta-item meta-author\"><div class=\"coauthors\"><span class=\"vcard author\"><span class=\"fn\"><a href=\"#\"><img alt=\"\" src=\"assets/client/img/user-1.jpg\" class=\"avatar avatar-24\" height=\"24\" width=\"24\">Lisa Scholfield</a></span></span></div></div><div class=\"meta-item meta-comment fl-right\"><i class=\"ti-comment-alt\"></i><span>25</span></div><div class=\"meta-item meta-rating fl-right\"><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star-half\"></i></div></div><div class=\"inner-box\"><div class=\"box-inner-ellipsis\"><h4 class=\"entry-title\"><a href=\"#\">Netherlands</a></h4></div></div></article></div><div class=\"col-md-4 col-sm-4\"><article class=\"tour-box style-1\"><!-- Single Tour --><div class=\"tour-box-image\"><figure><a href=\"tour-detail.html\"><img src=\"assets/client/img/tour/tour-1.jpg\" class=\"img-responsive listing-box-img\" alt=\"\"><div class=\"list-overlay\"></div></a><h4 class=\"destination-place\"><a href=\"#\">Istanbul, Turkey</a></h4></figure></div><div class=\"entry-meta\"><div class=\"meta-item meta-author\"><div class=\"coauthors\"><span class=\"vcard author\"><span class=\"fn\"><a href=\"#\"><img alt=\"\" src=\"assets/client/img/user-1.jpg\" class=\"avatar avatar-24\" height=\"24\" width=\"24\">Lisa Scholfield</a></span></span></div></div><div class=\"meta-item meta-comment fl-right\"><i class=\"ti-comment-alt\"></i><span>25</span></div><div class=\"meta-item meta-rating fl-right\"><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star\"></i><i class=\"fa fa-star-half\"></i></div></div><div class=\"inner-box\"><div class=\"box-inner-ellipsis\"><h4 class=\"entry-title\"><a href=\"#\">Netherlands</a></h4></div></div></article></div></div></div></section><div class=\"clearfix\"></div><section class=\"before-footer bt-1 bb-1\"><div class=\"container-fluid padd-0 full-width\"><div class=\"col-md-2 col-sm-2 br-1 mbb-1\"><div class=\"data-flex\"><h4>Contact Us!</h4></div></div><div class=\"col-md-3 col-sm-3 br-1 mbb-1\"><div class=\"data-flex text-center\"> 53 Boulevard Victor Hugo 44200 Nantes, France </div></div><div class=\"col-md-3 col-sm-3 br-1 mbb-1\"><div class=\"data-flex text-center\"><span class=\"d-block mrg-bot-0\">06 52 52 20 30</span><a href=\"#\" class=\"theme-cl\"><strong>hello@gmail.com</strong></a></div></div><div class=\"col-md-4 col-sm-4 padd-0\"><div class=\"data-flex padd-0\"><ul class=\"social-share\"><li><a href=\"#\"><i class=\"fa fa-facebook theme-cl\"></i></a></li><li><a href=\"#\"><i class=\"fa fa-google-plus theme-cl\"></i></a></li><li><a href=\"#\"><i class=\"fa fa-twitter theme-cl\"></i></a></li><li><a href=\"#\"><i class=\"fa fa-linkedin theme-cl\"></i></a></li></ul></div></div></div></section>", 6);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "clearfix"
+}, null, -1
+/* HOISTED */
+);
 
-var _hoisted_8 = [_hoisted_1, _hoisted_2];
+var _hoisted_3 = {
+  "class": "destination gray-bg"
+};
+var _hoisted_4 = {
+  "class": "container"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "heading"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "theme-cl"
+}, "Шукай своє житло"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Найбільш популярні кімнати")])])], -1
+/* HOISTED */
+);
+
+var _hoisted_6 = {
+  "class": "row"
+};
+var _hoisted_7 = {
+  "class": "col-md-4 col-sm-4"
+};
+var _hoisted_8 = {
+  "class": "tour-box style-1"
+};
+var _hoisted_9 = {
+  "class": "tour-box-image"
+};
+var _hoisted_10 = ["src"];
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "list-overlay"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_12 = {
+  "class": "destination-place"
+};
+var _hoisted_13 = {
+  "class": "entry-meta"
+};
+var _hoisted_14 = {
+  "class": "meta-item meta-author"
+};
+var _hoisted_15 = {
+  "class": "coauthors"
+};
+var _hoisted_16 = {
+  "class": "vcard author"
+};
+var _hoisted_17 = {
+  "class": "fn"
+};
+var _hoisted_18 = {
+  href: "#"
+};
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  alt: "",
+  src: "//hotel-booking-backend-master/assets/client/img/no-user-img.jpg",
+  "class": "avatar avatar-24",
+  height: "24",
+  width: "24"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_20 = {
+  "class": "meta-item meta-comment fl-right"
+};
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "ti-comment-alt"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_22 = {
+  "class": "meta-item meta-rating fl-right"
+};
+var _hoisted_23 = {
+  "class": "fa fa-star"
+};
+var _hoisted_24 = {
+  "class": "inner-box"
+};
+var _hoisted_25 = {
+  "class": "box-inner-ellipsis"
+};
+var _hoisted_26 = {
+  "class": "entry-title"
+};
+var _hoisted_27 = {
+  href: "#"
+};
+var _hoisted_28 = {
+  "class": "price-box"
+};
+var _hoisted_29 = {
+  "class": "tour-price fl-right"
+};
+
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "ti ti-user"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_31 = {
+  "class": "theme-cl f-bold"
+};
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "clearfix"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_33 = {
+  "class": "container"
+};
+
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "heading"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "theme-cl"
+}, "Оберіть помешкання"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Популярні апартаменти")])])], -1
+/* HOISTED */
+);
+
+var _hoisted_35 = {
+  "class": "row"
+};
+var _hoisted_36 = {
+  "class": "col-md-4 col-sm-4"
+};
+var _hoisted_37 = {
+  "class": "tour-box style-1"
+};
+var _hoisted_38 = {
+  "class": "tour-box-image"
+};
+var _hoisted_39 = ["src"];
+
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "list-overlay"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_41 = {
+  "class": "destination-place"
+};
+var _hoisted_42 = {
+  "class": "entry-meta"
+};
+var _hoisted_43 = {
+  "class": "meta-item meta-author"
+};
+var _hoisted_44 = {
+  "class": "coauthors"
+};
+var _hoisted_45 = {
+  "class": "vcard author"
+};
+var _hoisted_46 = {
+  "class": "fn"
+};
+var _hoisted_47 = {
+  href: "#"
+};
+
+var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  alt: "",
+  src: "//hotel-booking-backend-master/assets/client/img/no-user-img.jpg",
+  "class": "avatar avatar-24",
+  height: "24",
+  width: "24"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_49 = {
+  "class": "meta-item meta-comment fl-right"
+};
+
+var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "ti-comment-alt"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_51 = {
+  "class": "meta-item meta-rating fl-right"
+};
+var _hoisted_52 = {
+  "class": "fa fa-star"
+};
+var _hoisted_53 = {
+  "class": "inner-box"
+};
+var _hoisted_54 = {
+  "class": "box-inner-ellipsis"
+};
+var _hoisted_55 = {
+  "class": "entry-title"
+};
+var _hoisted_56 = {
+  href: "#"
+};
+
+var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "clearfix"
+}, null, -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, _hoisted_8);
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.rooms, function (room) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("article", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Single Tour "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("figure", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      to: {
+        name: 'rooms.show',
+        params: {
+          slug: room.slug
+        }
+      }
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+          src: room.preview_image,
+          "class": "img-responsive listing-box-img",
+          alt: ""
+        }, null, 8
+        /* PROPS */
+        , _hoisted_10), _hoisted_11];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      to: {
+        name: 'rooms.show',
+        params: {
+          slug: room.slug
+        }
+      }
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(room.title), 1
+        /* TEXT */
+        )];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["to"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(room.apartment.manager.last_name) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(room.apartment.manager.first_name), 1
+    /* TEXT */
+    )])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(room.apartment.comments.length), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(room.apartment.star_rate, function (n) {
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_23);
+    }), 256
+    /* UNKEYED_FRAGMENT */
+    ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(room.apartment.city.title), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(room.price) + " грн", 1
+    /* TEXT */
+    )])])])])])]);
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  ))])])]), _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.apartments, function (apartment) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("article", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Single Tour "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("figure", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      to: {
+        name: 'apartments.show',
+        params: {
+          slug: apartment.slug
+        }
+      }
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+          src: apartment.preview_image,
+          "class": "img-responsive listing-box-img",
+          alt: ""
+        }, null, 8
+        /* PROPS */
+        , _hoisted_39), _hoisted_40];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      to: {
+        name: 'apartments.show',
+        params: {
+          slug: apartment.slug
+        }
+      }
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(apartment.title), 1
+        /* TEXT */
+        )];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["to"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_47, [_hoisted_48, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(apartment.manager.last_name) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(apartment.manager.first_name), 1
+    /* TEXT */
+    )])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [_hoisted_50, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(apartment.comments.length), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(apartment.star_rate, function (n) {
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_52);
+    }), 256
+    /* UNKEYED_FRAGMENT */
+    ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(apartment.city.title), 1
+    /* TEXT */
+    )])])])])]);
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  ))])])]), _hoisted_57]);
 }
 
 /***/ }),

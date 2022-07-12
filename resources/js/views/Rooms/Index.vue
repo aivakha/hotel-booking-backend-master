@@ -189,7 +189,7 @@
                             </div>
 
                             <div class="tr-inner-single-box">
-                                <button @click.prevent="filterRooms()" type="submit" class="btn theme-btn" style="width: 85%; margin-bottom: 20px">Відфільтрувати</button>
+                                <button @click.prevent="filterRooms()" type="submit" class="btn theme-btn text-center" style="width: 85%; margin-bottom: 20px">Відфільтрувати</button>
                             </div>
 
                         </div>

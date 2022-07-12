@@ -676,7 +676,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.filterRooms();
     }, ["prevent"])),
     type: "submit",
-    "class": "btn theme-btn",
+    "class": "btn theme-btn text-center",
     style: {
       "width": "85%",
       "margin-bottom": "20px"

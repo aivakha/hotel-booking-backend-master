@@ -71,158 +71,61 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="heading">
-                            <span class="theme-cl">Book Hotel</span>
-                            <h1>Top Viewed Hotels</h1>
+                            <span class="theme-cl">Шукай своє житло</span>
+                            <h1>Найбільш популярні кімнати</h1>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4 col-sm-4">
+                    <div v-for="room in rooms" class="col-md-4 col-sm-4">
                         <article class="tour-box style-1">
-
                             <!-- Single Tour -->
                             <div class="tour-box-image">
                                 <figure>
-                                    <a href="tour-detail.html">
-                                        <img src="assets/client/img/tour/tour-1.jpg" class="img-responsive listing-box-img" alt=""/>
+                                    <router-link :to="{name: 'rooms.show', params: {slug: room.slug}}">
+                                        <img :src="room.preview_image" class="img-responsive listing-box-img" alt="">
                                         <div class="list-overlay"></div>
-                                    </a>
+                                    </router-link>
                                     <h4 class="destination-place">
-                                        <a href="#">Istanbul, Turkey</a>
+                                        <router-link :to="{name: 'rooms.show', params: {slug: room.slug}}">
+                                            {{ room.title }}
+                                        </router-link>
                                     </h4>
                                 </figure>
                             </div>
-
                             <div class="entry-meta">
                                 <div class="meta-item meta-author">
                                     <div class="coauthors">
-												<span class="vcard author">
-													<span class="fn">
-														<a href="#"><img alt="" src="assets/client/img/user-1.jpg" class="avatar avatar-24" height="24"
-                                                                         width="24">Lisa Scholfield</a>
-													</span>
-												</span>
-                                    </div>
-                                </div>
-                                <div class="meta-item meta-comment fl-right">
-                                    <i class="ti-comment-alt"></i><span>25</span>
-                                </div>
-                                <div class="meta-item meta-rating fl-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half"></i>
-                                </div>
-                            </div>
-
-                            <div class="inner-box">
-                                <div class="box-inner-ellipsis">
-                                    <h4 class="entry-title">
-                                        <a href="#">Netherlands</a>
-                                    </h4>
-                                </div>
-                            </div>
-
-                        </article>
-                    </div>
-                    <div class="col-md-4 col-sm-4">
-                        <article class="tour-box style-1">
-
-                            <!-- Single Tour -->
-                            <div class="tour-box-image">
-                                <figure>
-                                    <a href="tour-detail.html">
-                                        <img src="assets/client/img/tour/tour-1.jpg" class="img-responsive listing-box-img" alt=""/>
-                                        <div class="list-overlay"></div>
+                                    <span class="vcard author">
+                                    <span class="fn">
+                                    <a href="#">
+                                        <img alt="" src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg" class="avatar avatar-24" height="24" width="24">
+                                        {{ room.apartment.manager.last_name }} {{ room.apartment.manager.first_name }}
                                     </a>
-                                    <h4 class="destination-place">
-                                        <a href="#">Istanbul, Turkey</a>
-                                    </h4>
-                                </figure>
-                            </div>
-
-                            <div class="entry-meta">
-                                <div class="meta-item meta-author">
-                                    <div class="coauthors">
-												<span class="vcard author">
-													<span class="fn">
-														<a href="#"><img alt="" src="assets/client/img/user-1.jpg" class="avatar avatar-24" height="24"
-                                                                         width="24">Lisa Scholfield</a>
-													</span>
-												</span>
+                                    </span>
+                                    </span>
                                     </div>
                                 </div>
                                 <div class="meta-item meta-comment fl-right">
-                                    <i class="ti-comment-alt"></i><span>25</span>
+                                    <i class="ti-comment-alt"></i><span>{{ room.apartment.comments.length }}</span>
                                 </div>
                                 <div class="meta-item meta-rating fl-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half"></i>
+                                    <i v-for="n in room.apartment.star_rate" class="fa fa-star"></i>
                                 </div>
                             </div>
-
                             <div class="inner-box">
                                 <div class="box-inner-ellipsis">
                                     <h4 class="entry-title">
-                                        <a href="#">Netherlands</a>
+                                        <a href="#">{{ room.apartment.city.title }}</a>
                                     </h4>
-                                </div>
-                            </div>
-
-                        </article>
-                    </div>
-                    <div class="col-md-4 col-sm-4">
-                        <article class="tour-box style-1">
-
-                            <!-- Single Tour -->
-                            <div class="tour-box-image">
-                                <figure>
-                                    <a href="tour-detail.html">
-                                        <img src="assets/client/img/tour/tour-1.jpg" class="img-responsive listing-box-img" alt=""/>
-                                        <div class="list-overlay"></div>
-                                    </a>
-                                    <h4 class="destination-place">
-                                        <a href="#">Istanbul, Turkey</a>
-                                    </h4>
-                                </figure>
-                            </div>
-
-                            <div class="entry-meta">
-                                <div class="meta-item meta-author">
-                                    <div class="coauthors">
-												<span class="vcard author">
-													<span class="fn">
-														<a href="#"><img alt="" src="assets/client/img/user-1.jpg" class="avatar avatar-24" height="24"
-                                                                         width="24">Lisa Scholfield</a>
-													</span>
-												</span>
+                                    <div class="price-box">
+                                        <div class="tour-price fl-right">
+                                            <i class="ti ti-user"></i><span class="theme-cl f-bold">{{ room.price }} грн</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="meta-item meta-comment fl-right">
-                                    <i class="ti-comment-alt"></i><span>25</span>
-                                </div>
-                                <div class="meta-item meta-rating fl-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half"></i>
-                                </div>
                             </div>
-
-                            <div class="inner-box">
-                                <div class="box-inner-ellipsis">
-                                    <h4 class="entry-title">
-                                        <a href="#">Netherlands</a>
-                                    </h4>
-                                </div>
-                            </div>
-
                         </article>
                     </div>
                 </div>
@@ -236,208 +139,101 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="heading">
-                            <span class="theme-cl">Select Hotel</span>
-                            <h1>Top Rated Hotels</h1>
+                            <span class="theme-cl">Оберіть помешкання</span>
+                            <h1>Популярні апартаменти</h1>
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-md-4 col-sm-4">
+                    <div v-for="apartment in apartments" class="col-md-4 col-sm-4">
                         <article class="tour-box style-1">
-
                             <!-- Single Tour -->
                             <div class="tour-box-image">
                                 <figure>
-                                    <a href="tour-detail.html">
-                                        <img src="assets/client/img/tour/tour-1.jpg" class="img-responsive listing-box-img" alt=""/>
+                                    <router-link :to="{name: 'apartments.show', params: {slug: apartment.slug}}">
+                                        <img :src="apartment.preview_image" class="img-responsive listing-box-img" alt="">
                                         <div class="list-overlay"></div>
-                                    </a>
+                                    </router-link>
                                     <h4 class="destination-place">
-                                        <a href="#">Istanbul, Turkey</a>
+                                        <router-link :to="{name: 'apartments.show', params: {slug: apartment.slug}}">
+                                            {{ apartment.title }}
+                                        </router-link>
                                     </h4>
                                 </figure>
                             </div>
-
                             <div class="entry-meta">
                                 <div class="meta-item meta-author">
                                     <div class="coauthors">
-												<span class="vcard author">
-													<span class="fn">
-														<a href="#"><img alt="" src="assets/client/img/user-1.jpg" class="avatar avatar-24" height="24"
-                                                                         width="24">Lisa Scholfield</a>
-													</span>
-												</span>
-                                    </div>
-                                </div>
-                                <div class="meta-item meta-comment fl-right">
-                                    <i class="ti-comment-alt"></i><span>25</span>
-                                </div>
-                                <div class="meta-item meta-rating fl-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half"></i>
-                                </div>
-                            </div>
-
-                            <div class="inner-box">
-                                <div class="box-inner-ellipsis">
-                                    <h4 class="entry-title">
-                                        <a href="#">Netherlands</a>
-                                    </h4>
-                                </div>
-                            </div>
-
-                        </article>
-                    </div>
-                    <div class="col-md-4 col-sm-4">
-                        <article class="tour-box style-1">
-
-                            <!-- Single Tour -->
-                            <div class="tour-box-image">
-                                <figure>
-                                    <a href="tour-detail.html">
-                                        <img src="assets/client/img/tour/tour-1.jpg" class="img-responsive listing-box-img" alt=""/>
-                                        <div class="list-overlay"></div>
+                                    <span class="vcard author">
+                                    <span class="fn">
+                                    <a href="#">
+                                        <img alt="" src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg" class="avatar avatar-24" height="24" width="24">
+                                        {{ apartment.manager.last_name }} {{ apartment.manager.first_name }}
                                     </a>
-                                    <h4 class="destination-place">
-                                        <a href="#">Istanbul, Turkey</a>
-                                    </h4>
-                                </figure>
-                            </div>
-
-                            <div class="entry-meta">
-                                <div class="meta-item meta-author">
-                                    <div class="coauthors">
-												<span class="vcard author">
-													<span class="fn">
-														<a href="#"><img alt="" src="assets/client/img/user-1.jpg" class="avatar avatar-24" height="24"
-                                                                         width="24">Lisa Scholfield</a>
-													</span>
-												</span>
+                                    </span>
+                                    </span>
                                     </div>
                                 </div>
                                 <div class="meta-item meta-comment fl-right">
-                                    <i class="ti-comment-alt"></i><span>25</span>
+                                    <i class="ti-comment-alt"></i><span>{{ apartment.comments.length }}</span>
                                 </div>
                                 <div class="meta-item meta-rating fl-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half"></i>
+                                    <i v-for="n in apartment.star_rate" class="fa fa-star"></i>
                                 </div>
                             </div>
-
                             <div class="inner-box">
                                 <div class="box-inner-ellipsis">
                                     <h4 class="entry-title">
-                                        <a href="#">Netherlands</a>
+                                        <a href="#">{{ apartment.city.title }}</a>
                                     </h4>
                                 </div>
                             </div>
-
-                        </article>
-                    </div>
-                    <div class="col-md-4 col-sm-4">
-                        <article class="tour-box style-1">
-
-                            <!-- Single Tour -->
-                            <div class="tour-box-image">
-                                <figure>
-                                    <a href="tour-detail.html">
-                                        <img src="assets/client/img/tour/tour-1.jpg" class="img-responsive listing-box-img" alt=""/>
-                                        <div class="list-overlay"></div>
-                                    </a>
-                                    <h4 class="destination-place">
-                                        <a href="#">Istanbul, Turkey</a>
-                                    </h4>
-                                </figure>
-                            </div>
-
-                            <div class="entry-meta">
-                                <div class="meta-item meta-author">
-                                    <div class="coauthors">
-												<span class="vcard author">
-													<span class="fn">
-														<a href="#"><img alt="" src="assets/client/img/user-1.jpg" class="avatar avatar-24" height="24"
-                                                                         width="24">Lisa Scholfield</a>
-													</span>
-												</span>
-                                    </div>
-                                </div>
-                                <div class="meta-item meta-comment fl-right">
-                                    <i class="ti-comment-alt"></i><span>25</span>
-                                </div>
-                                <div class="meta-item meta-rating fl-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half"></i>
-                                </div>
-                            </div>
-
-                            <div class="inner-box">
-                                <div class="box-inner-ellipsis">
-                                    <h4 class="entry-title">
-                                        <a href="#">Netherlands</a>
-                                    </h4>
-                                </div>
-                            </div>
-
                         </article>
                     </div>
                 </div>
+
             </div>
         </section>
         <div class="clearfix"></div>
 
-        <section class="before-footer bt-1 bb-1">
-            <div class="container-fluid padd-0 full-width">
-
-                <div class=" col-md-2 col-sm-2 br-1 mbb-1">
-                    <div class="data-flex">
-                        <h4>Contact Us!</h4>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-3 br-1 mbb-1">
-                    <div class="data-flex text-center">
-                        53 Boulevard Victor Hugo 44200 Nantes, France
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-3 br-1 mbb-1">
-                    <div class="data-flex text-center">
-                        <span class="d-block mrg-bot-0">06 52 52 20 30</span>
-                        <a href="#" class="theme-cl"><strong>hello@gmail.com</strong></a>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-4 padd-0">
-                    <div class="data-flex padd-0">
-                        <ul class="social-share">
-                            <li><a href="#"><i class="fa fa-facebook theme-cl"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus theme-cl"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter theme-cl"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin theme-cl"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </section>
     </div>
 </template>
 
 <script>
 export default {
     name: 'Index',
+
     mounted() {
-        $(document).trigger('change')
-    }
+        this.getRandomRooms()
+        this.getRandomApartments()
+    },
+
+    data() {
+        return {
+            rooms: [],
+            apartments: [],
+        }
+    },
+
+    methods: {
+        getRandomRooms() {
+            this.axios.get('/api/random-rooms')
+                .then(response => {
+                    this.rooms = response.data.data;
+                    console.log(response.data.data);
+                });
+        },
+
+        getRandomApartments() {
+            this.axios.get('/api/random-apartments')
+                .then(response => {
+                    this.apartments = response.data.data;
+                    console.log(response.data.data);
+                });
+        }
+
+    },
 }
 </script>
 
