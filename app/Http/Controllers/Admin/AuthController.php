@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginStore;
 use App\Http\Requests\Auth\RegistrationStore;
 use App\Models\User;
@@ -14,11 +15,11 @@ class AuthController extends Controller
 {
     use Notifiable;
 
-    public function registrationForm() {
-        return view('client.auth.registration');
+    public function registerForm() {
+        return view('auth.register');
     }
 
-    public function registration(RegistrationStore $request) {
+    public function register(RegistrationStore $request) {
         $data = $request->validated();
 
         $user = User::add($data);
@@ -38,12 +39,12 @@ class AuthController extends Controller
     }
 
     public function loginForm() {
-        return view('client.auth.login');
+        return view('auth.login');
     }
 
     public function login(LoginStore $request) {
         if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
-            return redirect('/');
+            return redirect()->route('dashboard');
         }
 
         return redirect()->back()->with('success', 'Не правильний логін або пароль');
@@ -52,6 +53,6 @@ class AuthController extends Controller
     public function logout() {
         Auth::logout();
 
-        return redirect()->route('login');
+        return redirect()->to('/');
     }
 }

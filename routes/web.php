@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true, 'register'=> false, 'login'=> false]);
 
 Route::group([
-    'middleware' => ['admin', 'auth', 'verified'],
+    'middleware' => ['admin', 'verified'],
     'prefix' => 'admin',
     'namespace' => 'App\Http\Controllers\Admin'
 ], function() {
-    Route::get('/', 'IndexController@index');
+    Route::get('/', 'IndexController@index')->name('dashboard');
 
     Route::get('/account', 'UserController@edit')->name('account');
     Route::put('/account', 'UserController@update')->name('account.update');
@@ -45,26 +45,27 @@ Route::group([
     Route::resource('/apartments', 'ApartmentController');
     Route::resource('/bookings', 'BookingController');
     Route::resource('/roles', 'RoleController')->middleware('role:super_user');
+    Route::get('/logout', 'AuthController@logout')->name('logout');
 });
 
 Route::group([
     'middleware' => 'auth'
 ], function() {
-    Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
+//    Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
     Route::post('/comment', 'App\Http\Controllers\CommentController@store')->name('comments.store');
 });
 
 Route::group([
     'middleware' => 'guest'
 ], function() {
-    Route::get('/registration', 'App\Http\Controllers\AuthController@registrationForm')->name('registration');
-    Route::post('/registration', 'App\Http\Controllers\AuthController@registration');
-    Route::get('/login', 'App\Http\Controllers\AuthController@loginForm')->name('login');
-    Route::post('/login', 'App\Http\Controllers\AuthController@login');
+    Route::get('/register', 'App\Http\Controllers\Admin\AuthController@registerForm')->name('register');
+    Route::post('/register', 'App\Http\Controllers\Admin\AuthController@register')->name('register');
+    Route::get('/login', 'App\Http\Controllers\Admin\AuthController@loginForm')->name('login');
+    Route::post('/login', 'App\Http\Controllers\Admin\AuthController@login')->name('login');
 });
 
 
 Route::get('/{any}', '\App\Http\Controllers\Client\SpaController@index')->where('any', '.*');
 
 // For Vue 3
-Route::get('/test', 'App\Http\Controllers\TestController@index');
+//Route::get('/test', 'App\Http\Controllers\TestController@index');

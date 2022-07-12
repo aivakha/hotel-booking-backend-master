@@ -100,6 +100,11 @@
                             </div>
 
                             <div class="mb-3">
+                                <label class="form-label" for="rooms">{{ __('Кількість кімнат*') }}</label>
+                                <input class="form-control" id="rooms" value="{{old('rooms')}}" type="text" name="rooms" placeholder="135">
+                            </div>
+
+                            <div class="mb-3">
                                 <label class="form-label" for="address">{{ __('Кількість зірок*') }}</label>
                                 <select class="form-select" aria-label="Рейтинг" name="star_rate">
                                     <option value="1">1</option>

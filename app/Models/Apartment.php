@@ -24,7 +24,8 @@ class Apartment extends Model
         'city_id',
         'manager_id',
         'distance_id',
-        'type_id'
+        'type_id',
+        'rooms'
     ];
 
     /**
@@ -108,6 +109,10 @@ class Apartment extends Model
             'apartment_id',
             'leisure_activity_id'
         );
+    }
+
+    public function averageRate() {
+        return round($this->comments()->avg('rate'), 1);
     }
 
     // methods

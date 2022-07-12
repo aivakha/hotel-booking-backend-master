@@ -1,5 +1,4 @@
 <template>
-    <!-- ======================= Start Page Title ===================== -->
     <div class="page-title image-title" style="background-image:url(//hotel-booking-backend-master/assets/client/img/tour.jpg);">
         <div class="container">
             <div class="page-title-wrap">
@@ -7,8 +6,7 @@
             </div>
         </div>
     </div>
-    <!-- ======================= End Page Title ===================== -->
-    <!-- =========== Start All Hotel In Grid View =================== -->
+
     <section class="gray-bg">
         <div class="container">
             <div class="row">
@@ -59,7 +57,7 @@
                                 </div>
                                 <div class="tr-single-body">
                                     <form method="post">
-                                        <div id="price-range"></div>
+                                        <div id="price-range" v-on:change="filterRooms()"></div>
                                     </form>
                                 </div>
                             </div>
@@ -73,7 +71,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="apartment_type in filterList.apartment_types">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox" v-model="apartment_types" :value="apartment_type.id">
+                                                <input type="checkbox" v-model="apartment_types" :value="apartment_type.id" v-on:change="filterRooms()">
                                                 <label></label>
                                             </span>
                                             {{  apartment_type.title }}
@@ -90,7 +88,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="bed_type in filterList.bed_types">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox" v-model="bed_types" :value="bed_type.id">
+                                                <input type="checkbox" v-model="bed_types" :value="bed_type.id" v-on:change="filterRooms()">
                                                 <label></label>
                                             </span>
                                             {{  bed_type.title }}
@@ -107,7 +105,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="meal in filterList.meals">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox" v-model="meals" :value="meal.id">
+                                                <input type="checkbox" v-model="meals" :value="meal.id" v-on:change="filterRooms()">
                                                 <label></label>
                                             </span>
                                             {{  meal.title }}
@@ -125,7 +123,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="distance in filterList.distances">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox" v-model="distances" :value="distance.id">
+                                                <input type="checkbox" v-model="distances" :value="distance.id" v-on:change="filterRooms()">
                                                 <label></label>
                                             </span>
                                             {{  distance.title }}
@@ -143,7 +141,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="leisure_activity in filterList.leisure_activities">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox" v-model="leisure_activities" :value="leisure_activity.id">
+                                                <input type="checkbox" v-model="leisure_activities" :value="leisure_activity.id" v-on:change="filterRooms()">
                                                 <label></label>
                                             </span>
                                             {{  leisure_activity.title }}
@@ -161,7 +159,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="feature in filterList.features">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox" v-model="features" :value="feature.id">
+                                                <input type="checkbox" v-model="features" :value="feature.id" v-on:change="filterRooms()">
                                                 <label></label>
                                             </span>
                                             {{  feature.title }}
@@ -179,7 +177,7 @@
                                     <ul class="side-list-check">
                                         <li v-for="star_rate in filterList.star_rates">
                                             <span class="custom-checkbox">
-                                                <input type="checkbox" v-model="star_rates" :value="star_rate.star_rate">
+                                                <input type="checkbox" v-model="star_rates" :value="star_rate.star_rate" v-on:change="filterRooms()">
                                                 <label></label>
                                             </span>
                                             <div class="search-rating">
@@ -191,7 +189,7 @@
                             </div>
 
                             <div class="tr-inner-single-box">
-                                <button @click.prevent="filterRooms()" type="submit">Відфільтрувати</button>
+                                <button @click.prevent="filterRooms()" type="submit" class="btn theme-btn" style="width: 85%; margin-bottom: 20px">Відфільтрувати</button>
                             </div>
 
                         </div>

@@ -20,15 +20,25 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
 
                     <ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li><router-link to="/">Home</router-link></li>
-                        <li><router-link to="/rooms">Rooms</router-link></li>
-                        <li><router-link to="/">Find Hotel</router-link></li>
-                        <li><router-link to="/">Cart</router-link></li>
+                        <li><router-link :to="{name: 'home'}">Головна</router-link></li>
+                        <li><router-link :to="{name: 'rooms'}">Пошук житла</router-link></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="br-right"><a href="javascript:void(0)"  data-toggle="modal" data-target="#signin"><i class="login-icon ti-user"></i>Login</a></li>
-                        <li class="sign-up"><a class="btn-signup red-btn" href="tour-grid-sidebar.html"><span class="ti-briefcase"></span>Booking Hotel</a></li>
+                        <li class="br-right">
+                            <a href="//hotel-booking-backend-master/login">
+                                <i class="login-icon ti-user"></i>
+                                Обліковий запис
+                            </a>
+                        </li>
+
+                        <li class="br-right">
+                            <router-link :to="{name: 'rooms'}" class="btn-signup red-btn">
+                                <i class="login-icon ti-user"></i>
+                                Забронювати
+                            </router-link>
+                        </li>
+
                     </ul>
 
                 </div>
@@ -132,9 +142,11 @@
 <script>
 export default {
     name: 'App',
-    mounted() {
-        $(document).trigger('change')
-    }
+    data() {
+        return {
+
+        }
+    },
 }
 </script>
 

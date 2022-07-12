@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Apartment\StoreRequest;
+use App\Http\Requests\Apartment\UpdateRequest;
 use App\Models\Apartment;
 use App\Models\ApartmentType;
 use App\Models\City;
@@ -129,7 +130,7 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
 

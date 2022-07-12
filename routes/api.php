@@ -14,12 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::get('/user', \App\Http\Controllers\API\User\IndexController::class);
 Route::post('/rooms', \App\Http\Controllers\API\Room\IndexController::class);
 Route::get('/rooms/filters', \App\Http\Controllers\API\Room\FilterListController::class);
 Route::get('/rooms/{slug}', \App\Http\Controllers\API\Room\ShowController::class);
 Route::get('/apartments/{slug}', \App\Http\Controllers\API\Apartment\ShowController::class);
+
+
+
+// API route for register new user
+// Route::post('/register', [App\Http\Controllers\API\Auth\AuthController::class, 'register']);
+// Route::post('/login', [App\Http\Controllers\API\Auth\AuthController::class, 'login']);
+
+Route::post('/rooms', \App\Http\Controllers\API\Room\IndexController::class);
+Route::post('/comment', [\App\Http\Controllers\API\Comment\CommentController::class, 'store']);
+
+//Protecting Routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/user', [App\Http\Controllers\API\Auth\AuthController::class, 'user']);
+});
+

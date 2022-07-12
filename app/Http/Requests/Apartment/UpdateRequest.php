@@ -13,7 +13,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,20 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|max:255',
+            'full_description' => 'required|max:2000',
+            'short_description' => 'required|max:500',
+            'star_rate' => 'required',
+            'address' => 'required',
+            'preview_image' => 'image|nullable',
+            'gallery.*' => 'image|nullable',
+            'meals' => 'nullable',
+            'leisure_activities' => 'nullable',
+            'manager_id' => 'required',
+            'city_id' => 'required',
+            'distance_id' => 'required',
+            'type_id' => 'required',
+            'rooms' => 'required|integer',
         ];
     }
 }

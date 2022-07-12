@@ -11,4 +11,5 @@ const app = createApp(App)
 
 app.use(router)
 app.config.globalProperties.axios = axios
+axios.defaults.withCredentials = true;
 app.mount('#app')

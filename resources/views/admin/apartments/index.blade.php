@@ -29,7 +29,7 @@
             </div>
             <div class="card-body bg-light">
                 @if ($apartments->isNotEmpty())
-                    <div id="tableExample2" data-list='{"valueNames":["id", "title", "city", "type", "star-rate", "preview_image"],"page":15,"pagination":true}'>
+                    <div id="tableExample2" data-list='{"valueNames":["id", "title", "city", "type", "star-rate", "rooms", "preview_image"],"page":15,"pagination":true}'>
                         <div class="table-responsive scrollbar">
                             <table class="table table-bordered table-striped fs--1 mb-0">
                                 <thead class="bg-200 text-900">
@@ -39,6 +39,7 @@
                                     <th class="sort" data-sort="city">{{ __('Місто') }}</th>
                                     <th class="sort" data-sort="type">{{ __('Тип') }}</th>
                                     <th class="sort" data-sort="star-rate">{{ __('Рейтинг') }}</th>
+                                    <th class="sort" data-sort="rooms">{{ __('К-сть кімнат') }}</th>
                                     <th class="sort" data-sort="preview_image">{{ __('Картинка') }}</th>
                                     <th class="sort">Дії</th>
                                 </tr>
@@ -56,6 +57,7 @@
                                         <td class="city">{{ $apartment->city->title }}</td>
                                         <td class="type">{{ $apartment->type->title }}</td>
                                         <td class="star-rate">{{ $apartment->star_rate }}</td>
+                                        <td class="rooms">{{ $apartment->rooms }}</td>
                                         <td class="preview_image">
                                             <img src="{{ $apartment->getImage() }}" style="width: 100%;max-width: 100px" alt="">
                                         </td>

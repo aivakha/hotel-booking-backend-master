@@ -1,10 +1,12 @@
 <template>
-    <section class="page-title-banner" style="background-image:url(//hotel-booking-backend-master/assets/client/img/banner.jpg);">
+    <section class="page-title-banner"
+             style="background-image:url(//hotel-booking-backend-master/assets/client/img/banner.jpg);">
         <div class="container">
             <div class="row">
                 <div class="tr-list-detail">
                     <div class="tr-list-thumb">
-                        <img src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg" class="img-responsive img-circle" alt="">
+                        <img src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg"
+                             class="img-responsive img-circle" alt="">
                     </div>
                     <div v-if="apartment.manager" class="tr-list-info">
                         <h4>{{ apartment.manager.last_name }} {{ apartment.manager.first_name }}</h4>
@@ -23,9 +25,13 @@
                     <div class="tab" role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#Overview" aria-controls="home" role="tab" data-toggle="tab"><i class="ti-user"></i>Огляд</a></li>
-                            <li role="presentation"><a href="#Review" aria-controls="messages" role="tab" data-toggle="tab"><i class="ti-thumb-up"></i>Відгуки</a></li>
-                            <li role="presentation"><a href="#Photos" aria-controls="messages" role="tab" data-toggle="tab"><i class="ti-gallery"></i>Галерея</a></li>
+                            <li role="presentation" class="active"><a href="#Overview" aria-controls="home" role="tab"
+                                                                      data-toggle="tab"><i class="ti-user"></i>Огляд</a>
+                            </li>
+                            <li role="presentation"><a href="#Review" aria-controls="messages" role="tab"
+                                                       data-toggle="tab"><i class="ti-thumb-up"></i>Відгуки</a></li>
+                            <li role="presentation"><a href="#Photos" aria-controls="messages" role="tab"
+                                                       data-toggle="tab"><i class="ti-gallery"></i>Галерея</a></li>
                         </ul>
                         <!-- Tab panes -->
                     </div>
@@ -76,7 +82,7 @@
                                                         <!--<sup class="cl-success">№735-А</sup>-->
                                                     </h5>
                                                     <ul class="extra-service">
-                                                        <li >
+                                                        <li>
                                                             <div class="icon-box-icon-block">
                                                                 <a href="#">
                                                                     <div class="icon-box-round">
@@ -143,11 +149,13 @@
                                     <div class="tr-single-body">
                                         <div class="row">
 
-                                            <div v-for="leisureActivity in apartment.leisureActivities" class="col-md-4 col-sm-6">
+                                            <div v-for="leisureActivity in apartment.leisureActivities"
+                                                 class="col-md-4 col-sm-6">
                                                 <div class="listing-features">
                                                     <div class="listing-features-box">
                                                         <div class="listing-features-thumb">
-                                                            <img :src="leisureActivity.image" class="img-responsive" alt="">
+                                                            <img :src="leisureActivity.image" class="img-responsive"
+                                                                 alt="">
                                                         </div>
                                                         <div class="listing-features-detail">
                                                             <h4>{{ leisureActivity.title }}</h4>
@@ -183,7 +191,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="apartment.comments && getAverageRate() > 0" class="row">
+                            <div v-if="apartment.average_rate > 0" class="row">
                                 <div class="tr-single-box">
                                     <div class="tr-single-header">
                                         <h4><i class="fa fa-star-o"></i>Рейтинг</h4>
@@ -192,11 +200,13 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div id="review_summary">
-                                                    <strong>{{ getAverageRate() }}</strong>
-                                                    <em v-if="getAverageRate() >= 4" class="cl-success">Супер</em>
-                                                    <em v-if="getAverageRate() < 4 && getAverageRate() >= 3" style="color: #f0ad4e">Добре</em>
-                                                    <em v-if="getAverageRate() < 3" style="color: #d9534f ">Погано</em>
-                                                    <small>Пораховано на основі {{ apartment.comments.length }} відгуків</small>
+                                                    <strong>{{ apartment.average_rate }}</strong>
+                                                    <em v-if="apartment.average_rate >= 4" class="cl-success">Супер</em>
+                                                    <em v-if="apartment.average_rate < 4 && apartment.average_rate >= 3"
+                                                        style="color: #f0ad4e">Добре</em>
+                                                    <em v-if="apartment.average_rate < 3" style="color: #d9534f ">Погано</em>
+                                                    <small>Пораховано на основі {{ apartment.comments.length }}
+                                                        відгуків</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -220,38 +230,51 @@
                                         <!-- Single Review -->
                                         <div v-for="comment in apartment.comments" class="review-box">
                                             <div class="review-thumb">
-                                                <img src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg" class="img-responsive img-circle" alt="">
+                                                <img
+                                                    src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg"
+                                                    class="img-responsive img-circle" alt="">
                                             </div>
 
                                             <div class="review-box-content">
                                                 <div class="reviewer-rate">
-                                                    <p><i class="fa fa-star cl-warning"></i>{{ comment.rate }}/<span>5</span></p>
+                                                    <p><i class="fa fa-star cl-warning"></i>{{
+                                                            comment.rate
+                                                        }}/<span>5</span></p>
                                                 </div>
                                                 <div class="review-user-info">
-                                                    <h4>{{ comment.author.last_name }} {{ comment.author.first_name }}</h4>
+                                                    <h4>{{ comment.author.last_name }} {{
+                                                            comment.author.first_name
+                                                        }}</h4>
                                                     <p>{{ comment.text }}</p>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <form>
+                                        <div v-if="errors || message" class="client-errors">
+                                            <ul v-if="errors" class="ul" v-for="(field, k) in errors" :key="k" style="list-style: none">
+                                                <li v-for="error in field" :key="k" style="color: #ff526c">
+                                                    {{ error }}
+                                                </li>
+                                            </ul>
+
+                                            <ul v-if="message" class="ul"  style="list-style: none">
+                                                <li style="color: #ff526c">{{ message }}</li>
+                                            </ul>
+                                        </div>
+
+                                        <form v-if="user" class="form" ref="commentForm">
                                             <div class="form-group">
-                                                <label>User Name</label>
-                                                <input type="text" class="form-control" placeholder="User Name">
+                                                <label>Рейтинг</label>
+                                                <input id="comment-rate" type="number" class="form-control" placeholder="3" v-model="rate">
                                             </div>
                                             <div class="form-group">
-                                                <label>Password</label>
-                                                <input type="password" class="form-control" placeholder="*********">
-                                            </div>
-                                            <div class="form-group">
-                              <span class="custom-checkbox">
-                              <input type="checkbox" id="45">
-                              <label for="45"></label>Remember me
-                              </span>
-                                                <a href="#" title="Forget" class="fl-right">Forgot Password?</a>
+                                                <label>Коментар</label>
+                                                <input id="comment-text" type="text" class="form-control" v-model="text" placeholder="Все супер">
                                             </div>
                                             <div class="form-group text-center">
-                                                <button type="button" class="btn theme-btn full-width btn-m">LogIn</button>
+                                                <button @click.prevent="postComment()" type="submit" class="btn theme-btn full-width btn-m">
+                                                    Коментувати
+                                                </button>
                                             </div>
                                         </form>
 
@@ -289,7 +312,8 @@
                 <div class="col-md-4 col-sm-12">
                     <div v-if="apartment" class="tr-single-box">
                         <div class="tr-single-header">
-                            <h4 v-if="apartment.city">{{ apartment.title }}<sup class="cl-success"> Україна, {{ apartment.city.title }}</sup>
+                            <h4 v-if="apartment.city">{{ apartment.title }}<sup class="cl-success"> Україна,
+                                {{ apartment.city.title }}</sup>
                             </h4>
                         </div>
 
@@ -321,6 +345,17 @@
                                     </div>
                                 </li>
 
+                                <li v-if="apartment">
+                                    <div class="icon-box-icon-block">
+                                        <div class="icon-box-round">
+                                            <i class="ti-home"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            Кількість кімнат {{ apartment.rooms }}
+                                        </div>
+                                    </div>
+                                </li>
+
                                 <li v-for="meal in apartment.meals">
                                     <div class="icon-box-icon-block">
                                         <div class="icon-box-round">
@@ -331,6 +366,7 @@
                                         </div>
                                     </div>
                                 </li>
+
                             </ul>
                         </div>
 
@@ -339,7 +375,6 @@
             </div>
         </div>
     </section>
-
 </template>
 
 <script>
@@ -348,26 +383,32 @@ export default {
 
     mounted() {
         this.getApartment()
-        // this.getUser()
+        this.getUser()
     },
 
     data() {
         return {
-            // user: [],
+            user: [],
             apartment: [],
-            average: null,
+            text: '',
+            rate: '',
+            message: '',
+            errors: '',
         }
     },
 
     methods: {
-        // getUser() {
-        //     this.axios.get('/api/user')
-        //         .then(response => {
-        //             this.user = response.data.data
-        //             console.log(response);
-        //         })
-        //         .catch(error => console.log(error.response.data))
-        // },
+        getUser() {
+            this.axios.get('/api/user').then(response => {
+                console.log(response.data);
+                this.user = response.data;
+            }).catch(e => {
+                if (e.response.status === 401) {
+                    console.log(e.response.data);
+                    this.user = null;
+                }
+            });
+        },
 
         getApartment(slug) {
             this.axios.get(`/api/apartments/${this.$route.params.slug}`)
@@ -378,18 +419,26 @@ export default {
                 .catch(error => console.log(error.response.data))
         },
 
-        getAverageRate() {
-            let comments = this.apartment.comments;
-            let arr = [];
-
-            for (let i = 0; i <= comments.length; i++) {
-                let proxy = {...comments[i]};
-                if (typeof proxy.rate !== 'undefined') {
-                    arr.push(proxy.rate);
-                }
-            }
-
-            return this.average = arr.reduce((a, b) => a + b, 0) / arr.length;
+        postComment() {
+            this.axios.post('/api/comment', {
+                'text': this.text,
+                'rate': this.rate,
+                'user_id': this.user.id,
+                'apartment_id': this.apartment.id,
+            })
+                .then(response => {
+                    console.log(response.data.data);
+                    this.apartment.comments.push(response.data.data);
+                    this.rate = '';
+                    this.text = '';
+                })
+                .catch(e => {
+                    if (e.response.status === 422) {
+                        console.log(e.response.data);
+                        this.message = e.response.data.message;
+                        this.errors = e.response.data.errors;
+                    }
+                });
         },
     },
 }
