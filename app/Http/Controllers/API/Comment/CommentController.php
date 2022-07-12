@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Comment;
 
+use App\Events\Comment\CommentEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Comment\StoreRequest;
 use App\Http\Resources\Comment\CommentResource;
@@ -21,6 +22,8 @@ class CommentController extends Controller
 
         // dd($comment);
         $comment->save();
+
+        event(new CommentEvent($comment));
 
         return new CommentResource($comment);
     }

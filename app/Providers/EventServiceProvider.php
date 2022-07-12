@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\Booking\BookingEvent;
 use App\Events\Booking\BookingStatusEvent;
+use App\Events\Comment\CommentEvent;
 use App\Listeners\Booking\EmailClientStatusListener;
 use App\Listeners\Booking\EmailManagerListener;
 use App\Listeners\Booking\EmailClientListener;
@@ -37,6 +38,10 @@ class EventServiceProvider extends ServiceProvider
 
         BookingStatusEvent::class => [
             EmailClientStatusListener::class,
+        ],
+
+        CommentEvent::class => [
+            \App\Listeners\Comment\EmailManagerListener::class,
         ],
     ];
 
