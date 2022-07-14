@@ -18,7 +18,7 @@ class Room extends Model
     use Sluggable;
     use Filterable;
 
-    protected $fillable = ['title', 'description', 'date_from', 'date_to', 'price', 'apartment_id'];
+    protected $fillable = ['title', 'description', 'date_from', 'date_to', 'price', 'members', 'apartment_id'];
 
     /**
      * Return the sluggable configuration array for this model.

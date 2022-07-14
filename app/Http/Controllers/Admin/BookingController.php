@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\Booking\BookingEvent;
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Booking\StoreRequest;
 use App\Http\Requests\Booking\UpdateRequest;
 use App\Models\Booking;
 use App\Models\Room;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -20,7 +23,16 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::all();
+        $this->authorize('index', [self::class]);
+
+        $user = Auth::user();
+        if ($user->hasRole('super_user')) {
+            $bookings = Booking::all();
+        } else {
+            $bookings = Booking::whereHas('apartment', function(Builder $query) {
+                $query->whereIn('user_id', [Auth::user()->id]);
+            })->get();
+        }
 
         return view('admin.bookings.index', compact('bookings'));
     }
@@ -32,6 +44,7 @@ class BookingController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
         $rooms = Room::pluck('title', 'id')->all();
         $users = User::pluck('email', 'id')->all();
 
@@ -77,10 +90,15 @@ class BookingController extends Controller
     public function edit($id)
     {
         $booking = Booking::find($id);
+        $this->authorize('view', $booking);
+        $user = Auth::user();
+        if ($user->hasRole('super_user')) {
+            $rooms = Room::pluck('title', 'id')->all();
+        } else {
+            $rooms = Room::whereIn('user_id', [Auth::user()->id])->pluck('title', 'id')->all();
+        }
 
-        $rooms = Room::pluck('title', 'id')->all();
         $selectedRoom = $booking->room->id;
-
         $status = $booking->status;
 
         return view('admin.bookings.edit', compact('booking', 'rooms', 'selectedRoom', 'status'));
@@ -98,6 +116,7 @@ class BookingController extends Controller
         $data = $request->validated();
 
         $booking = Booking::find($id);
+        $this->authorize('update', $booking);
         $booking->edit($data);
         $booking->setCheckIn($request->get('check_in'));
         $booking->setCheckOut($request->get('check_out'));

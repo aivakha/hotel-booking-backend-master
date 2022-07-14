@@ -80,6 +80,12 @@
                             </div>
 
                             <div class="mb-3">
+                                <label class="form-label" for="members">{{ __('Максимальна кількість людей*') }}</label>
+                                <input class="form-control" id="members" value="{{old('members')}}" name="members" type="text"
+                                       placeholder="5">
+                            </div>
+
+                            <div class="mb-3">
                                 <label class="form-label" for="price">{{ __('Ціна за добу*') }}</label>
                                 <input class="form-control" id="price" value="{{old('price')}}" name="price" type="text"
                                        placeholder="800">

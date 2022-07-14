@@ -12,9 +12,11 @@
                     <div class="col-md">
                         <h5 class="mb-2 mb-md-0">{{ __('Керування бронюваннями') }}</h5>
                     </div>
+                    @if (Auth::user()->hasRole('super_user'))
                     <div class="col-auto">
                         <a href="{{ route('bookings.create') }}" class="btn btn-success me-1 mb-1">{{ __('Додати') }}</a>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

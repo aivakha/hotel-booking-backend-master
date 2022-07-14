@@ -16,7 +16,7 @@ class Booking extends Model
 
     protected $fillable = ['user_id', 'room_id', 'apartment_id', 'check_in', 'check_out', 'status'];
 
-    public function user() {
+    public function user() { // whom was booked
         return $this->belongsTo(User::class);
     }
 

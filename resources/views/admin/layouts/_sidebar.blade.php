@@ -172,6 +172,14 @@
                     @endhasallroles
 
 
+                    <a class="nav-link" href="{{ route('comments.index') }}" role="button" data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="far fa-comments"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">{{ __('Коментарі') }}</span>
+                        </div>
+                    </a>
                 </li>
 
 
@@ -247,7 +255,7 @@
 
                 </li>
 
-
+                @hasanyrole('super_user|advance_user')
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                         <div class="col-auto navbar-vertical-label">{{ __('Налаштування бронювань') }}</div>
@@ -273,7 +281,9 @@
                         </li>
                     </ul>
                 </li>
+                @endhasallroles
 
+                @hasanyrole('super_user')
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                         <div class="col-auto navbar-vertical-label">{{ __('Налаштування користувачів') }}</div>
@@ -298,9 +308,8 @@
                             </a>
                         </li>
                     </ul>
-
-
                 </li>
+                @endhasallroles
             </ul>
         </div>
     </div>

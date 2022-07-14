@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\ApartmentTypeController;
 use App\Http\Controllers\Admin\BedTypeController;
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\DistanceController;
 use App\Http\Controllers\Admin\FeatureController;
@@ -17,6 +18,7 @@ use App\Models\User;
 use App\Policies\ApartmentPolicy;
 use App\Policies\ApartmentTypePolicy;
 use App\Policies\BedTypePolicy;
+use App\Policies\BookingPolicy;
 use App\Policies\CityPolicy;
 use App\Policies\DistancePolicy;
 use App\Policies\FeaturePolicy;
@@ -48,6 +50,7 @@ class AuthServiceProvider extends ServiceProvider
         DistanceController::class => DistancePolicy::class,
         ManagerController::class => ManagerPolicy::class,
         RoomController::class => RoomPolicy::class,
+        BookingController::class => BookingPolicy::class,
         User::class => UserPolicy::class
     ];
 

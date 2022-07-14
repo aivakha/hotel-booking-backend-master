@@ -31,7 +31,8 @@ class UpdateRequest extends FormRequest
             'features' => 'nullable',
             'bed_types' => 'nullable',
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-            'apartment_id' => 'required'
+            'apartment_id' => 'required',
+            'members' => 'required|integer|min:0',
         ];
     }
 }

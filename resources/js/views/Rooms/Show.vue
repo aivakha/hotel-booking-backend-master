@@ -200,7 +200,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="room.apartment" class="row">
+                            <div v-if="room.apartment && room.apartment.comments.length > 0" class="row">
                                 <div class="tr-single-box">
                                     <div class="tr-single-header">
                                         <h4><i class="fa fa-star-o"></i>Рейтинг</h4>

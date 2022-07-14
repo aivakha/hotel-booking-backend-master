@@ -85,6 +85,12 @@
                                    placeholder="800">
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label" for="members">{{ __('Максимальна кількість людей*') }}</label>
+                            <input class="form-control" id="members" value="{{ $room->members }}" name="members" type="text"
+                                   placeholder="5">
+                        </div>
+
                         <div class="pull-right">
                             <a class="btn btn-danger me-1 mb-1"
                                href="{{ route('rooms.index')  }}">{{ __('Повернутись назад') }}</a>

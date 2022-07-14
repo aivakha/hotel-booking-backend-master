@@ -21,7 +21,7 @@
 
                     <div class="row">
                         <div class="mb-3">
-                            <label class="form-label" for="title">{{ __('Активність') }}</label>
+                            <label class="form-label" for="title">{{ __('Зручність') }}</label>
                             <input class="form-control" id="title" type="text" name="title" value="{{ $feature->title }}" placeholder="Фітне-центр">
                         </div>
                     </div>

@@ -21,7 +21,7 @@
                     <div class="tab-pane preview-tab-pane active" role="tabpanel">
                         <div class="row">
                             <div class="mb-3">
-                                <label class="form-label" for="title">{{ __('Активність') }}</label>
+                                <label class="form-label" for="title">{{ __('Зручність') }}</label>
                                 <input class="form-control" id="title" value="{{old('title')}}" name="title" type="text" placeholder="Фітнес-центр">
                             </div>
 
