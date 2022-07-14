@@ -45,17 +45,31 @@
                                         <td class="id">{{ $feature->id }}</td>
                                         <td class="title">{{ $feature->title }}</td>
                                         <td class="actions">
-                                            <div class="actions-btn">
-                                                <a class="btn p-0" href="{{route('features.edit', $feature->id)}}">
-                                                    <span class="far fa-edit"></span>
-                                                </a>
+                                            @if (Auth::user()->hasRole('super_user'))
+                                                <div class="actions-btn">
+                                                    <a class="btn p-0" href="{{route('features.edit', $feature->id)}}">
+                                                        <span class="far fa-edit"></span>
+                                                    </a>
 
-                                                {{Form::open(['route'=> ['features.destroy', $feature->id], 'method' => 'delete'])}}
-                                                <button class="btn p-0 delete-btn" type="submit">
-                                                    <span class="far fa-trash-alt"></span>
-                                                </button>
-                                                {{Form::close()}}
-                                            </div>
+                                                    {{Form::open(['route'=> ['features.destroy', $feature->id], 'method' => 'delete'])}}
+                                                    <button class="btn p-0 delete-btn" type="submit">
+                                                        <span class="far fa-trash-alt"></span>
+                                                    </button>
+                                                    {{Form::close()}}
+                                                </div>
+                                            @elseif (Auth::user()->id == $feature->user_id)
+                                                <div class="actions-btn">
+                                                    <a class="btn p-0" href="{{route('features.edit', $feature->id)}}">
+                                                        <span class="far fa-edit"></span>
+                                                    </a>
+
+                                                    {{Form::open(['route'=> ['features.destroy', $feature->id], 'method' => 'delete'])}}
+                                                    <button class="btn p-0 delete-btn" type="submit">
+                                                        <span class="far fa-trash-alt"></span>
+                                                    </button>
+                                                    {{Form::close()}}
+                                                </div>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

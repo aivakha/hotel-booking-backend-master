@@ -200,7 +200,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="room.apartment && getAverageRate() > 0" class="row">
+                            <div v-if="room.apartment" class="row">
                                 <div class="tr-single-box">
                                     <div class="tr-single-header">
                                         <h4><i class="fa fa-star-o"></i>Рейтинг</h4>
@@ -209,11 +209,11 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div id="review_summary">
-                                                    <strong>{{ getAverageRate() }}</strong>
-                                                    <em v-if="getAverageRate() >= 4" class="cl-success">Супер</em>
-                                                    <em v-if="getAverageRate() < 4 && getAverageRate() >= 3"
+                                                    <strong>{{ room.apartment.average_rate }}</strong>
+                                                    <em v-if="room.apartment.average_rate >= 4" class="cl-success">Супер</em>
+                                                    <em v-if="room.apartment.average_rate < 4 && room.apartment.average_rate >= 3"
                                                         style="color: #f0ad4e">Добре</em>
-                                                    <em v-if="getAverageRate() < 3" style="color: #d9534f ">Погано</em>
+                                                    <em v-if="room.apartment.average_rate < 3" style="color: #d9534f ">Погано</em>
                                                     <small>Пораховано на основі {{ room.apartment.comments.length }}
                                                         відгуків</small>
                                                 </div>
@@ -357,7 +357,6 @@ export default {
     data() {
         return {
             room: [],
-            average: null,
         }
     },
 
@@ -369,20 +368,6 @@ export default {
                     console.log(response.data.data);
                 })
                 .catch(error => console.log(error.response.data))
-        },
-
-        getAverageRate() {
-            let comments = this.room.apartment.comments;
-            let arr = [];
-
-            for (let i = 0; i <= comments.length; i++) {
-                let proxy = {...comments[i]};
-                if (typeof proxy.rate !== 'undefined') {
-                    arr.push(proxy.rate);
-                }
-            }
-
-            return this.average = arr.reduce((a, b) => a + b, 0) / arr.length;
         },
     },
 }

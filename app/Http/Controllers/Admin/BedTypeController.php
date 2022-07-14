@@ -17,6 +17,8 @@ class BedTypeController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', [self::class]);
+
         $bed_types = BedType::all();
 
         return view('admin.bed-types.index', compact('bed_types'));
@@ -29,6 +31,8 @@ class BedTypeController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
+
         return view('admin.bed-types.create');
     }
 
@@ -41,7 +45,7 @@ class BedTypeController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        BedType::create($data);
+        BedType::add($data);
 
         return redirect()->route('bed-types.index')->with('success', 'Успішно добавлено!');
     }
@@ -67,6 +71,8 @@ class BedTypeController extends Controller
     {
         $bed_type = BedType::find($id);
 
+        $this->authorize('view', $bed_type);
+
         return view('admin.bed-types.edit', compact('bed_type'));
     }
 
@@ -81,6 +87,7 @@ class BedTypeController extends Controller
     {
         $data = $request->validated();
         $bed_type = BedType::find($id);
+        $this->authorize('update', $bed_type);
         $bed_type->update($data);
 
         return redirect()->route('bed-types.index')->with('success', 'Успішно оновлено!');
@@ -94,7 +101,9 @@ class BedTypeController extends Controller
      */
     public function destroy($id)
     {
-        BedType::find($id)->delete();
+        $bed_type = BedType::find($id);
+        $this->authorize('delete', $bed_type);
+        $bed_type->delete();
 
         return redirect()->route('bed-types.index')->with('success', 'Успішно видалено!');
     }

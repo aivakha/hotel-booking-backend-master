@@ -17,6 +17,8 @@ class ApartmentTypeController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', [self::class]);
+
         $apartment_types = ApartmentType::all();
 
         return view('admin.apartment-types.index', compact('apartment_types'));
@@ -29,6 +31,8 @@ class ApartmentTypeController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
+
         return view('admin.apartment-types.create');
     }
 
@@ -42,7 +46,7 @@ class ApartmentTypeController extends Controller
     {
         $data = $request->validated();
 
-        ApartmentType::create($data);
+        ApartmentType::add($data);
 
         return redirect()->route('apartment-types.index')->with('success', 'Успішно добавлено!');
     }
@@ -68,6 +72,8 @@ class ApartmentTypeController extends Controller
     {
         $apartment_type = ApartmentType::find($id);
 
+        $this->authorize('view', $apartment_type);
+
         return view('admin.apartment-types.edit', compact('apartment_type'));
     }
 
@@ -82,6 +88,7 @@ class ApartmentTypeController extends Controller
     {
         $data = $request->validated();
         $apartment_type = ApartmentType::find($id);
+        $this->authorize('update', $apartment_type);
         $apartment_type->update($data);
 
         return redirect()->route('apartment-types.index')->with('success', 'Успішно оновлено!');
@@ -95,7 +102,11 @@ class ApartmentTypeController extends Controller
      */
     public function destroy($id)
     {
-        ApartmentType::find($id)->delete();
+        $apartment_type = ApartmentType::find($id);
+
+        $this->authorize('delete', $apartment_type);
+
+        $apartment_type->delete();
 
         return redirect()->route('apartment-types.index')->with('success', 'Успішно видалено!');
     }

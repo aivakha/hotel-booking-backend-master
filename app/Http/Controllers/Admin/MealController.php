@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Meal\StoreRequest;
 use App\Http\Requests\Meal\UpdateRequest;
@@ -18,6 +19,8 @@ class MealController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', [self::class]);
+
         $meals = Meal::all();
 
         return view('admin.meals.index', compact('meals'));
@@ -30,6 +33,8 @@ class MealController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
+
         return view('admin.meals.create');
     }
 
@@ -42,7 +47,7 @@ class MealController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        Meal::create($data);
+        Meal::add($data);
 
         return redirect()->route('meals.index')->with('success', 'Успішно добавлено!');
     }
@@ -68,6 +73,8 @@ class MealController extends Controller
     {
         $meal = Meal::find($id);
 
+        $this->authorize('view', $meal);
+
         return view('admin.meals.edit', compact('meal'));
     }
 
@@ -82,6 +89,7 @@ class MealController extends Controller
     {
         $data = $request->validated();
         $meal = Meal::find($id);
+        $this->authorize('update', $meal);
         $meal->update($data);
 
         return redirect()->route('meals.index')->with('success', 'Успішно оновлено!');;
@@ -95,7 +103,11 @@ class MealController extends Controller
      */
     public function destroy($id)
     {
-        Meal::find($id)->delete();
+        $meal = Meal::find($id);
+
+        $this->authorize('delete', $meal);
+
+        $meal->delete();
 
         return redirect()->route('meals.index')->with('success', 'Успішно видалено!');
     }

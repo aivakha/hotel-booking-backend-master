@@ -2,6 +2,29 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\ApartmentTypeController;
+use App\Http\Controllers\Admin\BedTypeController;
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\DistanceController;
+use App\Http\Controllers\Admin\FeatureController;
+use App\Http\Controllers\Admin\LeisureActivityController;
+use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\MealController;
+use App\Http\Controllers\Admin\RoomController;
+use App\Models\Apartment;
+use App\Models\User;
+use App\Policies\ApartmentPolicy;
+use App\Policies\ApartmentTypePolicy;
+use App\Policies\BedTypePolicy;
+use App\Policies\CityPolicy;
+use App\Policies\DistancePolicy;
+use App\Policies\FeaturePolicy;
+use App\Policies\LeisureActivityPolicy;
+use App\Policies\ManagerPolicy;
+use App\Policies\MealPolicy;
+use App\Policies\RoomPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -15,7 +38,17 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        ApartmentController::class => ApartmentPolicy::class,
+        MealController::class => MealPolicy::class,
+        LeisureActivityController::class => LeisureActivityPolicy::class,
+        ApartmentTypeController::class => ApartmentTypePolicy::class,
+        BedTypeController::class => BedTypePolicy::class,
+        FeatureController::class => FeaturePolicy::class,
+        CityController::class => CityPolicy::class,
+        DistanceController::class => DistancePolicy::class,
+        ManagerController::class => ManagerPolicy::class,
+        RoomController::class => RoomPolicy::class,
+        User::class => UserPolicy::class
     ];
 
     /**

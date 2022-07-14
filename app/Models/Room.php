@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -47,6 +48,11 @@ class Room extends Model
         return $this->hasMany(RoomGallery::class)->get();
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function features()
     {
         return $this->belongsToMany( // многие ко многим
@@ -77,6 +83,7 @@ class Room extends Model
 
         $data = array_merge($fields, $dateRange);
         $room->fill($data);
+        $room->user_id = Auth::user()->id;
         $room->save();
 
         return $room;

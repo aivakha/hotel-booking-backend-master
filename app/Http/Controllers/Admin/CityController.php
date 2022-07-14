@@ -17,6 +17,7 @@ class CityController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', [self::class]);
         $cities = City::all();
 
         return view('admin.cities.index', compact('cities'));
@@ -29,6 +30,8 @@ class CityController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
+
         return view('admin.cities.create');
     }
 
@@ -68,6 +71,8 @@ class CityController extends Controller
     {
         $city = City::find($id);
 
+        $this->authorize('update', $city);
+
         return view('admin.cities.edit', compact('city'));
     }
 
@@ -82,6 +87,7 @@ class CityController extends Controller
     {
         $data = $request->validated();
         $city = City::find($id);
+        $this->authorize('update', $city);
         $city->update($data);
 
         return redirect()->route('cities.index')->with('success', 'Успішно оновлено!');;
@@ -95,7 +101,9 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        City::find($id)->delete();
+        $city = City::find($id);
+        $this->authorize('delete', $city);
+        $city->delete();
 
         return redirect()->route('cities.index')->with('success', 'Успішно видалено!');
     }

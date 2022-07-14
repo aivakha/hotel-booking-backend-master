@@ -57,6 +57,11 @@
                             <input type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" placeholder="Повторіть пароль">
                         </div>
 
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="true" name="is_checked">
+                            <label class="form-check-label">Хочу зареєструвати своє помешкання</label>
+                        </div>
+
                         <div class="mb-3">
                             <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">
                                 {{ __('Зареєструватись') }}</button>

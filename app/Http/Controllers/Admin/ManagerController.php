@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use \App\Http\Requests\Manager\StoreRequest;
 use App\Models\Manager;
@@ -16,7 +17,8 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $managers = Manager::all();
+        $this->authorize('index', [self::class]);
+        $managers = Helper::getAllbyRole(Manager::class, 'managers', 'super_user');
 
         return view('admin.managers.index', compact('managers'));
     }
@@ -28,6 +30,8 @@ class ManagerController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
+
         return view('admin.managers.create');
     }
 
@@ -41,7 +45,7 @@ class ManagerController extends Controller
     {
         $data = $request->validated();
 
-        Manager::create($data);
+        Manager::add($data);
 
         return redirect()->route('managers.index')->with('success', 'Успішно добавлено!');
     }
@@ -66,6 +70,7 @@ class ManagerController extends Controller
     public function edit($id)
     {
         $manager = Manager::find($id);
+        $this->authorize('view', $manager);
 
         return view('admin.managers.edit', compact('manager'));
     }
@@ -81,6 +86,7 @@ class ManagerController extends Controller
     {
         $data = $request->validated();
         $manager = Manager::find($id);
+        $this->authorize('update', $manager);
         $manager->update($data);
 
         return redirect()->route('managers.index')->with('success', 'Успішно оновлено!');;
@@ -94,7 +100,11 @@ class ManagerController extends Controller
      */
     public function destroy($id)
     {
-        Manager::find($id)->delete();
+        $manager = Manager::find($id);
+
+        $this->authorize('delete', $manager);
+
+        $manager->delete();
 
         return redirect()->route('managers.index')->with('success', 'Успішно видалено!');
     }

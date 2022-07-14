@@ -45,13 +45,12 @@ Route::group([
     Route::resource('/apartments', 'ApartmentController');
     Route::resource('/bookings', 'BookingController');
     Route::resource('/roles', 'RoleController')->middleware('role:super_user');
-    Route::get('/logout', 'AuthController@logout')->name('logout');
 });
 
 Route::group([
     'middleware' => 'auth'
 ], function() {
-//    Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
+    Route::get('/logout', 'App\Http\Controllers\Admin\AuthController@logout')->name('logout');
     Route::post('/comment', 'App\Http\Controllers\CommentController@store')->name('comments.store');
 });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Apartment\StoreRequest;
 use App\Http\Requests\Apartment\UpdateRequest;
@@ -12,7 +13,9 @@ use App\Models\Distance;
 use App\Models\LeisureActivity;
 use App\Models\Manager;
 use App\Models\Meal;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -23,8 +26,9 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
-        // $rooms = Room::with('gallery')->get();
+        $this->authorize('index', [self::class]);
+
+        $apartments = Helper::getAllbyRole(Apartment::class, 'apartments', 'super_user');
 
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -36,13 +40,17 @@ class ApartmentController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
+
         $meals = Meal::pluck('title', 'id')->all();
         $leisureActivities = LeisureActivity::pluck('title', 'id')->all();
         $distances = Distance::pluck('title', 'id')->all();
         $cities = City::pluck('title', 'id')->all();
         $types = ApartmentType::pluck('title', 'id')->all();
+
         $managers = [];
-        foreach(Manager::all() as $manager) {
+        $user_managers = Helper::getAllbyRole(Manager::class, 'managers', 'super_user');
+        foreach($user_managers as $manager) {
             $managers[$manager->id] = "{$manager->last_name} {$manager->first_name}";
         }
 
@@ -60,7 +68,6 @@ class ApartmentController extends Controller
         $data = $request->validated();
 
         $apartment = Apartment::add($data);
-
 
         if ($request->hasFile('preview_image')) {
             $apartment->uploadImage($request->file('preview_image'));
@@ -98,6 +105,8 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::find($id);
 
+        $this->authorize('view', $apartment);
+
         $meals = Meal::pluck('title', 'id')->all();
         $selectedMeals = $apartment->meals->pluck('id')->all();
 
@@ -114,8 +123,10 @@ class ApartmentController extends Controller
         $selectedType= $apartment->type()->pluck('id')->all();
 
         $star_rate = $apartment->star_rate();
+
         $managers = [];
-        foreach(Manager::all() as $manager) {
+        $user_managers = Helper::getAllbyRole(Manager::class, 'managers', 'super_user');
+        foreach($user_managers as $manager) {
             $managers[$manager->id] = "{$manager->last_name} {$manager->first_name}";
         }
         $selectedManager= $apartment->manager()->pluck('id')->all();
@@ -135,6 +146,9 @@ class ApartmentController extends Controller
         $data = $request->validated();
 
         $apartment = Apartment::find($id);
+
+        $this->authorize('update', $apartment);
+
         $apartment->edit($data);
 
         if ($request->hasFile('preview_image')) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LeisureActivity\StoreRequest;
 use App\Http\Requests\LeisureActivity\UpdateRequest;
@@ -17,6 +18,8 @@ class LeisureActivityController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', [self::class]);
+
         $leisure_activities = LeisureActivity::all();
 
         return view('admin.leisure-activities.index', compact('leisure_activities'));
@@ -29,6 +32,8 @@ class LeisureActivityController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
+
         return view('admin.leisure-activities.create');
     }
 
@@ -69,6 +74,8 @@ class LeisureActivityController extends Controller
     {
         $leisure_activity = LeisureActivity::find($id);
 
+        $this->authorize('view', $leisure_activity);
+
         return view('admin.leisure-activities.edit', compact('leisure_activity'));
     }
 
@@ -83,6 +90,7 @@ class LeisureActivityController extends Controller
     {
         $data = $request->validated();
         $leisure_activity = LeisureActivity::find($id);
+        $this->authorize('update', $leisure_activity);
         $leisure_activity->edit($data);
         if ($request->hasFile('image')) {
             $leisure_activity->uploadImage($request->file('image'));
@@ -99,7 +107,11 @@ class LeisureActivityController extends Controller
      */
     public function destroy($id)
     {
-        LeisureActivity::find($id)->remove();
+        $leisureActivity = LeisureActivity::find($id);
+
+        $this->authorize('delete', $leisureActivity);
+
+        $leisureActivity->remove();
 
         return redirect()->route('leisure-activities.index')->with('success', 'Успішно видалено!');
     }

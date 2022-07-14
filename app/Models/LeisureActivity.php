@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -23,10 +24,16 @@ class LeisureActivity extends Model
         );
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public static function add($fields)
     {
         $feature = new static;
         $feature->fill($fields);
+        $feature->user_id = Auth::user()->id;
         $feature->save();
 
         return $feature;

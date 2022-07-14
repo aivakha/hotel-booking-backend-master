@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Room\StoreRequest;
 use App\Http\Requests\Room\UpdateRequest;
@@ -22,8 +23,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
-        // $rooms = Room::with('gallery')->get();
+        $this->authorize('index', [self::class]);
+        $rooms = Helper::getAllbyRole(Room::class, 'rooms', 'super_user');
 
         return view('admin.rooms.index', compact('rooms'));
     }
@@ -35,9 +36,11 @@ class RoomController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
         $features = Feature::pluck('title', 'id')->all();
         $bed_types = BedType::pluck('title', 'id')->all();
-        $apartments = Apartment::pluck('title', 'id')->all();
+        // $apartments = Apartment::pluck('title', 'id')->all();
+        $apartments = Helper::getAllbyRole(Apartment::class, 'apartments', 'super_user')->pluck('title', 'id')->all();
 
         return view('admin.rooms.create', compact('features', 'bed_types', 'apartments'));
     }
@@ -88,12 +91,13 @@ class RoomController extends Controller
     public function edit($id)
     {
         $room = Room::find($id);
+        $this->authorize('view', $room);
         $features = Feature::pluck('title', 'id')->all();
         $selectedFeatures = $room->features->pluck('id')->all();
         $bedTypes = BedType::pluck('title', 'id')->all();
         $selectedBedTypes = $room->bedTypes->pluck('id')->all();
 
-        $apartments = Apartment::pluck('title', 'id')->all();
+        $apartments = Helper::getAllbyRole(Apartment::class, 'apartments', 'super_user')->pluck('title', 'id')->all();
         $selectedApartment = $room->apartment()->pluck('id')->all();
 
         return view('admin.rooms.edit', compact('room', 'features', 'selectedFeatures', 'bedTypes', 'selectedBedTypes', 'apartments', 'selectedApartment'));
@@ -111,6 +115,7 @@ class RoomController extends Controller
         $data = $request->validated();
 
         $room = Room::find($id);
+        $this->authorize('update', $room);
         $room->edit($data);
 
         if ($request->hasFile('preview_image')) {
@@ -135,7 +140,11 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        Room::find($id)->remove();
+        $room = Room::find($id);
+
+        $this->authorize('delete', $room);
+
+        $room->remove();
 
         return redirect()->route('rooms.index')->with('success', 'Успішно видалено!');
     }

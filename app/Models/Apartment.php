@@ -6,6 +6,7 @@ use App\Models\Traits\Filterable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -47,6 +48,11 @@ class Apartment extends Model
     }
 
     public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -121,6 +127,7 @@ class Apartment extends Model
 
         $apartment = new static;
         $apartment->fill($fields);
+        $apartment->user_id = Auth::user()->id;
         $apartment->save();
 
         return $apartment;

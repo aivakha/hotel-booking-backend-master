@@ -18,6 +18,8 @@ class FeatureController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', [self::class]);
+
         $features = Feature::all();
 
         return view('admin.features.index', compact('features'));
@@ -30,6 +32,8 @@ class FeatureController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
+
         return view('admin.features.create');
     }
 
@@ -42,7 +46,7 @@ class FeatureController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        Feature::create($data);
+        Feature::add($data);
 
         return redirect()->route('features.index')->with('success', 'Успішно добавлено!');
     }
@@ -67,6 +71,7 @@ class FeatureController extends Controller
     public function edit($id)
     {
         $feature = Feature::find($id);
+        $this->authorize('view', $feature);
 
         return view('admin.features.edit', compact('feature'));
     }
@@ -82,6 +87,7 @@ class FeatureController extends Controller
     {
         $data = $request->validated();
         $feature = Feature::find($id);
+        $this->authorize('update', $feature);
         $feature->update($data);
 
         return redirect()->route('features.index')->with('success', 'Успішно оновлено!');
@@ -95,7 +101,11 @@ class FeatureController extends Controller
      */
     public function destroy($id)
     {
-        Feature::find($id)->delete();
+        $feature = Feature::find($id);
+
+        $this->authorize('delete', $feature);
+
+        $feature->delete();
 
         return redirect()->route('features.index')->with('success', 'Успішно видалено!');
     }

@@ -17,6 +17,7 @@ class DistanceController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', [self::class]);
         $distances = Distance::all();
 
         return view('admin.distances.index', compact('distances'));
@@ -29,6 +30,7 @@ class DistanceController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
         return view('admin.distances.create');
     }
 
@@ -67,6 +69,7 @@ class DistanceController extends Controller
     public function edit($id)
     {
         $distance = Distance::find($id);
+        $this->authorize('update', $distance);
 
         return view('admin.distances.edit', compact('distance'));
     }
@@ -82,6 +85,7 @@ class DistanceController extends Controller
     {
         $data = $request->validated();
         $distance = Distance::find($id);
+        $this->authorize('update', $distance);
         $distance->update($data);
 
         return redirect()->route('distances.index')->with('success', 'Успішно оновлено!');;
@@ -95,7 +99,9 @@ class DistanceController extends Controller
      */
     public function destroy($id)
     {
-        Distance::find($id)->delete();
+        $distance = Distance::find($id);
+        $this->authorize('delete', $distance);
+        $distance->delete();
 
         return redirect()->route('distances.index')->with('success', 'Успішно видалено!');
     }

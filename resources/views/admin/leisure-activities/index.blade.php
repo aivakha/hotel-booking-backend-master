@@ -13,7 +13,8 @@
                         <h5 class="mb-2 mb-md-0">{{ __('Налаштування активностей') }}</h5>
                     </div>
                     <div class="col-auto">
-                        <a href="{{route('leisure-activities.create')}}" class="btn btn-success me-1 mb-1">{{ __('Додати') }}</a>
+                        <a href="{{route('leisure-activities.create')}}"
+                           class="btn btn-success me-1 mb-1">{{ __('Додати') }}</a>
                     </div>
                 </div>
             </div>
@@ -49,17 +50,33 @@
                                             <img src="{{ $leisure_activity->getImage() }}" style="width: 40px" alt="">
                                         </td>
                                         <td class="actions">
-                                            <div class="actions-btn">
-                                                <a class="btn p-0" href="{{route('leisure-activities.edit', $leisure_activity->id)}}">
-                                                    <span class="far fa-edit"></span>
-                                                </a>
+                                            @if (Auth::user()->hasRole('super_user'))
+                                                <div class="actions-btn">
+                                                    <a class="btn p-0"
+                                                       href="{{route('leisure-activities.edit', $leisure_activity->id)}}">
+                                                        <span class="far fa-edit"></span>
+                                                    </a>
 
-                                                {{Form::open(['route'=> ['leisure-activities.destroy', $leisure_activity->id], 'method' => 'delete'])}}
-                                                <button class="btn p-0 delete-btn" type="submit">
-                                                    <span class="far fa-trash-alt"></span>
-                                                </button>
-                                                {{Form::close()}}
-                                            </div>
+                                                    {{Form::open(['route'=> ['leisure-activities.destroy', $leisure_activity->id], 'method' => 'delete'])}}
+                                                    <button class="btn p-0 delete-btn" type="submit">
+                                                        <span class="far fa-trash-alt"></span>
+                                                    </button>
+                                                    {{Form::close()}}
+                                                </div>
+                                            @elseif (Auth::user()->id == $leisure_activity->user_id)
+                                                <div class="actions-btn">
+                                                    <a class="btn p-0"
+                                                       href="{{route('leisure-activities.edit', $leisure_activity->id)}}">
+                                                        <span class="far fa-edit"></span>
+                                                    </a>
+
+                                                    {{Form::open(['route'=> ['leisure-activities.destroy', $leisure_activity->id], 'method' => 'delete'])}}
+                                                    <button class="btn p-0 delete-btn" type="submit">
+                                                        <span class="far fa-trash-alt"></span>
+                                                    </button>
+                                                    {{Form::close()}}
+                                                </div>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -67,9 +84,11 @@
                             </table>
                         </div>
                         <div class="d-flex justify-content-center mt-3">
-                            <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                            <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous"
+                                    data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
                             <ul class="pagination mb-0"></ul>
-                            <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
+                            <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
+                                    data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
                         </div>
                     </div>
                 @else

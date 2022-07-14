@@ -23,7 +23,7 @@
             <div class="card-header">
                 <div class="row flex-between-end">
                     <div class="col-auto align-self-center">
-                        <h5 class="mb-0">{{ __('Всі види харчувань') }}</h5>
+                        <h5 class="mb-0">{{ __('Всі типи харчувань') }}</h5>
                     </div>
                 </div>
             </div>
@@ -40,32 +40,48 @@
                                 </tr>
                                 </thead>
                                 <tbody class="list" style="vertical-align: middle">
-                                    @foreach($meals as $meal)
-                                        <tr>
-                                            <td class="id">{{ $meal->id }}</td>
-                                            <td class="title">{{ $meal->title }}</td>
-                                            <td class="actions">
+                                @foreach($meals as $meal)
+                                    <tr>
+                                        <td class="id">{{ $meal->id }}</td>
+                                        <td class="title">{{ $meal->title }}</td>
+                                        <td class="actions">
+                                            @if (Auth::user()->hasRole('super_user'))
                                                 <div class="actions-btn">
                                                     <a class="btn p-0" href="{{route('meals.edit', $meal->id)}}">
                                                         <span class="far fa-edit"></span>
                                                     </a>
 
                                                     {{Form::open(['route'=> ['meals.destroy', $meal->id], 'method' => 'delete'])}}
-                                                        <button class="btn p-0 delete-btn" type="submit">
-                                                            <span class="far fa-trash-alt"></span>
-                                                        </button>
+                                                    <button class="btn p-0 delete-btn" type="submit">
+                                                        <span class="far fa-trash-alt"></span>
+                                                    </button>
                                                     {{Form::close()}}
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                            @elseif (Auth::user()->id == $meal->user_id)
+                                                <div class="actions-btn">
+                                                    <a class="btn p-0" href="{{route('meals.edit', $meal->id)}}">
+                                                        <span class="far fa-edit"></span>
+                                                    </a>
+
+                                                    {{Form::open(['route'=> ['meals.destroy', $meal->id], 'method' => 'delete'])}}
+                                                    <button class="btn p-0 delete-btn" type="submit">
+                                                        <span class="far fa-trash-alt"></span>
+                                                    </button>
+                                                    {{Form::close()}}
+                                                </div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="d-flex justify-content-center mt-3">
-                            <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                            <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous"
+                                    data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
                             <ul class="pagination mb-0"></ul>
-                            <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
+                            <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
+                                    data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
                         </div>
                     </div>
                 @else

@@ -27,8 +27,12 @@ class AuthController extends Controller
 
         if ($user) {
             event(new Registered($user));
-            // $user->notify(new VerifyEmailNotification());
-            $user->assignRole('simple_user');
+
+            if ($request->get('is_checked')) {
+                $user->assignRole('advance_user');
+            } else {
+                $user->assignRole('simple_user');
+            }
 
             Auth::login($user);
 
