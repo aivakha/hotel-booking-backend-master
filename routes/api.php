@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/user', \App\Http\Controllers\API\User\IndexController::class);
 Route::post('/rooms', \App\Http\Controllers\API\Room\IndexController::class);
 Route::get('/rooms/filters', \App\Http\Controllers\API\Room\FilterListController::class);
@@ -22,18 +21,16 @@ Route::get('/rooms/{slug}', \App\Http\Controllers\API\Room\ShowController::class
 Route::get('/apartments/{slug}', \App\Http\Controllers\API\Apartment\ShowController::class);
 Route::get('/random-rooms', \App\Http\Controllers\API\Room\MostViewedController::class);
 Route::get('/random-apartments', \App\Http\Controllers\API\Apartment\MostViewedController::class);
-
-
+Route::get('/cities', \App\Http\Controllers\API\City\IndexController::class);
+// Route::post('/cities', \App\Http\Controllers\API\City\IndexController::class); // second advanced method
+Route::post('/comment', [\App\Http\Controllers\API\Comment\CommentController::class, 'store']);
 
 // API route for register new user
 // Route::post('/register', [App\Http\Controllers\API\Auth\AuthController::class, 'register']);
 // Route::post('/login', [App\Http\Controllers\API\Auth\AuthController::class, 'login']);
-
-Route::post('/rooms', \App\Http\Controllers\API\Room\IndexController::class);
-Route::post('/comment', [\App\Http\Controllers\API\Comment\CommentController::class, 'store']);
-
-//Protecting Routes
+// Protected Route
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', [App\Http\Controllers\API\Auth\AuthController::class, 'user']);
+    Route::post('/book-room/{slug}', \App\Http\Controllers\API\Booking\CreateBookController::class);
 });
 

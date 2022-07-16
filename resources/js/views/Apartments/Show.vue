@@ -28,7 +28,7 @@
                             <li role="presentation" class="active"><a href="#Overview" aria-controls="home" role="tab"
                                                                       data-toggle="tab"><i class="ti-user"></i>Огляд</a>
                             </li>
-                            <li v-if="apartment.comments && user.verified" role="presentation">
+                            <li v-if="apartment.comments" role="presentation">
                                 <a href="#Review" aria-controls="messages" role="tab"
                                                        data-toggle="tab">
                                     <i class="ti-thumb-up"></i>
@@ -225,7 +225,7 @@
                         <div role="tabpanel" class="tab-pane fade in" id="Review">
 
                             <!-- Review -->
-                            <div v-if="apartment.comments && user.verified" class="row">
+                            <div v-if="apartment.comments" class="row">
                                 <div class="tr-single-box">
                                     <div class="tr-single-header">
                                         <h4><i class="ti-write"></i>Всі відгуки</h4>
@@ -267,7 +267,7 @@
                                             </ul>
                                         </div>
 
-                                        <form v-if="user" class="form" ref="commentForm">
+                                        <form v-if="user && user.verified" class="form" ref="commentForm">
                                             <div class="form-group">
                                                 <label>Рейтинг</label>
                                                 <input id="comment-rate" type="number" class="form-control" v-model="rate" max="5" min="1">
@@ -339,14 +339,12 @@
 
                                 <li>
                                     <div class="icon-box-icon-block">
-                                        <a href="#">
-                                            <div class="icon-box-round">
-                                                <i class="ti-timer"></i>
-                                            </div>
-                                            <div class="icon-box-text">
-                                                До центру міста {{ apartment.distance.title }} метрів
-                                            </div>
-                                        </a>
+                                        <div class="icon-box-round">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            Розразовано на {{ apartment.members }} чоловік
+                                        </div>
                                     </div>
                                 </li>
 
@@ -410,7 +408,7 @@ export default {
             }).catch(e => {
                 if (e.response.status === 401) {
                     console.log(e.response.data);
-                    this.user = null;
+                    this.user = false;
                 }
             });
         },

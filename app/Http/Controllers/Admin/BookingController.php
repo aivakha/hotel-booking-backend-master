@@ -23,15 +23,15 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $this->authorize('index', [self::class]);
-
         $user = Auth::user();
         if ($user->hasRole('super_user')) {
             $bookings = Booking::all();
-        } else {
+        } elseif ($user->hasRole('advance_user')) {
             $bookings = Booking::whereHas('apartment', function(Builder $query) {
                 $query->whereIn('user_id', [Auth::user()->id]);
             })->get();
+        } else {
+            $bookings = Booking::whereIn('user_id', [Auth::user()->id])->get();
         }
 
         return view('admin.bookings.index', compact('bookings'));
@@ -99,9 +99,10 @@ class BookingController extends Controller
         }
 
         $selectedRoom = $booking->room->id;
+        $selectedUser = User::find($booking->user_id);
         $status = $booking->status;
 
-        return view('admin.bookings.edit', compact('booking', 'rooms', 'selectedRoom', 'status'));
+        return view('admin.bookings.edit', compact('booking', 'rooms', 'selectedRoom', 'status', 'selectedUser'));
     }
 
     /**

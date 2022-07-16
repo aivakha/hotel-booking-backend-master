@@ -4,7 +4,7 @@
             <div class="slideshow-container">
                 <!-- slideshow-item -->
                 <div class="slideshow-item">
-                    <div class="bg" data-bg="assets/client/img/banner-2.jpg"></div>
+                    <div class="bg" style="background-image: url(assets/client/img/banner-2.jpg);"></div>
                 </div>
                 <!--  slideshow-item end  -->
                 <!-- slideshow-item -->
@@ -26,39 +26,9 @@
                             <h2>Відкрийте для себе наступну пригоду</h2>
                             <p>Ознайомтеся з найвищими рейтингами готелів по всій Україні</p>
                         </div>
-
-                        <form>
-                            <fieldset class="home-form-1">
-
-                                <div class="col-md-2 col-sm-2 padd-0">
-                                    <input type="text" class="form-control" placeholder="City">
-                                </div>
-
-                                <div class="col-md-2 col-sm-2 padd-0">
-                                    <input class="form-control JS--date-input" type="text" onfocus="(this.type='date')"
-                                           onblur="(this.type='text')" placeholder="Check In">
-                                </div>
-
-                                <div class="col-md-2 col-sm-2 padd-0">
-                                    <input class="form-control JS--date-input" type="text" onfocus="(this.type='date')"
-                                           onblur="(this.type='text')" placeholder="Check Out">
-                                </div>
-
-                                <div class="col-md-2 col-sm-2 padd-0">
-                                    <input class="form-control" type="number" placeholder="Adults" min="0">
-                                </div>
-
-                                <div class="col-md-2 col-sm-2 padd-0">
-                                    <input class="form-control" type="number" placeholder="Children" min="0">
-                                </div>
-
-
-                                <div class="col-md-2 col-sm-2 padd-0">
-                                    <button type="submit" class="btn theme-btn cl-white seub-btn">FIND HOTEL</button>
-                                </div>
-
-                            </fieldset>
-                        </form>
+                        <router-link :to="{name: 'rooms'}" class="btn theme-btn cl-white seub-btn">
+                            ПЕРЕЙТИ ДО ПОШУКУ ПОМЕШКАННЯ
+                        </router-link>
                     </div>
                 </div>
             </div>

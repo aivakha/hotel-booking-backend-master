@@ -21,6 +21,34 @@
                     <div class="tab-pane preview-tab-pane active" role="tabpanel">
                         <div class="row">
 
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">{{ __("І'мя") }}</label>
+                                    <input class="form-control" name="first_name" type="text" value="{{ $selectedUser->first_name }}" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">{{ __("Прізвище") }}</label>
+                                    <input class="form-control" name="last_name" type="text" value="{{ $selectedUser->last_name }}" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">{{ __("Телефон") }}</label>
+                                    <input class="form-control" name="phone" type="text" value="{{ $selectedUser->phone }}" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">{{ __("E'mail") }}</label>
+                                    <input class="form-control" name="email" type="text" value="{{ $selectedUser->email }}" disabled>
+                                </div>
+                            </div>
+
                             <div class="mb-3">
                                 <label class="form-label">{{ __("В'їзд") }}</label>
                                 <input class="form-control datetimepicker" name="check_in" type="text"
@@ -43,6 +71,7 @@
                                 <select class="form-select" name="status">
                                     <option value="1" {{ $status == '1' ? 'selected' : '' }}>{{ __('Прийнято') }}</option>
                                     <option value="0" {{ $status == '0' ? 'selected' : '' }}>{{ __('Відхилено') }}</option>
+                                    <option value="2" {{ $status == '2' ? 'selected' : '' }}>{{ __('Виконано') }}</option>
                                 </select>
                             </div>
 

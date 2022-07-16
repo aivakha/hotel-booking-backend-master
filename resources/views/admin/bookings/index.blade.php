@@ -41,7 +41,9 @@
                                 <th class="sort" data-sort="check_in">{{ __("В'їзд") }}</th>
                                 <th class="sort" data-sort="check_out">{{ __('Виїзд') }}</th>
                                 <th class="sort" data-sort="status">{{ __('Статус') }}</th>
+                                @if (!Auth::user()->hasRole('simple_user'))
                                 <th class="sort">Дії</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody class="list">
@@ -53,25 +55,29 @@
                                         <td class="check_in">{{ $booking->check_in }}</td>
                                         <td class="check_out">{{ $booking->check_out }}</td>
                                         <td class="status">{{ $booking->getStatus() }}
-                                            @if ($booking->status)
+                                            @if ($booking->status == 1)
                                                 <span class="far fa-thumbs-up approved"></span>
+                                            @elseif ($booking->status == 2)
+                                                <span class="fas fa-check" style="color: blue"></span>
                                             @else
                                                 <span class="far fa-thumbs-down declined"></span>
                                             @endif
                                         </td>
+                                        @if (!Auth::user()->hasRole('simple_user'))
                                         <td class="actions">
-                                            <div class="actions-btn">
-                                                <a class="btn p-0" href="{{route('bookings.edit', $booking->id)}}">
-                                                    <span class="far fa-edit"></span>
-                                                </a>
+                                                <div class="actions-btn">
+                                                    <a class="btn p-0" href="{{route('bookings.edit', $booking->id)}}">
+                                                        <span class="far fa-edit"></span>
+                                                    </a>
 
-                                                {{Form::open(['route'=> ['bookings.destroy', $booking->id], 'method' => 'delete'])}}
-                                                <button class="btn p-0 delete-btn" type="submit">
-                                                    <span class="far fa-trash-alt"></span>
-                                                </button>
-                                                {{Form::close()}}
-                                            </div>
+                                                    {{Form::open(['route'=> ['bookings.destroy', $booking->id], 'method' => 'delete'])}}
+                                                    <button class="btn p-0 delete-btn" type="submit">
+                                                        <span class="far fa-trash-alt"></span>
+                                                    </button>
+                                                    {{Form::close()}}
+                                                </div>
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

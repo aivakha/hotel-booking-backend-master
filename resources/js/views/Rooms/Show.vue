@@ -210,7 +210,8 @@
                                             <div class="col-sm-12">
                                                 <div id="review_summary">
                                                     <strong>{{ room.apartment.average_rate }}</strong>
-                                                    <em v-if="room.apartment.average_rate >= 4" class="cl-success">Супер</em>
+                                                    <em v-if="room.apartment.average_rate >= 4"
+                                                        class="cl-success">Супер</em>
                                                     <em v-if="room.apartment.average_rate < 4 && room.apartment.average_rate >= 3"
                                                         style="color: #f0ad4e">Добре</em>
                                                     <em v-if="room.apartment.average_rate < 3" style="color: #d9534f ">Погано</em>
@@ -249,6 +250,17 @@
                                         </div>
                                         <div class="icon-box-text">
                                             {{ room.apartment.comments.length }} відгуків
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="icon-box-icon-block">
+                                        <div class="icon-box-round">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            Розразовано на {{ room.members }} чоловік
                                         </div>
                                     </div>
                                 </li>
@@ -296,46 +308,37 @@
                             </div>
                         </div>
                         <div class="tr-single-body">
-                            <form class="book-form">
-
+                            <h6 v-if="!user.length">Увійдіть у систему, аби мати можливіть забронювати помешкання</h6>
+                            <form v-if="user && user.verified" class="book-form">
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="form-group">
                                             <label>В'їзд</label>
-                                            <input class="form-control JS--date-input" type="date" value="">
+                                            <input class="form-control JS--date-input" type="text"
+                                                   onfocus="(this.type='date')" onblur="(this.type='text')"
+                                                   v-model="booking_check_in" required>
                                         </div>
                                     </div>
                                     <div class="col-xs-12">
                                         <div class="form-group">
                                             <label>Виїзд</label>
-                                            <input class="form-control JS--date-input" type="date" value="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label>Дорослих</label>
-                                            <input type="number" name="adult" value="1" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label>Дітей</label>
-                                            <input type="number" name="children" value="0" class="form-control">
+                                            <input class="form-control JS--date-input" type="text"
+                                                   onfocus="(this.type='date')" onblur="(this.type='text')"
+                                                   v-model="booking_check_out" required>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-xs-12 mrg-top-15">
-                                        <a href="#" class="btn btn-arrow theme-btn full-width">Забронювати</a>
+                                        <button @click.prevent="bookRoom()" type="submit"
+                                                class="btn btn-arrow theme-btn full-width">Забронювати
+                                        </button>
                                     </div>
                                 </div>
-
-
                             </form>
+
+
                         </div>
                     </div>
 
@@ -352,11 +355,19 @@ export default {
 
     mounted() {
         this.getRoom()
+        this.getUser()
     },
 
     data() {
         return {
             room: [],
+            user: [],
+
+            booking_check_in: [],
+            booking_check_out: [],
+
+            message: '',
+            errors: '',
         }
     },
 
@@ -368,6 +379,50 @@ export default {
                     console.log(response.data.data);
                 })
                 .catch(error => console.log(error.response.data))
+        },
+
+        getUser() {
+            this.axios.get('/api/user').then(response => {
+                console.log(response.data);
+                this.user = response.data;
+            }).catch(e => {
+                if (e.response.status === 401) {
+                    console.log(e.response.data);
+                    this.user = false;
+                }
+            });
+        },
+
+        bookRoom() {
+            this.axios.post(`/api/book-room/${this.$route.params.slug}`, {
+                'date_range': this.booking_check_in.length > 0 && this.booking_check_out.length > 0 ? this.booking_check_in + ',' + this.booking_check_out : [],
+                'user_id': this.user.id,
+                'room_id': this.room.id,
+
+            })
+                .then(response => {
+                    console.log(response);
+                    this.message = response.data.message;
+                    swal({
+                        title: "Успішно!",
+                        text: this.message,
+                        icon: "success",
+                        button: "Закрити",
+                    });
+                })
+                .catch(e => {
+                    if (e.response.status === 422) {
+                        console.log(e.response.data);
+                        this.message = e.response.data.message;
+                        this.errors = e.response.data.errors;
+                    }
+                    swal({
+                        title: "Сталась помилка",
+                        text: this.message,
+                        icon: "error",
+                        button: "Закрити",
+                    });
+                });
         },
     },
 }

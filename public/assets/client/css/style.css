@@ -7654,3 +7654,28 @@ a.cl-box {
 		opacity: 0
 	}
 }
+
+.nice-select, .nice-select.open .list {
+    width: 100%;
+}
+
+.custom-checkbox input[type=checkbox] {
+    cursor: pointer;
+}
+
+/*.client-info-message h3, .client-info-message span {*/
+/*    opacity: 0;*/
+/*}*/
+
+/*.client-info-message.vshow h3, .client-info-message.vshow span {*/
+/*    opacity: 1;*/
+/*}*/
+
+.toHide {
+    display: none;
+}
+
+.toShow {
+    display: block;
+}
+

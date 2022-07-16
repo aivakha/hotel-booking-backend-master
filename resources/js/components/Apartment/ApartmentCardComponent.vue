@@ -19,7 +19,7 @@
                 <div class="coauthors">
                                     <span class="vcard author">
                                     <span class="fn">
-                                    <a href="#">
+                                    <a v-if="apartment.manager" href="#">
                                         <img alt="" src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg" class="avatar avatar-24" height="24" width="24">
                                         {{ apartment.manager.last_name }} {{ apartment.manager.first_name }}
                                     </a>

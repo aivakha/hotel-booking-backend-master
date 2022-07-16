@@ -167,7 +167,7 @@
 <script src="{{ asset('assets/client/js/custom.js') }}"></script>
 
 <script src="{{ asset('assets/client/js/jQuery.style.switcher.js') }}"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>

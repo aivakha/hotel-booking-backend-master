@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "vue": "^3.2.36"
+        "vue": "^3.2.36",
+        "vue-multiselect": "^2.1.6"
     }
 }

@@ -23,21 +23,27 @@
                                 <div class="tr-single-body">
                                     <form action="" class="search_booking_form">
                                         <div class="sidebar-input">
-                                            <input type="text" class="form-control" placeholder="Location..">
+                                            <!--second advanced method-->
+                                            <!--<input v-model="city" v-on:input="getCities" type="text" class="form-control" placeholder="Місто">-->
+                                            <select name="cities" id="cities" class="form-control" v-model="booking_city" v-on:change="filterRooms()">
+                                                <option value="">Всі регіони</option>
+                                                <option :value="city.id" v-for="(city, index) in cities">{{ city.title }}</option>
+                                            </select>
+                                        </div>
+                                        <input v-model="booking_members" type="text" class="form-control" placeholder="К-сть людей" v-on:change="filterRooms()">
+                                        <div class="sidebar-input">
+                                            <input class="form-control JS--date-input" type="text" v-model="booking_check_in"
+                                                   onfocus="(this.type='date')" onblur="(this.type='text')"
+                                                   placeholder="В'їзд*" v-on:change="filterRooms()">
                                         </div>
                                         <div class="sidebar-input">
-                                            <input class="form-control JS--date-input" type="text"
+                                            <input class="form-control JS--date-input" type="text" v-model="booking_check_out"
                                                    onfocus="(this.type='date')" onblur="(this.type='text')"
-                                                   placeholder="Check In">
+                                                   placeholder="Відїзд*" v-on:change="filterRooms()">
                                         </div>
-                                        <div class="sidebar-input">
-                                            <input class="form-control JS--date-input" type="text"
-                                                   onfocus="(this.type='date')" onblur="(this.type='text')"
-                                                   placeholder="Check Out">
-                                        </div>
-                                        <button class="form-control" style="background-color: #ff4e00; color: #FFF"
-                                                type="submit">Submit
-                                        </button>
+<!--                                        <button class="form-control" style="background-color: #ff4e00; color: #FFF"-->
+<!--                                                type="submit">Пошук-->
+<!--                                        </button>-->
                                     </form>
                                 </div>
                             </div>
@@ -175,13 +181,77 @@
                                 </div>
                                 <div class="tr-single-body">
                                     <ul class="side-list-check">
-                                        <li v-for="star_rate in filterList.star_rates">
+<!--                                        <li v-for="star_rate in filterList.star_rates">-->
+<!--                                            <span class="custom-checkbox">-->
+<!--                                                <input type="checkbox"-->
+<!--                                                       v-model="star_rates"-->
+<!--                                                       :value="star_rate.star_rate"-->
+<!--                                                       v-on:change="filterRooms()">-->
+<!--                                                <label></label>-->
+<!--                                            </span>-->
+<!--                                            <div class="search-rating">-->
+<!--                                                <i v-for="n in star_rate.star_rate" class="fa fa-star yellow-st"></i>-->
+<!--                                            </div>-->
+<!--                                        </li>-->
+
+
+                                        <li>
                                             <span class="custom-checkbox">
-                                                <input type="checkbox" v-model="star_rates" :value="star_rate.star_rate" v-on:change="filterRooms()">
+                                                <input type="checkbox" v-model="star_rates" :value="1" v-on:change="filterRooms()">
                                                 <label></label>
                                             </span>
                                             <div class="search-rating">
-                                                <i v-for="n in star_rate.star_rate" class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <span class="custom-checkbox">
+                                                <input type="checkbox" v-model="star_rates" :value="2" v-on:change="filterRooms()">
+                                                <label></label>
+                                            </span>
+                                            <div class="search-rating">
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <span class="custom-checkbox">
+                                                <input type="checkbox" v-model="star_rates" :value="3" v-on:change="filterRooms()">
+                                                <label></label>
+                                            </span>
+                                            <div class="search-rating">
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <span class="custom-checkbox">
+                                                <input type="checkbox" v-model="star_rates" :value="4" v-on:change="filterRooms()">
+                                                <label></label>
+                                            </span>
+                                            <div class="search-rating">
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <span class="custom-checkbox">
+                                                <input type="checkbox" v-model="star_rates" :value="5" v-on:change="filterRooms()">
+                                                <label></label>
+                                            </span>
+                                            <div class="search-rating">
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
+                                                <i class="fa fa-star yellow-st"></i>
                                             </div>
                                         </li>
                                     </ul>
@@ -189,7 +259,9 @@
                             </div>
 
                             <div class="tr-inner-single-box">
-                                <button @click.prevent="filterRooms()" type="submit" class="btn theme-btn text-center" style="width: 85%; margin-bottom: 20px">Відфільтрувати</button>
+                                <button @click.prevent="filterRooms()" type="submit" class="btn theme-btn text-center" style="width: 85%;margin-bottom: 20px;margin: 0 auto 10px auto;display: block;">
+                                    Відфільтрувати
+                                </button>
                             </div>
 
                         </div>
@@ -198,11 +270,13 @@
                 <!-- All Item -->
                 <div class="col-md-8 col-sm-12">
                     <div class="row">
-
                         <div v-for="room in rooms" class="col-md-6 col-sm-6">
                             <RoomCardComponent :room="room"></RoomCardComponent>
                         </div>
-
+                        <div v-if="rooms.length < 1" class="client-info-message text-center">
+                            <h3>За Вашим запитом не було знайдено жодних апартаментів</h3>
+                            <span>спробуйте зайти пізнаше, або змінити параметри пошуку</span>
+                        </div>
                     </div>
                     <div v-if="pagination.last_page > 1" class="row">
                         <ul class="pagination">
@@ -246,6 +320,7 @@ export default {
     mounted() {
         this.getRooms()
         this.getFilterList()
+        this.getCities()
     },
 
     data() {
@@ -262,6 +337,16 @@ export default {
             prices: [], // working
 
             pagination: [],
+            cities: [],
+
+            // selectedCity: [],
+            // check_in: [],
+            // check_out: [],
+            // members: [],
+            booking_city: '',
+            booking_members: null,
+            booking_check_in: [],
+            booking_check_out: [],
         }
     },
 
@@ -283,7 +368,10 @@ export default {
                 'distances': this.distances,
                 'star_rates': this.star_rates,
                 'prices': this.prices,
-                'page': page
+                'page': page,
+                'booking_city': this.booking_city,
+                'booking_members': this.booking_members,
+                'booking_date_range': this.booking_check_in.length > 0 && this.booking_check_out.length > 0 ? this.booking_check_in + ',' + this.booking_check_out : [],
             })
             .then(response => {
                 console.log(response);
@@ -307,9 +395,29 @@ export default {
                         }
                     });
                     console.log(response);
-                    //this.rooms = response.data.data;
                 })
-        }
+        },
+
+        getCities() {
+            this.axios.get('/api/cities')
+                .then(response => {
+                    this.cities = response.data.data;
+
+                    console.log(this.cities);
+                })
+        },
+
+        // second advanced method
+        // getCities() {
+        //     this.axios.post('/api/cities', {
+        //         'city': this.city
+        //     })
+        //         .then(response => {
+        //             this.cities = response.data;
+        //
+        //             console.log(this.cities);
+        //         })
+        // },
     },
 }
 </script>

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\Booking\EmailManagerNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Carbon;
 
 class EmailManagerListener
 {
@@ -39,9 +40,7 @@ class EmailManagerListener
             $user_phone = $user->phone;
             $user_email = $user->email;
 
-            $check_in = $event->booking->check_in;
-            $check_out = $event->booking->check_out;
-            $days = $check_out->diffInDays($check_in);
+            $days = Carbon::parse($event->booking->check_out)->diffInDays(Carbon::parse($event->booking->check_in));
 
             $room_title = $event->booking->room->title;
             $room_price = $event->booking->room->price;
@@ -54,8 +53,8 @@ class EmailManagerListener
 
             $data = [
                 'id' => $booking_id,
-                'check_in' => $check_in,
-                'check_out' => $check_out,
+                'check_in' => Carbon::parse($event->booking->check_in),
+                'check_out' => Carbon::parse($event->booking->check_out),
                 'room_title' => $room_title,
                 'total_price' => $total_price,
                 'created_at' => $created_at,

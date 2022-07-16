@@ -16,7 +16,7 @@
 {{--    {{ $booking->room->title }}--}}
 {{--@endforeach--}}
 <?php
-$room_id = 63;
+use App\Models\Booking;use Illuminate\Support\Carbon;$room_id = 63;
 //$check_in = '2022-07-11';
 //$check_out = '2022-07-13';
 
@@ -24,5 +24,22 @@ $room_id = 63;
 
 {{--{{ var_dump($availiable_rooms) }}--}}
 
-{{ var_dump($rooms_by_city) }}
+{{--{{ var_dump($rooms_by_city) }}--}}
+{{--{{ var_dump($booked_with_status_true) }}--}}
+{{--{{ var_dump($test_booking) }}--}}
+
+
+{{--{{ var_dump($booked_ids) }}--}}
+{{--{{ var_dump($booked_with_status_true) }}--}}
+{{--{{ var_dump($availiable_rooms) }}--}}
+{{--{{ var_dump($availiable_rooms_city) }}--}}
+
+{{--{{ var_dump($booked_in_range) }}--}}
+{{--{{ var_dump($availiable_rooms) }}--}}
+
+
+{{--{{ $days }}--}}
+{{ $check_in }}
+{{--{{ var_dump($booked_in_range) }}--}}
+
 

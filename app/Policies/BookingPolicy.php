@@ -12,10 +12,11 @@ class BookingPolicy
 
     public function index(?User $user)
     {
-        if ($user->hasRole('advance_user')) {
-            return true;
-        }
-        return false;
+//        if ($user->hasRole('advance_user')) {
+//            return true;
+//        }
+//        return false;
+//        return $user->id == $booking->apartment->user_id;
     }
 
     /**

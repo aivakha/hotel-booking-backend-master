@@ -15,10 +15,16 @@ __webpack_require__.r(__webpack_exports__);
   name: "Show",
   mounted: function mounted() {
     this.getRoom();
+    this.getUser();
   },
   data: function data() {
     return {
-      room: []
+      room: [],
+      user: [],
+      booking_check_in: [],
+      booking_check_out: [],
+      message: '',
+      errors: ''
     };
   },
   methods: {
@@ -30,6 +36,50 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response.data.data);
       })["catch"](function (error) {
         return console.log(error.response.data);
+      });
+    },
+    getUser: function getUser() {
+      var _this2 = this;
+
+      this.axios.get('/api/user').then(function (response) {
+        console.log(response.data);
+        _this2.user = response.data;
+      })["catch"](function (e) {
+        if (e.response.status === 401) {
+          console.log(e.response.data);
+          _this2.user = false;
+        }
+      });
+    },
+    bookRoom: function bookRoom() {
+      var _this3 = this;
+
+      this.axios.post("/api/book-room/".concat(this.$route.params.slug), {
+        'date_range': this.booking_check_in.length > 0 && this.booking_check_out.length > 0 ? this.booking_check_in + ',' + this.booking_check_out : [],
+        'user_id': this.user.id,
+        'room_id': this.room.id
+      }).then(function (response) {
+        console.log(response);
+        _this3.message = response.data.message;
+        swal({
+          title: "Успішно!",
+          text: _this3.message,
+          icon: "success",
+          button: "Закрити"
+        });
+      })["catch"](function (e) {
+        if (e.response.status === 422) {
+          console.log(e.response.data);
+          _this3.message = e.response.data.message;
+          _this3.errors = e.response.data.errors;
+        }
+
+        swal({
+          title: "Сталась помилка",
+          text: _this3.message,
+          icon: "error",
+          button: "Закрити"
+        });
       });
     }
   }
@@ -449,7 +499,7 @@ var _hoisted_102 = {
 var _hoisted_103 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "icon-box-round"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "ti-timer"
+  "class": "ti-user"
 })], -1
 /* HOISTED */
 );
@@ -464,7 +514,7 @@ var _hoisted_105 = {
 var _hoisted_106 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "icon-box-round"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "ti-heart"
+  "class": "ti-timer"
 })], -1
 /* HOISTED */
 );
@@ -473,39 +523,93 @@ var _hoisted_107 = {
   "class": "icon-box-text"
 };
 var _hoisted_108 = {
-  "class": "tr-single-box"
+  "class": "icon-box-icon-block"
 };
-var _hoisted_109 = {
-  "class": "tr-single-header"
-};
+
+var _hoisted_109 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "icon-box-round"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "ti-heart"
+})], -1
+/* HOISTED */
+);
+
 var _hoisted_110 = {
-  "class": "entry-meta"
+  "class": "icon-box-text"
 };
 var _hoisted_111 = {
-  "class": "meta-item meta-comment fl-right"
+  "class": "tr-single-box"
 };
 var _hoisted_112 = {
-  "class": "view-box"
+  "class": "tr-single-header"
 };
 var _hoisted_113 = {
-  "class": "fl-right"
+  "class": "entry-meta"
 };
 var _hoisted_114 = {
+  "class": "meta-item meta-comment fl-right"
+};
+var _hoisted_115 = {
+  "class": "view-box"
+};
+var _hoisted_116 = {
+  "class": "fl-right"
+};
+var _hoisted_117 = {
   "class": "font-20"
 };
 
-var _hoisted_115 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_118 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "theme-cl font-20"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_116 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("sub", null, "/доба", -1
+var _hoisted_119 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("sub", null, "/доба", -1
 /* HOISTED */
 );
 
-var _hoisted_117 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"tr-single-body\"><form class=\"book-form\"><div class=\"row\"><div class=\"col-xs-12\"><div class=\"form-group\"><label>В&#39;їзд</label><input class=\"form-control JS--date-input\" type=\"date\" value=\"\"></div></div><div class=\"col-xs-12\"><div class=\"form-group\"><label>Виїзд</label><input class=\"form-control JS--date-input\" type=\"date\" value=\"\"></div></div></div><div class=\"row\"><div class=\"col-xs-6\"><div class=\"form-group\"><label>Дорослих</label><input type=\"number\" name=\"adult\" value=\"1\" class=\"form-control\"></div></div><div class=\"col-xs-6\"><div class=\"form-group\"><label>Дітей</label><input type=\"number\" name=\"children\" value=\"0\" class=\"form-control\"></div></div></div><div class=\"row\"><div class=\"col-xs-12 mrg-top-15\"><a href=\"#\" class=\"btn btn-arrow theme-btn full-width\">Забронювати</a></div></div></form></div>", 1);
+var _hoisted_120 = {
+  "class": "tr-single-body"
+};
+var _hoisted_121 = {
+  key: 0
+};
+var _hoisted_122 = {
+  key: 1,
+  "class": "book-form"
+};
+var _hoisted_123 = {
+  "class": "row"
+};
+var _hoisted_124 = {
+  "class": "col-xs-12"
+};
+var _hoisted_125 = {
+  "class": "form-group"
+};
 
+var _hoisted_126 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "В'їзд", -1
+/* HOISTED */
+);
+
+var _hoisted_127 = {
+  "class": "col-xs-12"
+};
+var _hoisted_128 = {
+  "class": "form-group"
+};
+
+var _hoisted_129 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Виїзд", -1
+/* HOISTED */
+);
+
+var _hoisted_130 = {
+  "class": "row"
+};
+var _hoisted_131 = {
+  "class": "col-xs-12 mrg-top-15"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
@@ -606,19 +710,49 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )])]), $data.room.apartment ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_97, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_98, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_99, [_hoisted_100, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_101, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.room.apartment.comments.length) + " відгуків ", 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_102, [_hoisted_103, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_104, " До центру міста " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.room.apartment.distance.title) + " метрів ", 1
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_102, [_hoisted_103, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_104, " Розразовано на " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.room.members) + " чоловік ", 1
+  /* TEXT */
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_105, [_hoisted_106, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_107, " До центру міста " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.room.apartment.distance.title) + " метрів ", 1
   /* TEXT */
   )])]), $data.room.apartment ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.room.apartment.meals, function (meal) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_105, [_hoisted_106, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_107, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(meal.title), 1
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_108, [_hoisted_109, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_110, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(meal.title), 1
     /* TEXT */
     )])]);
   }), 256
   /* UNKEYED_FRAGMENT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" overview & booking Form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_108, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_109, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_110, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_111, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_112, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_113, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_114, [_hoisted_115, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.room.price) + " грн.", 1
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" overview & booking Form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_111, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_112, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_113, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_114, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_115, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_116, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_117, [_hoisted_118, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.room.price) + " грн.", 1
   /* TEXT */
-  ), _hoisted_116])])])])])]), _hoisted_117])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /col-md-4 ")])])])], 64
+  ), _hoisted_119])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_120, [!$data.user.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_121, "Увійдіть у систему, аби мати можливіть забронювати помешкання")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.user && $data.user.verified ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_122, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_123, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_124, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_125, [_hoisted_126, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "form-control JS--date-input",
+    type: "text",
+    onfocus: "(this.type='date')",
+    onblur: "(this.type='text')",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.booking_check_in = $event;
+    }),
+    required: ""
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.booking_check_in]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_127, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_128, [_hoisted_129, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "form-control JS--date-input",
+    type: "text",
+    onfocus: "(this.type='date')",
+    onblur: "(this.type='text')",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.booking_check_out = $event;
+    }),
+    required: ""
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.booking_check_out]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_130, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_131, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return $options.bookRoom();
+    }, ["prevent"])),
+    type: "submit",
+    "class": "btn btn-arrow theme-btn full-width"
+  }, "Забронювати ")])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /col-md-4 ")])])])], 64
   /* STABLE_FRAGMENT */
   );
 }

@@ -136,7 +136,7 @@
     });
 
     /*----- Fast Click Select ------*/
-    $('select').niceSelect();
+    // $('select').niceSelect();
 
     /*-------- Price Range Slider ------*/
     /*----Slim Scroll message & notification----*/

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\ApartmentType;
 use App\Models\BedType;
+use App\Models\City;
 use App\Models\Distance;
 use App\Models\Feature;
 use App\Models\LeisureActivity;

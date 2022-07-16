@@ -18,6 +18,26 @@
     <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
         <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+
+                @hasanyrole('simple_user')
+                <li class="nav-item">
+                    <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                        <div class="col-auto navbar-vertical-label">{{ __('Налаштування профілю') }}</div>
+                        <div class="col ps-0"><hr class="mb-0 navbar-vertical-divider"></div>
+                    </div>
+
+                    <a class="nav-link" href="{{ route('account') }}" role="button" data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="far fa-address-book"></span>
+                            </span>
+                            <span class="nav-link-text ps-1">{{ __('Особистий профіль') }}</span>
+                        </div>
+                    </a>
+
+                </li>
+                @endhasallroles
+
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                         <div class="col-auto navbar-vertical-label">{{ __('Налаштування Готелів') }}</div>
@@ -183,14 +203,13 @@
                 </li>
 
 
-
+                @hasanyrole('super_user|advance_user')
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                         <div class="col-auto navbar-vertical-label">{{ __('Налаштування Кімнат') }}</div>
                         <div class="col ps-0"><hr class="mb-0 navbar-vertical-divider"></div>
                     </div>
 
-                    @hasanyrole('super_user|advance_user')
                     <a class="nav-link dropdown-indicator" href="#rooms" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="rooms">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-bed"></span></span><span class="nav-link-text ps-1">{{ __('Кімнати') }}</span>
                         </div>
@@ -209,9 +228,9 @@
                             </a>
                         </li>
                     </ul>
-                    @endhasallroles
 
-                    @hasanyrole('super_user|advance_user')
+
+
                     <a class="nav-link dropdown-indicator" href="#bed_types" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="bed_types">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-couch"></span></span><span class="nav-link-text ps-1">{{ __('Типи ліжок') }}</span>
                         </div>
@@ -230,9 +249,7 @@
                             </a>
                         </li>
                     </ul>
-                    @endhasallroles
 
-                    @hasanyrole('super_user|advance_user')
                     <a class="nav-link dropdown-indicator" href="#features" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="features">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-tags"></span></span><span class="nav-link-text ps-1">{{ __('Зручності') }}</span>
                         </div>
@@ -251,11 +268,10 @@
                             </a>
                         </li>
                     </ul>
-                    @endhasallroles
 
                 </li>
+                @endhasallroles
 
-                @hasanyrole('super_user|advance_user')
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                         <div class="col-auto navbar-vertical-label">{{ __('Налаштування бронювань') }}</div>
@@ -273,15 +289,16 @@
                                 </div>
                             </a>
                         </li>
+                        @hasanyrole('super_user|advance_user')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('bookings.create') }}" data-bs-toggle="" aria-expanded="false">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ __('Додати') }}</span>
                                 </div>
                             </a>
                         </li>
+                        @endhasallroles
                     </ul>
                 </li>
-                @endhasallroles
 
                 @hasanyrole('super_user')
                 <li class="nav-item">

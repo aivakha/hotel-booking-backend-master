@@ -52,7 +52,6 @@ class Booking extends Model
 
     public function setCheckIn($date) {
         $check_in = $this->setDate($date);
-
         $this->check_in = $check_in;
         $this->save();
     }
@@ -109,5 +108,24 @@ class Booking extends Model
         }
 
         return 'Відхилено';
+    }
+
+    public static function getBookedRooms($from, $to) {
+        $booking = new static;
+
+        return $booking->where(function ($query) use ($from, $to) {
+            $query->where(function ($query) use ($from, $to) {
+                $query->where('check_in', '<=', $from)
+                    ->where('check_out', '>=', $from);
+            })->orWhere(function ($query) use ($from, $to) {
+                $query->where('check_in', '<=', $to)
+                    ->where('check_out', '>=', $to);
+            })->orWhere(function ($query) use ($from, $to) {
+                $query->where('check_in', '>=', $from)
+                    ->where('check_out', '<=', $to);
+            });
+        })
+            ->where('status', '=', '1')
+            ->pluck('room_id')->unique();
     }
 }

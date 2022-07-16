@@ -26,6 +26,9 @@ class IndexRequest extends FormRequest
         return [
             'meals' => 'nullable|array',
             'prices' => 'nullable|array',
+            'booking_city' => 'nullable',
+            'booking_members' => 'nullable',
+            'booking_date_range' => 'nullable',
             'features' => 'nullable|array',
             'bed_types' => 'nullable|array',
             'apartment_types' => 'nullable|array',
