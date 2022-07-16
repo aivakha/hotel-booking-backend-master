@@ -308,7 +308,7 @@
                             </div>
                         </div>
                         <div class="tr-single-body">
-                            <h6 v-if="!user.length">Увійдіть у систему, аби мати можливіть забронювати помешкання</h6>
+                            <h6 v-if="user.length < 1">Увійдіть у систему, аби мати можливіть забронювати помешкання</h6>
                             <form v-if="user && user.verified" class="book-form">
                                 <div class="row">
                                     <div class="col-xs-12">

@@ -59,7 +59,7 @@
                             <!-- Range Slider -->
                             <div class="tr-inner-single-box" style="margin-top: 30px">
                                 <div class="tr-single-header">
-                                    <h4>Ціна</h4>
+                                    <h4>Бюджет за ніч</h4>
                                 </div>
                                 <div class="tr-single-body">
                                     <form method="post">
@@ -71,7 +71,7 @@
                             <!-- Room Type -->
                             <div class="tr-inner-single-box">
                                 <div class="tr-single-header">
-                                    <h4>Тип помешкання</h4>
+                                    <h4>Тип розміщення</h4>
                                 </div>
                                 <div class="tr-single-body">
                                     <ul class="side-list-check">
@@ -141,7 +141,7 @@
                             <!-- Distance to center -->
                             <div class="tr-inner-single-box">
                                 <div class="tr-single-header">
-                                    <h4>Активності</h4>
+                                    <h4>Чим зайнятись у вільний час</h4>
                                 </div>
                                 <div class="tr-single-body">
                                     <ul class="side-list-check">
@@ -156,7 +156,23 @@
                                 </div>
                             </div>
 
-                            <!-- Distance to center -->
+                            <div class="tr-inner-single-box">
+                                <div class="tr-single-header">
+                                    <h4>Оцінка за відгуками</h4>
+                                </div>
+                                <div class="tr-single-body">
+                                    <ul class="side-list-check">
+                                        <li v-for="comment_rate in filterList.comments_rate">
+                                            <span class="custom-checkbox">
+                                                <input type="checkbox" v-model="comments_rate" :value="comment_rate.id" v-on:change="filterRooms()">
+                                                <label></label>
+                                            </span>
+                                            {{  comment_rate.rate }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
                             <div class="tr-inner-single-box">
                                 <div class="tr-single-header">
                                     <h4>Зручності</h4>
@@ -177,24 +193,10 @@
                             <!-- Start Rating -->
                             <div class="tr-inner-single-box">
                                 <div class="tr-single-header">
-                                    <h4>Рейтинг помешкання</h4>
+                                    <h4>Кількість зірок (рейтинг помешкання)</h4>
                                 </div>
                                 <div class="tr-single-body">
                                     <ul class="side-list-check">
-<!--                                        <li v-for="star_rate in filterList.star_rates">-->
-<!--                                            <span class="custom-checkbox">-->
-<!--                                                <input type="checkbox"-->
-<!--                                                       v-model="star_rates"-->
-<!--                                                       :value="star_rate.star_rate"-->
-<!--                                                       v-on:change="filterRooms()">-->
-<!--                                                <label></label>-->
-<!--                                            </span>-->
-<!--                                            <div class="search-rating">-->
-<!--                                                <i v-for="n in star_rate.star_rate" class="fa fa-star yellow-st"></i>-->
-<!--                                            </div>-->
-<!--                                        </li>-->
-
-
                                         <li>
                                             <span class="custom-checkbox">
                                                 <input type="checkbox" v-model="star_rates" :value="1" v-on:change="filterRooms()">
@@ -329,12 +331,13 @@ export default {
             filterList: [],
             meals: [],
             leisure_activities: [],
-            features: [], // working
-            bed_types: [], // working
-            apartment_types: [], // working
-            distances: [], // working
-            star_rates: [], // working
-            prices: [], // working
+            features: [],
+            bed_types: [],
+            apartment_types: [],
+            distances: [],
+            star_rates: [],
+            prices: [],
+            comments_rate: [],
 
             pagination: [],
             cities: [],
@@ -367,6 +370,7 @@ export default {
                 'apartment_types': this.apartment_types,
                 'distances': this.distances,
                 'star_rates': this.star_rates,
+                'comments_rate': this.comments_rate,
                 'prices': this.prices,
                 'page': page,
                 'booking_city': this.booking_city,

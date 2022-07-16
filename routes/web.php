@@ -63,7 +63,4 @@ Route::group([
     Route::post('/login', 'App\Http\Controllers\Admin\AuthController@login')->name('login');
 });
 
-Route::get('/test', 'App\Http\Controllers\Admin\TestController@index');
-
-
 Route::get('/{any}', '\App\Http\Controllers\Client\SpaController@index')->where('any', '.*');

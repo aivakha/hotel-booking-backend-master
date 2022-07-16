@@ -7,6 +7,7 @@ use App\Models\Apartment;
 use App\Models\ApartmentType;
 use App\Models\BedType;
 use App\Models\City;
+use App\Models\Comment;
 use App\Models\Distance;
 use App\Models\Feature;
 use App\Models\LeisureActivity;
@@ -21,6 +22,7 @@ class FilterListController extends Controller
         $apartmentTypes = ApartmentType::all();
         $bedTypes = BedType::all();
         $leisureActivities = LeisureActivity::all();
+        $comments_rate = Comment::all();
         $starRates = Apartment::all(['star_rate']);
         $features = Feature::all();
         $distances = Distance::all();
@@ -33,6 +35,7 @@ class FilterListController extends Controller
             'apartment_types' => $apartmentTypes,
             'bed_types' => $bedTypes,
             'leisure_activities' => $leisureActivities,
+            'comments_rate' => $comments_rate,
             'star_rates' => $starRates,
             'features' => $features,
             'distances' => $distances,

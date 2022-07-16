@@ -18,6 +18,7 @@ class RoomFilter extends AbstractFilter
     const APARTMENT_TYPES = 'apartment_types';
     const DISTANCES = 'distances';
     const STAR_RATES = 'star_rates';
+    const COMMENTS_RATE = 'comments_rate';
     const BOOKING_CITY = 'booking_city';
     const BOOKING_MEMBERS = 'booking_members';
     const BOOKING_DATA_RANGE = 'booking_date_range';
@@ -33,6 +34,7 @@ class RoomFilter extends AbstractFilter
             self::APARTMENT_TYPES => [$this, 'apartment_types'],
             self::DISTANCES => [$this, 'distances'],
             self::STAR_RATES => [$this, 'star_rates'],
+            self::COMMENTS_RATE => [$this, 'comments_rate'],
             self::BOOKING_CITY => [$this, 'booking_city'],
             self::BOOKING_MEMBERS => [$this, 'booking_members'],
             self::BOOKING_DATA_RANGE => [$this, 'booking_date_range'],
@@ -58,6 +60,15 @@ class RoomFilter extends AbstractFilter
         $builder->whereHas('apartment', function ($b) use ($value) {
             $b->whereHas('meals', function ($a) use ($value) {
                 $a->whereIn('meal_id', $value);
+            });
+        });
+    }
+
+    protected function comments_rate(Builder $builder, $value)
+    {
+        $builder->whereHas('apartment', function ($b) use ($value) {
+            $b->whereHas('comments', function ($a) use ($value) {
+                $a->whereIn('id', $value);
             });
         });
     }
@@ -99,30 +110,6 @@ class RoomFilter extends AbstractFilter
 
     protected function booking_city(Builder $builder, $value)
     {
-        //dd($value);
-//        $startDate = '2022-07-01';
-//        $endDate = Carbon::parse('2022-07-18')->endOfDay();
-//        $temp_1 = Booking::whereBetween('check_in', [$startDate, $endDate])->get()->toArray();
-//        $temp_2 = Booking::whereBetween('check_out', [$startDate, $endDate])->get()->toArray();
-//        $booked_rooms = array_merge($temp_1, $temp_2);
-//
-//        $booked_rooms_ids = []; // booked rooms швы without any booking status
-//        foreach ($booked_rooms as $booked_room) {
-//            if (!in_array($booked_room['room_id'], $booked_rooms_ids)) {
-//                $booked_rooms_ids[] = $booked_room['room_id'];
-//            }
-//        }
-//
-//        $booked_with_status_true = Booking::whereIn('room_id', $booked_rooms_ids)->where('status', 1)->pluck('room_id');
-//        $availiable_rooms_by_booking = Room::whereNotIn('id', $booked_with_status_true)->pluck('id'); // availiable rooms by date and by booking status
-//        $builder->whereIn('id', $availiable_rooms_by_booking) // availiable rooms by date and by booking status by city by members
-//            ->where('members', '>=', [2])
-//            ->whereHas('apartment', function ($q) {
-//                $q->whereHas('city', function ($t) {
-//                    $t->whereIn('city_id', [122]);
-//                });
-//            });
-
         $builder->whereHas('apartment', function ($b) use ($value) {
             $b->whereIn('city_id', [$value]);
         });

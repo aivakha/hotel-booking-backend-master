@@ -35,6 +35,7 @@ class IndexRequest extends FormRequest
             'distances' => 'nullable|array',
             'star_rates' => 'nullable|array',
             'leisure_activities' => 'nullable|array',
+            'comments_rate' => 'nullable|array',
             'page' => 'required|integer',
         ];
     }
