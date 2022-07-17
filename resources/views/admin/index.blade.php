@@ -6,6 +6,7 @@
 
         @include('admin.layouts.alerts._success')
 
+        @hasanyrole('super_user')
         <div class="card mb-3">
             <div class="card-header">
                 <div class="row flex-between-end">
@@ -24,95 +25,20 @@
             @include('admin.layouts.widgets._distances')
 
             @include('admin.layouts.widgets._managers')
-
-            <div class="col-md-6">
-                <div class="card overflow-hidden" style="min-width: 12rem">
-                    <div class="bg-holder bg-card"
-                         style="background-image:url({{ asset('assets/admin/img/icons/spot-illustrations/corner-1.png') }});"></div>
-                    <div class="card-body position-relative">
-                        <h6>Hotels</h6>
-                        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning">231</div>
-                        <a class="fw-semi-bold fs--1 text-nowrap" href="app/e-commerce/customers.html">See all
-                            <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card overflow-hidden" style="min-width: 12rem">
-                    <div class="bg-holder bg-card"
-                         style="background-image:url({{ asset('assets/admin/img/icons/spot-illustrations/corner-3.png') }});">
-                    </div>
-                    <!--/.bg-holder-->
-
-                    <div class="card-body position-relative">
-                        <h6>Distances</h6>
-                        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif">120</div>
-                        <a class="fw-semi-bold fs--1 text-nowrap" href="index.html">
-                            All distances
-                            <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
+        @endhasallroles
 
+        @hasanyrole('advance_user|simple_user')
         <div class="card mb-3">
             <div class="card-header">
-                <div class="row flex-between-end">
+                <div class="row" style="display: flex;justify-content: center;align-items: center;">
                     <div class="col-auto align-self-center">
-                        <h5 class="mb-0">{{ __('Інформація про кімнати') }}</h5>
+                        <img src="{{ asset('assets/admin/img/ecommerce/booking-gif.gif') }}" alt="">
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row g-3 mb-3">
-            <div class="col-sm-6 col-md-4">
-                <div class="card overflow-hidden" style="min-width: 12rem">
-                    <div class="bg-holder bg-card"
-                         style="background-image:url({{ asset('assets/admin/img/icons/spot-illustrations/corner-1.png') }});"></div>
-
-
-                    <div class="card-body position-relative">
-                        <h6>Rooms</h6>
-                        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning">560</div>
-                        <a class="fw-semi-bold fs--1 text-nowrap" href="app/e-commerce/customers.html">See all
-                            <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="card overflow-hidden" style="min-width: 12rem">
-                    <div class="bg-holder bg-card"
-                         style="background-image:url({{ asset('assets/admin/img/icons/spot-illustrations/corner-2.png') }});"></div>
-
-                    <div class="card-body position-relative">
-                        <h6>Types</h6>
-                        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info">10</div>
-                        <a class="fw-semi-bold fs--1 text-nowrap" href="app/e-commerce/orders/order-list.html">All types
-                            <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="card overflow-hidden" style="min-width: 12rem">
-                    <div class="bg-holder bg-card"
-                         style="background-image:url({{ asset('assets/admin/img/icons/spot-illustrations/corner-3.png') }});">
-                    </div>
-                    <!--/.bg-holder-->
-
-                    <div class="card-body position-relative">
-                        <h6>Amenities</h6>
-                        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif">950</div>
-                        <a class="fw-semi-bold fs--1 text-nowrap" href="index.html">
-                            All amenities
-                            <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endhasallroles
 
 
         <footer class="footer">

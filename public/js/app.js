@@ -23288,12 +23288,11 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
   //     component: () => import('../views/Auth/Register.vue')
   // },
   ]
-}); // router.beforeEach((to, from, next) => {
-//     document.title = to.meta.title
-//
-//     next()
-// });
-
+});
+router.beforeEach(function (to, from, next) {
+  document.title = to.meta.title;
+  next();
+});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
 /***/ }),

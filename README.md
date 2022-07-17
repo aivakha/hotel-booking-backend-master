@@ -1,64 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Розроблений функціонал
+------------
+### Back-end
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+###### Розподілення користувачів за ролями
+- super_user (головний адміністратор сервісу)
+- advance_user (людина яка має права на публікацію власних оголошень)
+- simple_user (звичайний користувач сервісу)
 
-## About Laravel
+###### Аутентифікація
+- реєстрація з підтвердженням e-mail адреси
+- реєстрація з можливістю створення профіля для публікації власних оголошень
+- сповіщення про успішне підтвердження e-mail адреси користувача
+- вхід у систему
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+###### Особистий профіль
+- редагування особистої інформації
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+###### Панель звичайного користувача (simple_user)
+- перегляд та редагування профілю
+- перегляд залишених коментарів з можливістю сховати або показати коментар
+- перегляд власних бронювань
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+###### Панель користувача з правами на публікацію оголошень (advance_user)
+- Апартаменти:
+    - перегляд лише своїх апартаментів
+    - створення нового апартаменту
+    - редагування апартаменту
 
-## Learning Laravel
+- Харчування:
+    - перегляд усіх видів харчувань (спільна база з super_user)
+    - створення нового запису харчування
+    - можливість редагування **лише** своїх записів
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Активності:
+    - перегляд усіх активностей (спільна база з super_user)
+    - створення нового запису активності
+    - можливість редагування **лише** своїх записів
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Тип розміщення:
+    - перегляд усіх типів розміщення (спільна база з super_user)
+    - створення нового запису розміщення
+    - можливість редагування **лише** своїх записів
 
-## Laravel Sponsors
+- Менеджери:
+    - до кожного апартаменту, додана можливість прикріпити менеджера
+    - перегляд лише своїх записів з менеджерами
+    - можливість редагування **лише** своїх записів
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Коментарі:
+    - перегляд коментарів, прикріплиних лише до своїх записів (апартаментів)
+    - можливість показати або сховати коментар користувача
 
-### Premium Partners
+- Кімнати:
+    - перегляд  **лише** своїх записів (кімнат)
+    - створення нового запису кімнати
+    - можливість редагування **лише** своїх записів
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Типи ліжок:
+    - перегляд усіх типів ліжок (спільна база з super_user)
+    - створення нового запису з типом ліжка
+    - можливість редагування **лише** своїх записів
 
-## Contributing
+- Зручності:
+    - перегляд усіх зручностей (спільна база з super_user)
+    - створення нового запису із певною зручністю
+    - можливість редагування **лише** своїх записів (зручностей)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Бронювання:
+    - перегляд бронювань, прикріплиних лише до своїх записів (апартаментів)
+    - можливість редагування бронювання (при зміні статуса на "Відхилено" користувач отримує сповіщення на пошту)
 
-## Code of Conduct
+###### Панель головного адміністратора  (super_user)
+Головний адміністратор має всі вище перераховані функції та навіть більше (без жодних обмежень)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+###### E-mail сповіщення
+- e-mail сповіщення при верифікації пошти під час реєстрації
+- e-mail сповіщення при успішній верифікації пошти користувача
+- e-mail сповіщення при оформлені бронювання (на пошту користувача та на пошту прикріпленого менеджера до апартаменту з усіма даними)
+- e-mail сповіщення при скачувані бронювання менеджером
+- e-mail сповіщення на пошту менеджера апартаменту коли хтось публікує коментар
 
-## Security Vulnerabilities
+###### Захищення певної інформації
+- по ролям (бібліотека Laravel-permission)
+- по роутам (як web роути, так і api)
+- використання Laravel Policy
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Front-end
+###### Головна
+- популярні кімнати
+- популярні апартаменти
 
-## License
+###### Сторінка  пошуку
+- Пагінація
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Форма пошуку вільних кімнат:
+    - Місто
+    - Дата приїзду
+    - Дата відїзду
+
+- Фільтр:
+    - Бюджет за ніч (мінімальна, максимальна ціна)
+    - Тип розміщення
+    - Тип ліжка
+    - Харчування
+    - Відстань до центру
+    - Чим зайнятись у вільний час
+    - Оцінка за відгуками
+    - Зручності
+    - Кількість зірок (рейтинг помешкання)
+
+###### Сторінка  кімнати
+- Перегляд інформації про кімнату
+- Перегляд інформації про апартамент
+- Перегляд контактної інформації менеджера
+- Форма з бронюванням помешкання
+
+###### Сторінка  апартаменту
+- Перегляд інформації про апартамент
+- Перегляд контактної інформації менеджера
+- Можливість залишити відгук (коментар), якщо користувач зареєстрований та з підтвердженою поштою
+- Динамічний розрахунок рейтингу апартаменту базуючись на залишених користувачами відгуках

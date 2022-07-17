@@ -25,8 +25,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'full_description' => 'required|max:2000',
-            'short_description' => 'required|max:500',
+            'full_description' => 'required|max:3000',
+            'short_description' => 'required|max:1000',
             'star_rate' => 'required',
             'address' => 'required',
             'preview_image' => 'image|required',
