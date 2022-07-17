@@ -123,7 +123,7 @@
 
 # Встановлення проєкту та його запуск
 1. Завантажте та встановіть [Open Server](https://ospanel.io/download "OpenServer")
-2. Завантажте та встановіть Composer[Composer](https://getcomposer.org/download/ "Composer")
+2. Завантажте та встановіть [Composer](https://getcomposer.org/download/ "Composer")
 3. Завантажте та встановіть [NodeJS](https://nodejs.org/en/download/ "NodeJS")
 4. Переконайтесь, що у Вас встановлений Git
 5. Перейдіть по шляху, по якому Ви встановлювали Open Server та знайдіть там папку domains. Відкрийте у цій папці командне вікно та впишіть команду: `git clone https://github.com/aivakha/hotel-booking-backend-master.git`
