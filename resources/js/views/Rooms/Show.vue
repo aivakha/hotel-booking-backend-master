@@ -293,7 +293,7 @@
 
                     <!-- overview & booking Form -->
                     <div class="tr-single-box">
-                        <div class="tr-single-header">
+                        <div class="tr-single-header" style="border: 0px">
                             <div class="entry-meta">
                                 <div class="meta-item meta-comment fl-right">
                                     <div class="view-box">
@@ -308,7 +308,7 @@
                             </div>
                         </div>
                         <div class="tr-single-body">
-                            <h6 v-if="user.length < 1">Увійдіть у систему, аби мати можливіть забронювати помешкання</h6>
+                            <h6 v-if="!user.verified">Увійдіть у систему, аби мати можливіть забронювати помешкання</h6>
                             <form v-if="user && user.verified" class="book-form">
                                 <div class="row">
                                     <div class="col-xs-12">

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\Booking\EmailClientNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Carbon;
 
 class EmailClientListener
 {
@@ -37,11 +38,11 @@ class EmailClientListener
 
             $check_in = $event->booking->check_in;
             $check_out = $event->booking->check_out;
-            $days = $check_out->diffInDays($check_in);
+            $days = Carbon::parse($event->booking->check_out)->diffInDays(Carbon::parse($event->booking->check_in));
 
             $room_title = $event->booking->room->title;
             $room_price = $event->booking->room->price;
-            $total_price = $room_price * $days;
+            $total_price = $room_price * ($days + 1);
 
             $apartment_title = $event->booking->apartment->title;
             $apartment_address = $event->booking->apartment->address;

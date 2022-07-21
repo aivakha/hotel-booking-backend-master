@@ -51,13 +51,13 @@ class Booking extends Model
     }
 
     public function setCheckIn($date) {
-        $check_in = $this->setDate($date);
+        $check_in = Carbon::parse($date)->addHour('12')->addMinutes('0')->addSeconds('0')->format('Y-m-d H:i:s');
         $this->check_in = $check_in;
         $this->save();
     }
 
     public function setCheckOut($date) {
-        $check_out = $this->setDate($date);
+        $check_out = Carbon::parse($date)->addHour('11')->addMinutes('0')->addSeconds('0')->format('Y-m-d H:i:s');
 
         $this->check_out = $check_out;
         $this->save();
@@ -105,6 +105,10 @@ class Booking extends Model
     public function getStatus() {
         if ($this->status == 1) {
             return 'Прийнято';
+        }
+
+        if ($this->status == 2) {
+            return 'Виконано';
         }
 
         return 'Відхилено';

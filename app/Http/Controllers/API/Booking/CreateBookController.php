@@ -22,15 +22,10 @@ class CreateBookController extends Controller
         $date_range = explode(',', $request->get('date_range'));
 
         $from = Carbon::parse($date_range[0])->addHour('12')->addMinutes('0')->addSeconds('0')->format('Y-m-d H:i:s');
-        $to = Carbon::parse($date_range[1])->addHour('12')->addMinutes('0')->addSeconds('0')->format('Y-m-d H:i:s');
+        $to = Carbon::parse($date_range[1])->addHour('11')->addMinutes('0')->addSeconds('0')->format('Y-m-d H:i:s');
 
         $booked_in_range = Booking::getBookedRooms($from,$to)->toArray();
 
-
-
-
-
-        //dd('test');
         if (in_array($room->id, $booked_in_range)) {
             return response()->json([
                 'status' => 'error',

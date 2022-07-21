@@ -44,7 +44,7 @@ class EmailManagerListener
 
             $room_title = $event->booking->room->title;
             $room_price = $event->booking->room->price;
-            $total_price = $room_price * $days;
+            $total_price = $room_price * ($days + 1);
 
             $apartment_title = $event->booking->apartment->title;
             $apartment_address = $event->booking->apartment->address;
