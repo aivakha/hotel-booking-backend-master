@@ -1,5 +1,5 @@
 <template>
-    <div class="page-title image-title" style="background-image:url(//hotel-booking-backend-master/assets/client/img/tour.jpg);">
+    <div class="page-title image-title" style="background-image:url(/assets/client/img/tour.jpg);">
         <div class="container">
             <div class="page-title-wrap">
                 <h2>Знайдіть Своє Житло</h2>

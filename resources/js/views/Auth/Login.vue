@@ -1,7 +1,7 @@
 <template>
 
     <div class="page-title image-title"
-         style="background-image:url(//hotel-booking-backend-master/assets/client/img/tour.jpg);">
+         style="background-image:url(/assets/client/img/tour.jpg);">
         <div class="container">
             <div class="page-title-wrap">
                 <h2>Увійдіть до облікового запису</h2>
@@ -76,7 +76,7 @@ export default {
                 .then(response => {
                     this.axios.post('api/login', this.formData)
                         .then(response => {
-                            window.location.href = 'http://hotel-booking-backend-master/admin';
+                            window.location.href = '/admin';
                             console.log(response);
                         })
                         .catch(e => {
@@ -95,7 +95,7 @@ export default {
                 if (!response) {
                     this.$router.push({name: 'home'});
                 } else {
-                    window.location.href = 'http://hotel-booking-backend-master/admin';
+                    window.location.href = '/admin';
                 }
             });
         },

@@ -102,7 +102,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "page-title-banner",
   style: {
-    "background-image": "url(//hotel-booking-backend-master/assets/client/img/banner.jpg)"
+    "background-image": "url(/assets/client/img/banner.jpg)"
   }
 };
 var _hoisted_2 = {
@@ -118,7 +118,7 @@ var _hoisted_4 = {
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "tr-list-thumb"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "//hotel-booking-backend-master/assets/client/img/no-user-img.jpg",
+  src: "/assets/client/img/no-user-img.jpg",
   "class": "img-responsive img-circle",
   alt: ""
 })], -1
@@ -624,7 +624,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, _hoisted_17, 8
   /* PROPS */
   , _hoisted_14)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ============== Hotel Detail ====================== "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: 'http://hotel-booking-backend-master' + $data.room.preview_image,
+    src: $data.room.preview_image,
     "class": "img-responsive",
     alt: ""
   }, null, 8
@@ -774,13 +774,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Show_vue_vue_type_template_id_738a579a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Show.vue?vue&type=template&id=738a579a */ "./resources/js/views/Rooms/Show.vue?vue&type=template&id=738a579a");
 /* harmony import */ var _Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show.vue?vue&type=script&lang=js */ "./resources/js/views/Rooms/Show.vue?vue&type=script&lang=js");
-/* harmony import */ var E_OpenServer_NEW_domains_hotel_booking_backend_master_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_oleksandr_Sites_hotel_booking_backend_master_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,E_OpenServer_NEW_domains_hotel_booking_backend_master_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Show_vue_vue_type_template_id_738a579a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/views/Rooms/Show.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_oleksandr_Sites_hotel_booking_backend_master_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Show_vue_vue_type_template_id_738a579a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/views/Rooms/Show.vue"]])
 /* hot reload */
 if (false) {}
 

@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "page-title-banner",
   style: {
-    "background-image": "url(//hotel-booking-backend-master/assets/client/img/banner.jpg)"
+    "background-image": "url(/assets/client/img/banner.jpg)"
   }
 };
 var _hoisted_2 = {
@@ -110,7 +110,7 @@ var _hoisted_4 = {
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "tr-list-thumb"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "//hotel-booking-backend-master/assets/client/img/no-user-img.jpg",
+  src: "/assets/client/img/no-user-img.jpg",
   "class": "img-responsive img-circle",
   alt: ""
 })], -1
@@ -497,7 +497,7 @@ var _hoisted_96 = {
 var _hoisted_97 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "review-thumb"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "//hotel-booking-backend-master/assets/client/img/no-user-img.jpg",
+  src: "/assets/client/img/no-user-img.jpg",
   "class": "img-responsive img-circle",
   alt: ""
 })], -1
@@ -855,13 +855,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Show_vue_vue_type_template_id_2404169c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Show.vue?vue&type=template&id=2404169c */ "./resources/js/views/Apartments/Show.vue?vue&type=template&id=2404169c");
 /* harmony import */ var _Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show.vue?vue&type=script&lang=js */ "./resources/js/views/Apartments/Show.vue?vue&type=script&lang=js");
-/* harmony import */ var E_OpenServer_NEW_domains_hotel_booking_backend_master_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_oleksandr_Sites_hotel_booking_backend_master_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,E_OpenServer_NEW_domains_hotel_booking_backend_master_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Show_vue_vue_type_template_id_2404169c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/views/Apartments/Show.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_oleksandr_Sites_hotel_booking_backend_master_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Show_vue_vue_type_template_id_2404169c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/views/Apartments/Show.vue"]])
 /* hot reload */
 if (false) {}
 

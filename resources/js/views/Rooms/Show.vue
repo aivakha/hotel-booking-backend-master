@@ -1,11 +1,11 @@
 <template>
     <section class="page-title-banner"
-             style="background-image:url(//hotel-booking-backend-master/assets/client/img/banner.jpg);">
+             style="background-image:url(/assets/client/img/banner.jpg);">
         <div class="container">
             <div class="row">
                 <div class="tr-list-detail">
                     <div class="tr-list-thumb">
-                        <img src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg"
+                        <img src="/assets/client/img/no-user-img.jpg"
                              class="img-responsive img-circle" alt=""/>
                     </div>
                     <div v-if="room.apartment" class="tr-list-info">
@@ -57,7 +57,7 @@
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="list-thumb-box">
                                                     <img
-                                                        :src="'http://hotel-booking-backend-master' + room.preview_image"
+                                                        :src="room.preview_image"
                                                         class="img-responsive" alt="">
                                                     <h5 v-if="room.apartment">
                                                         {{ room.apartment.star_rate }}/<sub class="theme-cl">5</sub>

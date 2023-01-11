@@ -1,11 +1,11 @@
 <template>
     <section class="page-title-banner"
-             style="background-image:url(//hotel-booking-backend-master/assets/client/img/banner.jpg);">
+             style="background-image:url(/assets/client/img/banner.jpg);">
         <div class="container">
             <div class="row">
                 <div class="tr-list-detail">
                     <div class="tr-list-thumb">
-                        <img src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg"
+                        <img src="/assets/client/img/no-user-img.jpg"
                              class="img-responsive img-circle" alt="">
                     </div>
                     <div v-if="apartment.manager" class="tr-list-info">
@@ -236,7 +236,7 @@
                                         <div v-for="comment in apartment.comments" class="review-box">
                                             <div class="review-thumb">
                                                 <img
-                                                    src="//hotel-booking-backend-master/assets/client/img/no-user-img.jpg"
+                                                    src="/assets/client/img/no-user-img.jpg"
                                                     class="img-responsive img-circle" alt="">
                                             </div>
 

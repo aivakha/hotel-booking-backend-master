@@ -26,7 +26,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="br-right">
-                            <a href="//hotel-booking-backend-master/login">
+                            <a href="/login">
                                 <i class="login-icon ti-user"></i>
                                 Обліковий запис
                             </a>
